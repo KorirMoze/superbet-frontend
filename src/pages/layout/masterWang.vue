@@ -12,20 +12,20 @@
   
   <script>
   import headerTop from '../../components/headerBar.vue'
-  import sideBar from '../../components/sideBar.vue'
+  // import sideBar from '../../components/sideBar.vue'
   
   export default {
-    components: { headerTop, sideBar },
-    data() {
-      return {
-        openSidebar: true
-      }
-    },
-    methods: {
-      toggleSidebar() {
-        this.openSidebar = !this.openSidebar
-      }
-    }
+    components: { headerTop, },
+    // data() {
+    //   return {
+    //     openSidebar: true
+    //   }
+    // },
+    // methods: {
+    //   toggleSidebar() {
+    //     this.openSidebar = !this.openSidebar
+    //   }
+    // }
   
   }
   </script>
