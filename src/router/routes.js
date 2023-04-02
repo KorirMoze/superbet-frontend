@@ -1,8 +1,17 @@
-export default[{
-    name:'Master',
-    path:'/',
-    components:import('../pages/layout/master.vue'),
-    redirect:'/dashboard',
-    children:[]
-}
-]
+
+export default [
+    {
+      name: "Master",
+      path: "/",
+      component: import('./../pages/layout/masterWang'),
+      redirect: '/dashBoard',
+      children: [
+        {
+          name: 'dashBoard',
+          path: '/dashboard',
+          component: import('./../pages/layout/dashBoard'),
+        }
+      ]
+      },
+  
+  ]
