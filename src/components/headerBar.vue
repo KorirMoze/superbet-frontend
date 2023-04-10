@@ -32,9 +32,10 @@
         <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
           Login
         </a>
-        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+        <router-link to="/registration" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">Registration</router-link>
+        <!-- <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
           Registration
-        </a>
+        </a> -->
         <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white">
           Logout
         </a>

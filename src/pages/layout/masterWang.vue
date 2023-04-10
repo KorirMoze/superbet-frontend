@@ -1,34 +1,4 @@
 <template>
-  <div>
-    <table>
-      <thead>
-        <tr>
-          <th>Home Team</th>
-          <th>Home Odd</th>
-          <th>Neutral Odd</th>
-          <th>Away Odd</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in Datas" :key="item.sport_id">
-          <td>{{ item.home_team }}</td>
-          <td>{{ item.home_odd }}</td>
-          <td>{{ item.neutral_odd }}</td>
-          <td>{{ item.away_odd }}</td>
-          <td>{{ item.status }}</td>
-        </tr>
-        <tr v-for="item in Datas" :key="item.sport_id">
-          <td>{{ item.away_team }}</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-    <p v-if="Datas.length === 0">No matches found.</p>
-  </div>
     <div class="w-full h-full flex">
       <sideBar :dataOpenSideBar="openSidebar" />
       <div class="w-full h-full">
