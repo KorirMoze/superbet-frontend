@@ -15,6 +15,11 @@ export default [
         name: 'registration',
         path: '/registration',
         component: import('./../components/RegistrationPage'),
+      },
+      {
+        name: 'login',
+        path: '/login',
+        component: import('./../components/loginPage'),
       }
     ]
   }

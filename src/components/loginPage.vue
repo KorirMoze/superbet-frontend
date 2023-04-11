@@ -1,7 +1,7 @@
 <template>
     <div class="registratio bg-gray-700 shadow-md shadow-inner rounded-lg">
     <div class="reg">
-        <h1>Registration</h1>
+        <h1>Login</h1>
         <form @submit.prevent="submit" method="POST">
            
           <!-- <div>
