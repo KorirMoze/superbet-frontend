@@ -20,6 +20,11 @@ export default [
         name: 'login',
         path: '/login',
         component: import('./../components/loginPage'),
+      },
+      {
+        name: 'betslip',
+        path: '/betSlip',
+        component: import('./../components/betSlip'),
       }
     ]
   }

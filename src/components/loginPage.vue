@@ -9,28 +9,28 @@
             <input type="text" id="username"  v-model="userName" required class="px-4 py-3 rounded-lg pa">
           </div> -->
 
-          <div>
+          <!-- <div>
             <label for="firstName" class="ml-0 ">First Name</label>
             <input type="text" class="pa px-4 py-3 rounded-lg bg-slate-500" id="fname" v-model="fname" required>
-          </div>
+          </div> -->
           <div>
-            <label for="secondName" class="ml-0">Second Name</label>
-            <input type="text" class="pa px-4 py-3 rounded-lg bg-slate-500" id="sname" v-model="sname" required>
+            <label for="userName" class="ml-0">User Name</label>
+            <input type="text" class="pa px-4 py-3 rounded-lg bg-slate-500" id="sname" v-model="userName" required>
           </div>
-          <div>
+          <!-- <div>
             <label for="phoneNumber" class="ml-0">Phone Number</label>
             <input type="tel" class="pa px-4 py-3 rounded-lg bg-slate-500" id="phoneNumber" v-model="phoneNumber" required>
-          </div>
-          <div>
+          </div> -->
+          <!-- <div>
             <label for="email" class="ml-0">Email</label>
             <input type="email" id="email" class="pa px-4 py-3 rounded-lg bg-slate-500" v-model="email" required>
-          </div>
+          </div> -->
           <div>
             <label for="password" class="ml-0">Password</label>
             <input type="password" class="pa px-4 py-3 rounded-lg bg-slate-500 mb-3" id="password" v-model="password" required>
           </div>
           <!-- <button type="submit" class=" px-4 py-3 rounded-lg">Register</button> -->
-          <button  type="submit" @click="postData" class="px-4 py-3 text-md text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Register</button>
+          <button  type="submit" @click="postData" class="px-4 py-3 text-md text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Login</button>
   
         </form>
     </div>
@@ -59,21 +59,25 @@
     //     console.log('Password:', this.password);
     //   },
     postData() {
-  if (!this.fname || !this.email || !this.password || !this.phoneNumber) {
+  if (!this.userName || !this.password) {
     console.log('All fields are required');
     return;
   }
   
-  axios.post('http://127.0.0.1:8000/user/', {
-  firstname: this.fname,
-  email: this.email,
+  axios.post('http://127.0.0.1:8000/login/', {
+//   firstname: this.fname,
+//   email: this.email,
   password: this.password,
-  phone_number: this.phone_number,
+  username: this.userName,
 }, { withCredentials: false })
 .then(response => {
-  console.log(response.data);
-  this.submitted = true;
-})
+  if (response.data.message === 'Login successful') {
+      // Redirect to the home page
+      this.$router.push({ path: '/' });
+    } else {
+      console.log('Login failed');
+    }
+  })
 .catch(error => {
   console.error(error);
   this.errorMessage = error.message || 'Oops! Something went wrong.';

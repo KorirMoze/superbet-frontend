@@ -59,10 +59,10 @@
     <div class="rounded overflow-hidden shadow-lg match">
      
         <div class="px-6 py-4">
-        <div class="text-gray mb-2 hometeam prebet-match__teams"><span>{{ item.home_team }}</span> <span></span></div>
+        <div class="text-gray mb-2 hometeam prebet-match__teams" ><span>{{ item.home_team }}</span> <span></span></div>
         
         <div class="text-gray mb-2 prebet-match__teams">{{ item.away_team }}        <div class="px-6 pt-4 pb-2 prebet-match__odds__container">
-            <div class ='prebet-match__odds'>
+            <div class ='prebet-match__odds' onclick="addToBetslip({{ item.home_odd }}, {{ item.neutral_odd }}, {{ item.away_odd }})">
                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 ">{{ item.home_odd }}</span>
                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ item.neutral_odd }}</span>
                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ item.away_odd }}</span>
@@ -146,6 +146,17 @@ export default {
           console.log(error);
         });
     },
+    addToBetslip(item) {
+  console.log("Clicked on item: ", item);
+    
+    const betslipItem = {
+      match: item.match,
+      selection: item.selection,
+      odds: item.odds
+    };
+    
+    this.betslip.push(betslipItem);
+  },
     postData() {
       try {
         const data = {
