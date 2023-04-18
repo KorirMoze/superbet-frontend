@@ -161,16 +161,28 @@ export default {
         });
     },
     addToBetslip(item, selection) {
-  console.log("Clicked on item: ", item);
-  
-  const betslipItem = {
-    match: item.match,
-    selection: selection,
-    odds: item[selection]
-  };
-  
-  this.betslip.push(betslipItem);
-},
+      console.log("Clicked on item: ", item);
+      let odd;
+      switch (selection) {
+        case "home_odd":
+          odd = item.home_odd;
+          break;
+        case "neutral_odd":
+          odd = item.neutral_odd;
+          break;
+        case "away_odd":
+          odd = item.away_odd;
+          break;
+        default:
+          break;
+      }
+      const betslipItem = {
+        match: item.home_team + " vs " + item.away_team,
+        selection,
+        odds: odd,
+      };
+      this.betslip.push(betslipItem);
+    },
     postData() {
       try {
         const data = {

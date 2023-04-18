@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="we">
     <h2>Betslip</h2>
     <ul>
       <li v-for="(bet, index) in betslip" :key="index">
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "betSlip.vue",
+  name: "betSlip",
   props: {
     betslip: {
       type: Array,
@@ -20,3 +20,8 @@ export default {
   },
 };
 </script>
+<style>
+.we{
+  background-color: black;
+}
+</style>

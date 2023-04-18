@@ -22,10 +22,10 @@ export default [
         component: import('./../components/loginPage'),
       },
       {
-        name: 'betslip',
+        name: 'betSlip',
         path: '/betSlip',
         component: import('./../components/betSlip'),
-      }
+      },
     ]
   }
 ]
