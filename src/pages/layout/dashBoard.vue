@@ -2,6 +2,7 @@
     <div class="pop">
         <div class="popular">
             <h2>Popular Games</h2>
+            <betterSlip :betslip="betslip"/>
         </div>
         <div class="popgame">
             <div class="max-w-sm rounded overflow-hidden shadow-lg tt">
@@ -83,50 +84,25 @@
             <a class="prebet-match__markets">
                 +92 Markets
             </a></div>
+            
         </div></div>
      
      
  </div>
     </div>
 
-    <!-- <div>Datas ygueahsdanmokmndfgebwzJKVASDBJH </div>
-    <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Home Team</th>
-              <th>Home Odd</th>
-              <th>Neutral Odd</th>
-              <th>Away Odd</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in Datas" :key="item.sport_id">
-              <td>{{ item.home_team }}</td>
-              <td>{{ item.home_odd }}</td>
-              <td>{{ item.neutral_odd }}</td>
-              <td>{{ item.away_odd }}</td>
-              <td>{{ item.status }}</td>
-            </tr>
-            <tr v-for="item in Datas" :key="item.sport_id">
-              <td>{{ item.away_team }}</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-        <p v-if="Datas.length === 0">No matches found.</p>
-      </div> -->
 </div>
 
 </template>
 <script>
 import axios from 'axios';
-
+import betterSlip from "@/components/betterSlip.vue";
+// import masterWang from "@/pages/betterSlip.vue";
 export default {
+  components: {
+    betterSlip,
+    // masterWang
+  },
   name: 'dropDown',
   props: ['title', 'items'],
   data() {
