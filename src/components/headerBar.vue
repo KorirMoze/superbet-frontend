@@ -35,6 +35,7 @@
         <a href="/betSlip" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
           Betslip
         </a>
+        <betterSlip :betslip="betslip"/>
         <router-link to="/registration" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">Registration</router-link>
         <!-- <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
           Registration

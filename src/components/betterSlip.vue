@@ -1,10 +1,11 @@
 <template>
     <div>
-      <h2>Betslip</h2>
-      <betterSlip :betslip="betslip"/>
+      <h2>Bet Slip</h2>
+      <h1>Betterslip Component</h1>
+      <p>{{ betslip }}</p>
       <ul>
-        <li v-for="(bet, index) in betslip" :key="index">
-          {{ bet.match }} - {{ bet.selection }} - {{ bet.odds }}
+        <li v-for="(item, index) in betslip" :key="index">
+          {{ item.match }} - {{ item.selection }} - {{ item.odds }}
         </li>
       </ul>
     </div>
@@ -12,13 +13,17 @@
   
   <script>
   export default {
-    name: "bettterSlip",
+    name: "betterSlip",
     props: {
       betslip: {
         type: Array,
-        default: () => [],
+        required: true,
       },
     },
   };
   </script>
+  
+  <style scoped>
+  /* Add your component's styles here */
+  </style>
   
