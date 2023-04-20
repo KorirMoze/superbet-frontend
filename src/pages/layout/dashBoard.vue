@@ -2,7 +2,9 @@
     <div class="pop">
         <div class="popular">
             <h2>Popular Games </h2>
-            <betterSlip :betslip="betslip"/>
+            <!-- <betterSlip :betslip="betslip"/> -->
+            <betterSlip :betslip="betslip" @update:betslip="updateBetslip" style="background-color: #f2f2f2; padding: 10px;"></betterSlip>
+
         </div>
         <div class="popgame">
             <div class="max-w-sm rounded overflow-hidden shadow-lg tt">
@@ -177,6 +179,16 @@ export default {
   this.betslip.push(betslipItem);
   
 },
+updateBetslip(updatedBetslip) {
+      this.betslip = updatedBetslip;
+    },
+    placeBet() {
+      console.log("Placing bet:", this.betslip);
+      // Place the bet using the betslip data
+      // ...
+      // Once the bet is placed, clear the betslip
+      this.betslip = [];
+    },
 
     postData() {
       try {
