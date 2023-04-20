@@ -6,6 +6,7 @@ import './assets/tailwind.css'
 import router  from './router'
 import store from './store';
 
+
 axios.defaults.baseURL = 'http://localhost:8080/';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';

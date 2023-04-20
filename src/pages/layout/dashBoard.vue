@@ -1,7 +1,7 @@
 <template>
     <div class="pop">
         <div class="popular">
-            <h2>Popular Games</h2>
+            <h2>Popular Games </h2>
             <betterSlip :betslip="betslip"/>
         </div>
         <div class="popgame">
@@ -109,11 +109,14 @@ export default {
     return {
       Datas: [],
       betslip: [],
+      
     };
   },
   mounted() {
     this.getDatas();
     this.getAirtimes();
+    console.log(this.betslip);
+
   },
   methods: {
     getDatas() {
@@ -138,6 +141,7 @@ export default {
     },
     addToBetslip(item, selection) {
   console.log("Clicked on item: ", item);
+  
 
   // Check if there's already a selection for this team
   const existingSelectionIndex = this.betslip.findIndex(
@@ -171,6 +175,7 @@ export default {
   };
 
   this.betslip.push(betslipItem);
+  
 },
 
     postData() {
