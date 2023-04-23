@@ -2,18 +2,19 @@
   <div class="betslip" :key="betslipKey">
     <h2>Betslip</h2>
     <ul>
-      <li v-for="(betslipItem, index) in betslip" :key="index">
+      <li v-for="(betslipItem, index) in betslipCopy" :key="index">
         <span>{{ betslipItem.match }}</span>
         <span>{{ betslipItem.selection }}</span>
         <span>{{ betslipItem.odds }}</span>
         <button @click="removeFromBetslip(index)">Remove</button>
       </li>
     </ul>
-    <button v-if="betslip.length > 0" @click="placeBet">Place Bet</button>
+    <button v-if="betslipCopy.length > 0" @click="placeBet">Place Bet</button>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   props: {
     betslip: {
@@ -26,17 +27,42 @@ export default {
       betslipKey: 0,
     };
   },
+  computed: {
+    betslipCopy() {
+      return [...this.betslip];
+    }
+  },
   methods: {
     removeFromBetslip(index) {
-      const updatedBetslip = this.betslip.slice();
+      const updatedBetslip = this.betslipCopy.slice();
       updatedBetslip.splice(index, 1);
       this.$emit('update:betslip', updatedBetslip);
       this.betslipKey += 1;
     },
     placeBet() {
-      console.log('Placing bet:', this.betslip);
-      this.$emit('place-bet');
-    },
+      console.log('Placing bets:', this.betslip);
+
+      // Loop through the betslip array and send each item as a separate request
+      for (let i = 0; i < this.betslip.length; i++) {
+        const bet = this.betslip[i];
+
+        // Send a POST request to the backend API for this bet
+        axios.post('http://127.0.0.1:8000/place_bet/', {
+          match: bet.match,
+          selection: bet.selection,
+          odds: bet.odds,
+          stake: bet.stake
+        })
+        .then(response => {
+          console.log('Bet placed:', response.data);
+          // Emit a "bet-placed" event to update the UI
+          this.$emit('bet-placed', response.data.bet);
+        })
+        .catch(error => {
+          console.error('Failed to place bet:', error);
+        });
+      }
+
   },
   watch: {
     betslip: function (newValue, oldValue) {
@@ -85,3 +111,4 @@ button:hover {
   background-color: #0069d9;
 }
 </style>
+
