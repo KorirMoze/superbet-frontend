@@ -31,7 +31,11 @@ export default [
         path: '/account',
         component: import('./../components/accountDetails'),
       },
-
+      {
+        name: 'game',
+        path: '/game',
+        component: import('./../components/moreGame'),
+      },
   
       // {
       //   path: "/betslip",

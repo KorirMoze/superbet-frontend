@@ -2,7 +2,7 @@
     <div>
       <h1>Account Details</h1>
       <template v-if="Object.keys(gambler).length !== 0">
-        <pre>{{ JSON.stringify(gambler, null, 2) }}</pre>
+        <!-- <pre>{{ JSON.stringify(gambler, null, 2) }}</pre> -->
         <p>Email: {{ gambler.data && gambler.data.email }}</p>
         <p>First Name: {{ gambler.data && gambler.data.first_name }}</p>
         <p>Last Name: {{ gambler.data && gambler.data.last_name }}</p>

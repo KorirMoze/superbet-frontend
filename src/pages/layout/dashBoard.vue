@@ -83,9 +83,11 @@
                   <span data-v-5812f367="" class="marker" style="color: rgb(155, 118, 222); margin-left: 5px; display: none;">esport</span> 
                   <span data-v-5812f367="" class="marker" style="color: rgb(155, 118, 222); margin-left: 5px; display: none;">srl</span>
                 </div> 
-            <a class="prebet-match__markets">
-                +92 Markets
-            </a></div>
+                <div>
+                  <!-- existing code -->
+                  <router-link :to="'/game'" class="prebet-match__markets">+92 Markets</router-link>
+                </div>
+          </div>
             
         </div></div>
      
