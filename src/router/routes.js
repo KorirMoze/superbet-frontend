@@ -26,6 +26,13 @@ export default [
         path: '/betSlip',
         component: import('./../components/betterSlip'),
       },
+      {
+        name: 'account',
+        path: '/account',
+        component: import('./../components/accountDetails'),
+      },
+
+  
       // {
       //   path: "/betslip",
       //   components: {

@@ -32,8 +32,8 @@
         <a href="/login" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
           Login
         </a>
-        <a href="/betSlip" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
-          Betslip
+        <a href="/account" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+          My Account
         </a>
         <betterSlip :betslip="betslip"/>
         <router-link to="/registration" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">Registration</router-link>
