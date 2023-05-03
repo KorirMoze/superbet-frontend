@@ -58,32 +58,58 @@
     //     console.log('Email:', this.email);
     //     console.log('Password:', this.password);
     //   },
-    postData() {
+//     postData() {
+//   if (!this.userName || !this.password) {
+//     console.log('All fields are required');
+//     return;
+//   }
+  
+//   axios.post('http://127.0.0.1:8000/login/', {
+// //   firstname: this.fname,
+// //   email: this.email,
+//   password: this.password,
+//   username: this.userName,
+// }, { withCredentials: false })
+// .then(response => {
+//   if (response.data.message === 'Login successful') {
+//       // Redirect to the home page
+//       this.$router.push({ path: '/' });
+//     } else {
+//       console.log('Login failed');
+//     }
+//   })
+// .catch(error => {
+//   console.error(error);
+//   this.errorMessage = error.message || 'Oops! Something went wrong.';
+// });
+
+// },
+postData() {
   if (!this.userName || !this.password) {
     console.log('All fields are required');
     return;
   }
   
   axios.post('http://127.0.0.1:8000/login/', {
-//   firstname: this.fname,
-//   email: this.email,
-  password: this.password,
-  username: this.userName,
-}, { withCredentials: false })
-.then(response => {
-  if (response.data.message === 'Login successful') {
+    password: this.password,
+    username: this.userName,
+  }, { withCredentials: false })
+  .then(response => {
+    if (response.data.message === 'Login successful') {
+      // Save the JWT token to local storage
+      localStorage.setItem('jwt', response.data.token);
+      
       // Redirect to the home page
       this.$router.push({ path: '/' });
     } else {
       console.log('Login failed');
     }
   })
-.catch(error => {
-  console.error(error);
-  this.errorMessage = error.message || 'Oops! Something went wrong.';
-});
-
-},
+  .catch(error => {
+    console.error(error);
+    this.errorMessage = error.message || 'Oops! Something went wrong.';
+  });
+}
 
 
     },

@@ -44,37 +44,64 @@ export default {
       this.betslipKey += 1;
     },
 
-    placeBet() {
-      console.log('Placing bets:', this.betslip);
+//   placeBet() {
+//   console.log('Placing bets:', this.betslip);
 
-      // Get the JWT from a cookie or local storage
-      const token = localStorage.getItem('jwt');
+//   // Get the JWT from a cookie or local storage
+//   const token = localStorage.getItem('jwt');
+//   console.log(token)
+//   // Loop through the betslip array and send each item as a separate request
+//   for (let i = 0; i < this.betslip.length; i++) {
+//     const bet = this.betslip[i];
 
-      // Loop through the betslip array and send each item as a separate request
-      for (let i = 0; i < this.betslip.length; i++) {
-        const bet = this.betslip[i];
+//     // Send a POST request to the backend API for this bet, including the JWT in the headers
+//     axios.post('http://127.0.0.1:8000/place_bet/', {
+//       match: bet.match,
+//       selection: bet.selection,
+//       odds: bet.odds,
+//       stake: bet.stake
+//     }, {
+//       headers: {
+//         Authorization: `Bearer ${token}`
+//       }
+//     })
+//     .then(response => {
+//       console.log('Bet placed:', response.data);
+//       // Emit a "bet-placed" event to update the UI
+//       this.$emit('bet-placed', response.data.bet);
+//     })
+//     .catch(error => {
+//       console.error('Failed to place bet:', error);
+//     });
+//   }
+// }
+async placeBet() {
+  console.log('Placing bets:', this.betslip);
 
-        // Send a POST request to the backend API for this bet, including the JWT in the headers
-        axios.post('http://127.0.0.1:8000/place_bet/', {
-          match: bet.match,
-          selection: bet.selection,
-          odds: bet.odds,
-          stake: bet.stake
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-        .then(response => {
-          console.log('Bet placed:', response.data);
-          // Emit a "bet-placed" event to update the UI
-          this.$emit('bet-placed', response.data.bet);
-        })
-        .catch(error => {
-          console.error('Failed to place bet:', error);
-        });
+  // Get the JWT from a cookie or local storage
+  const token = localStorage.getItem('jwt');
+  console.log(token);
+
+  try {
+    // Send a POST request to the backend API with the entire betslip array,
+    // including the JWT in the headers
+    const response = await axios.post('http://127.0.0.1:8000/place_bet/', {
+      betslip: this.betslip
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
-    },
+    });
+
+    console.log('Bets placed:', response.data.bets);
+    // Emit a "bet-placed" event to update the UI with the placed bets
+    this.$emit('bet-placed', response.data.bets);
+
+  } catch (error) {
+    console.error('Failed to place bets:', error);
+  }
+}
+
   },
 
   watch: {
@@ -124,3 +151,4 @@ button:hover {
   background-color: #0069d9;
 }
 </style>
+  
