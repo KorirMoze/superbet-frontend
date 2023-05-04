@@ -85,7 +85,11 @@
                 </div> 
                 <div>
                   <!-- existing code -->
-                  <router-link :to="'/game'" class="prebet-match__markets">+92 Markets</router-link>
+                  <!-- <router-link :to="'/game' + gameId" class="prebet-match__markets">+92 Markets</router-link> -->
+                  <router-link :to="'/game/'" @click="sendParentId(game.parent_match_id)">
+                    +92 Markets
+                  </router-link>
+                  <div class="text-gray mb-2 hometeam prebet-match__teams" ><span>{{ item.parent_match_id }}</span> <span></span></div>
                 </div>
           </div>
             
@@ -101,6 +105,8 @@
 <script>
 import axios from 'axios';
 import betterSlip from "@/components/betterSlip.vue";
+import router from '@/router' // eslint-disable-line no-unused-vars
+
 // import masterWang from "@/pages/betterSlip.vue";
 export default {
   components: {
@@ -108,7 +114,8 @@ export default {
     // masterWang
   },
   name: 'dropDown',
-  props: ['title', 'items'],
+  
+  props: ['title', 'items','gameId'],
   data() {
     return {
       Datas: [],
@@ -133,6 +140,7 @@ export default {
           console.log(error);
         });
     },
+    
     getAirtimes() {
       axios
         .get('http://127.0.0.1:8000/')
@@ -220,6 +228,18 @@ updateBetslip(updatedBetslip) {
           console.log(error);
         });
     },
+    sendParentId(parentId) {
+      axios.post('http://50.116.38.17/credit_create/bet2/', { parentId })
+        .then(response => {
+          console.log('Parent ID sent to backend:', parentId);
+          console.log('Response from server:', response.data);
+          
+        })
+        .catch(error => {
+          console.error('Error sending parent ID to backend:', error);
+        });
+    },
+  
     scroll() {
       const element = document.getElementById('contact-me');
       element.scrollIntoView({ behavior: 'smooth' });
@@ -237,6 +257,7 @@ updateBetslip(updatedBetslip) {
     },
   },
 };
+
 </script>
 
 <style>
