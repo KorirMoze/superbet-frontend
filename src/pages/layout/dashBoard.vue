@@ -86,7 +86,7 @@
                 <div>
                   <!-- existing code -->
                   <!-- <router-link :to="'/game' + gameId" class="prebet-match__markets">+92 Markets</router-link> -->
-                  <router-link :to="'/game/'" @click="sendParentId(game.parent_match_id)">
+                  <router-link :to="'/game/'" @click="sendParentId(item.parent_match_id)">
                     +92 Markets
                   </router-link>
                   <div class="text-gray mb-2 hometeam prebet-match__teams" ><span>{{ item.parent_match_id }}</span> <span></span></div>
@@ -228,18 +228,47 @@ updateBetslip(updatedBetslip) {
           console.log(error);
         });
     },
-    sendParentId(parentId) {
-      axios.post('http://50.116.38.17/credit_create/bet2/', { parentId })
-        .then(response => {
-          console.log('Parent ID sent to backend:', parentId);
-          console.log('Response from server:', response.data);
+    // sendParentId(parent_match_id) {
+    //   axios.post('http://50.116.38.17/credit_create/bet2/', { parent_match_id })
+    //     .then(response => {
+    //       console.log('Parent ID sent to backend:', parent_match_id);
+    //       console.log('Response from server:', response.data);
           
+    //     })
+    //     .catch(error => {
+    //       console.error('Error sending parent ID to backend:', error);
+    //     });
+    // },
+  
+
+    sendParentId(parent_match_id) {
+      axios.post('http://127.0.0.1:8000/bet2/', { parent_match_id })
+        .then(response => {
+          console.log('Parent ID sent to backend:', parent_match_id);
+          console.log('Response from server:', response.data);
         })
         .catch(error => {
           console.error('Error sending parent ID to backend:', error);
         });
     },
-  
+//     sendParentId(parent_match_id) {
+//   axios.post('http://127.0.0.1:8000/bet2/', { parent_match_id })
+//     .then(response => {
+//       console.log('Parent ID sent to backend:', parent_match_id);
+//       console.log('Response from server:', response.data);
+//       this.$router.push({
+//         name: 'moreGame',
+//         params: {
+//           parent_match_id: parent_match_id,
+//           data: response.data,
+//         },
+//       });
+//     })
+//     .catch(error => {
+//       console.error('Error sending parent ID to backend:', error);
+//     });
+// },
+
     scroll() {
       const element = document.getElementById('contact-me');
       element.scrollIntoView({ behavior: 'smooth' });
