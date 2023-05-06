@@ -23,6 +23,7 @@
         matches: [],
         loading: true,
       };
+      
     },
     mounted() {
       axios.get(`http://127.0.0.1:8000/bet2/?parent_match_id=${this.gameId}`)
