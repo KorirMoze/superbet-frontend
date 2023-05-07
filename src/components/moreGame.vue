@@ -26,7 +26,7 @@
       
     },
     mounted() {
-      axios.get(`http://127.0.0.1:8000/bet2/?parent_match_id=${this.gameId}`)
+      axios.get(`http://127.0.0.1:8000/bet2/?parent_match_id=${this.parent_match_id}`)
         .then(response => {
           console.log('Response from server:', response.data);
           this.matches = response.data;
