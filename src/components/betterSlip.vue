@@ -1,6 +1,6 @@
 <template>
   <div class="betslip" :key="betslipKey">
-    <h2>Betslip</h2>
+   
     <ul>
       <li v-for="(betslipItem, index) in betslipCopy" :key="index">
         <span>{{ betslipItem.match }}</span>
@@ -119,6 +119,9 @@ async placeBet() {
   border: 1px solid #ccc;
   padding: 10px;
   margin-top: 20px;
+  background: rgba(217, 217, 217, 0.57);
+border-radius: 10px;
+
 }
 
 ul {
@@ -132,6 +135,7 @@ li {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5px;
+  height: 2rem;
 }
 
 li span {
