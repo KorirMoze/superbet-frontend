@@ -19,7 +19,7 @@
     name: 'GameData',
     data() {
       return {
-        gameId: this.$route.params.gameId,
+        gameId: this.$route.params.parent_match_id,
         matches: [],
         loading: true,
       };
