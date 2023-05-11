@@ -1,4 +1,23 @@
 <template>
+  <div class="container">
+
+    <div class="row">
+      <div class="col">
+        1 of 3
+      </div>
+      <div class="col-md-auto">
+        Variable width content wgjhsdbhjweksbdijhw
+      </div>
+      <div class="col col-lg-2">
+        <div class="betsslip">
+          <button class="btn1-betslip">Your Betslip</button>
+          <button class="btn1-betslip1">Your Betsrlip</button>
+          <p1 class="bet3">heds</p1>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <div class="pop">
         <div class="popular">
             <h2>Popular Games </h2>
@@ -6,50 +25,9 @@
             <betterSlip :betslip="betslip" @update:betslip="updateBetslip" style="background-color: #f2f2f2; padding: 10px;"></betterSlip>
 
         </div>
-        <div class="popgame">
-            <div class="max-w-sm rounded overflow-hidden shadow-lg tt">
-                <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains">
-                <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-                <p class="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                </p>
-                </div>
-                <div class="px-6 pt-4 pb-2">
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                </div>
-            </div>
-            <div class="max-w-sm rounded overflow-hidden shadow-lg tt">
-                <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains">
-                <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-                <p class="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                </p>
-                </div>
-                <div class="px-6 pt-4 pb-2">
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                </div>
-            </div>
-            <div class="max-w-sm rounded overflow-hidden shadow-lg tt">
-                <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains">
-                <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-                <p class="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                </p>
-                </div>
-                <div class="px-6 pt-4 pb-2">
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                </div>
-            </div>
-        </div>
+
+
+
     </div>
     <div class="time">
         <div class="pull-left" style="width: 70%; text-align: left;">
@@ -288,185 +266,43 @@ updateBetslip(updatedBetslip) {
 };
 
 </script>
-
 <style>
-
-.prebet-match__sport-icon {
-    height: 15px;
-    width: 15px;
-    fill: var(--light-black);
-    margin-right: 2px;
-}
-style attribute {
-    width: 70%;
-    text-align: left;
-}
-.pop{
-    display: block;
-    margin: auto;
-    width: 60%;
-}
-.popular{
-    background-color: #1A5F7A;
-    font-weight: 700;
-    text-align: left;
-    padding: 0.5em 0.75em;
-    display: block;
-    margin: auto;
-    width: 100%;
-}
-.popgame{
-    display: flex;
-    flex-direction: horizontal;
-}
-.tt{
-    margin-right: 10px;
-}
-.all_games{
-    width: 60%;
-    margin: auto;
-    text-align: left !important;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 5px 0;
-}
-.prebet-match__teams {
-    display: flex;
-    flex-direction: column;
-    padding: 2px 5px;
-    flex-basis: 50%;
-    font-weight: var(--font-weight-medium);
-    text-transform: capitalize;
-    font-size: var(--font-medium);
-    color: var(--black);
-    line-height: 12px;
-    white-space: nowrap;
-    cursor: pointer;
-}
-.hometeam {
-    justify-content: space-between;
-}
-.match {
-    width: 100%;
+.betsslip{
+  position: relative;
+  width: 452px;
+  
+  background: rgba(217, 217, 217, 0.37);
+  border-radius: 8.21818px;
 }
 
-.prebet-match__odd-market__container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 5px 0;
+.btn1-betslip1{
+
+width: 226.82px;
+height: 56.71px;
+
+
+background: #D9D9D9;
+border-radius: 0px 8.21818px 0px 0px;
 }
-div {
-    display: block;
+.btn1-betslip{
+
+width: 226.82px;
+height: 56.71px;
+
+
+background: #1EBA01;
+border-radius: 8.21818px 0px 0px 0px;
 }
-.prebet-match {
-    font-size: var(--font-medium);
-    background-color: var(--white);
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    padding: 5px;
-}
-.prebet-match__teams {
-    display: flex;
-    flex-direction: column;
-    padding: 2px 5px;
-    flex-basis: 50%;
-    font-weight: var(--font-weight-medium);
-    text-transform: capitalize;
-    font-size: var(--font-medium);
-    color: var(--black);
-    line-height: 12px;
-    white-space: nowrap;
-    cursor: pointer;
-}
-.prebet-match__teams__home {
-    margin-bottom: 8px;
+.bet3{
+  position: absolute;
+width: 428px;
+height: 110px;
+left: 1269px;
+top: 223px;
+
+background: rgba(217, 217, 217, 0.15);
+border-radius: 10px;
 }
 
-.prebet-match__teams {
-    display: flex;
-    flex-direction: column;
-    padding: 2px 5px;
-    flex-basis: 50%;
-    font-weight: var(--font-weight-medium);
-    text-transform: capitalize;
-    font-size: var(--font-medium);
-    color: var(--black);
-    line-height: 12px;
-    white-space: nowrap;
-    cursor: pointer;
-}
-.prebet-match__odds__container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    flex-basis: 50%;
-}
-.prebet-match__odds {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex: 10;
-}
-.prebet-match__odds[number-of-odds="3"] .prebet-match__odd {
-    width: calc(100% / 3 - 4px);
-}
-
-.prebet-match__odd {
-    background-color: var(--light-gray);
-    color: var(--black);
-    z-index: 2;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    border-radius: 15px;
-    align-items: center;
-    padding: 8px 5px;
-    border: none;
-}
-
-a, button {
-    cursor: pointer;
-}
-
-button, input, select, textarea {
-    outline: none;
-    appearance: none;
-    border-radius: 0;
-    -webkit-appearance: none;
-}
-
-body, button, html, input, pre, select, textarea {
-    font-family: var(--font),-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    color: var(--black);
-}
-.prebet-match__bottom {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.prebet-match__markers {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-lement.style {
-    color: rgb(204, 0, 0);
-    font-size: var(--font-small);
-    margin-left: 5px;
-    display: none;
-}
-.prebet-match__markets {
-    font-weight: var(--font-weight-normal);
-    font-size: var(--font-small);
-    text-align: left;
-    color: var(--green);
-    padding: 5px 0;
-    text-transform: capitalize;
-    cursor: pointer;
-}
 </style>
+
