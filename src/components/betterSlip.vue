@@ -4,9 +4,10 @@
     <ul>
       <li v-for="(betslipItem, index) in betslipCopy" :key="index">
         <span>{{ betslipItem.match }}</span>
-        <span>{{ betslipItem.selection }}</span>
-        <span>{{ betslipItem.odds }}</span>
-        <button @click="removeFromBetslip(index)">Remove</button>
+        <span class="selection">{{ betslipItem.selection }}</span>
+        <div>{{ betslipItem.odds }}</div>
+        <button class="btn-remove"
+        @click="removeFromBetslip(index)">Remove</button>
       </li>
     </ul>
     <button v-if="betslipCopy.length > 0" @click="placeBet">Place Bet</button>
@@ -128,18 +129,32 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  background-color: #EEEEEE;
+   align-items: center;
 }
 
 li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 5px;
   height: 2rem;
+  margin-bottom: 0.5rem;
+
+  background: rgba(217, 217, 217, 0.57);
+  height: 4rem;
+  border-radius: 10px;
 }
 
 li span {
-  margin-right: 10px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 600;
+font-size: 14.9005px;
+line-height: 22px;
+letter-spacing: 0.01em;
+
+
 }
 
 button {
@@ -153,6 +168,13 @@ button {
 
 button:hover {
   background-color: #0069d9;
+}
+.selection{
+
+color: #1EBA01;
+}
+.btn-remove{
+  background: #1EBA01;
 }
 </style>
   
