@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="">
 
     <div class="row">
 
@@ -8,8 +8,12 @@
 
           <div class="games" v-for="item in Datas" :key="item.sport_id">
             <div>
+  
              
               <div class="whole">
+                <div class="time">
+                  {{ item.start_time }}
+                </div>
                   <div class="homeaway">
                   <div class="homei">
                     {{ item.home_team }} </div>
@@ -24,12 +28,12 @@
                     <span><button class="hom1" @click="addToBetslip(item, 'neutral_odd')">{{ item.neutral_odd }}</button></span>
                     <span> <button class="hom2" @click="addToBetslip(item, 'away_odd')">{{ item.away_odd }}</button></span>
 
-                    <div class="prebet-match__bottom">
+                    <div >
 
                       <div>
         
-                        <router-link :to="'/game/'" @click="sendParentId(item.parent_match_id)">
-                          +92 Markets
+                        <router-link :to="'/game/'" @click="sendParentId(item.parent_match_id)" class="more">
+                          +92 
                         </router-link>
                         <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
                       </div>
@@ -46,7 +50,7 @@
         </div>
         </div>      
       </div>
-      
+
       <div class="col col-lg-4 col-md-4 col-sm-4">
         <div class="betsslip">
           <div class="we">
@@ -66,13 +70,7 @@
 
 
 
-    <div class="time">
-        <div class="pull-left" style="width: 70%; text-align: left;">
-            <span style="display: flex; align-items: center;">
-                <svg class="prebet-match__sport-icon"><use xlink:href="#soccer"></use></svg> 
-                <span>Spain • LaLiga
-    </span></span></div>
-    </div>
+ 
 
 
 </template>
@@ -297,8 +295,9 @@ background: rgba(217, 217, 217, 0.15);
 border-radius: 10px;
 }
 .row{
-  width: 100%;
+  width: 95%;
   margin-top: 1rem;
+  margin: auto;
 }
 .we{
   display: flex;
@@ -341,13 +340,12 @@ background: rgba(217, 217, 217, 0.6);
 border-radius: 9.34191px;
 }
 .games{
-width: 1048px;
-height: 98.5px;
-left: 166px;
-top: 544px;
 
-background: rgba(217, 217, 217, 0.25);
+left: 166px;
+background-color: #E8F6EF;
+
 border-radius: 9.84962px;
+
 }
 .prebet{
   display: flex;
@@ -389,17 +387,55 @@ font-weight: 700;
 font-size: 14.9471px;
 line-height: 175%;
 /* or 26px */
-
 letter-spacing: 0.01em;
-
 color: #000000;
-
 }
 .whole{
   display: flex;
+  padding-top: 1.7rem;
+  padding-bottom: 2.0rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
 }
 .ty{
   background-color: #fff;
+}
+.time{
+
+height: 25.46px;
+left: 194.56px;
+top: 594.09px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 16.8154px;
+line-height: 25px;
+/* identical to box height */
+
+text-align: center;
+letter-spacing: 0.01em;
+
+color: #000000;
+}
+.more{
+
+  width: 5.5rem !important;
+ 
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16.8154px;
+  line-height: 25px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  
+  color: #F9F9F9;
+  
+  background: #1EBA01;
+  border-radius: 9.84962px;
+  display: flex;
+  justify-content: center;
 }
 </style>
 
