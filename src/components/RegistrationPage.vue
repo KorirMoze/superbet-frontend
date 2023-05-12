@@ -103,33 +103,3 @@
     },
   };
   </script>
-<style>
-.registratio{
-    background-color: green!important;
-    width: 30%;
-    margin: auto;
-    margin-top: 4rem;
-}
-body{
-    
-    color: white !important;
-    font-family: font-serif;
-}
-label{
-    margin-left: 0 !important;
-    font-size: 1.5rem;
-    color: white;
-    align-items: pull-left;
-    text-align: left;
-}
-.pa{
-    width: 100% !important;
-    
-}
-.reg{
-    width: 80%;
-    margin: auto;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-}
-</style>  

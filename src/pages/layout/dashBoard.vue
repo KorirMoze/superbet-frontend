@@ -2,53 +2,51 @@
   <div class="container">
 
     <div class="row">
-      <!-- <div class="col col-lg-2 col-md-2 col-sm-2">
-        1 of 3
-      </div> -->
-      <div class="col col-lg-8 col-md-8 col-sm-8">
-        <div class="all_games" v-for="item in Datas" :key="item.sport_id">
-          <div class="rounded overflow-hidden shadow-lg match">
-           
-              <div class="px-6 py-4">
-              <div class="text-gray mb-2 hometeam prebet-match__teams" ><span>{{ item.home_team }}</span> <span></span></div>
-              
-              <div class="text-gray mb-2 prebet-match__teams">{{ item.away_team }}        <div class="px-6 pt-4 pb-2 prebet-match__odds__container">
-                  <div class ='prebet-match__odds'>
-                      <!-- <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 ">{{ item.home_odd }}</span>
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ item.neutral_odd }}</span>
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ item.away_odd }}</span> -->
-      
-                      <button class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" @click="addToBetslip(item, 'home_odd')">{{ item.home_odd }}</button>
-                      <button class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" @click="addToBetslip(item, 'neutral_odd')">{{ item.neutral_odd }}</button>
-                      <button class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" @click="addToBetslip(item, 'away_odd')">{{ item.away_odd }}</button>
-                  </div>
-                  <div class="prebet-match__bottom">
-                    <div class="prebet-match__markers">
-                      <svg data-v-81d7167e="" width="16" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path data-v-81d7167e="" d="M8 11.4C8 12.17 8.6 12.8 9.33 12.8H10.83C11.47 12.8 11.99 12.25 11.99 11.58C11.99 10.85 11.67 10.59 11.2 10.42L8.8 9.58001C8.32 9.41001 8 9.15001 8 8.42001C8 7.75001 8.52 7.20001 9.16 7.20001H10.66C11.4 7.21001 12 7.83001 12 8.60001" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
-                        <path data-v-81d7167e="" d="M10 12.85V13.59" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path data-v-81d7167e="" d="M10 6.40997V7.18997" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path data-v-81d7167e="" d="M9.99 17.98C14.4028 17.98 17.98 14.4028 17.98 9.99C17.98 5.57724 14.4028 2 9.99 2C5.57724 2 2 5.57724 2 9.99C2 14.4028 5.57724 17.98 9.99 17.98Z" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
-                        <path data-v-81d7167e="" d="M12.98 19.88C13.88 21.15 15.35 21.98 17.03 21.98C19.76 21.98 21.98 19.76 21.98 17.03C21.98 15.37 21.16 13.9 19.91 13" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg> <span style="color: rgb(204, 0, 0); font-size: var(--font-small); margin-left: 5px; display: none;">Upcoming Live</span> 
-                        <span data-v-5812f367="" class="marker" style="color: rgb(155, 118, 222); margin-left: 5px; display: none;">esport</span> 
-                        <span data-v-5812f367="" class="marker" style="color: rgb(155, 118, 222); margin-left: 5px; display: none;">srl</span>
-                      </div> 
+
+      <div class="col col-lg-8 col-md-8 col-sm-8 ty">
+        <div class="">
+
+          <div class="games" v-for="item in Datas" :key="item.sport_id">
+            <div>
+             
+              <div class="whole">
+                  <div class="homeaway">
+                  <div class="homei">
+                    {{ item.home_team }} </div>
+                
+                <div class="away">{{ item.away_team }} </div>  
+
+              </div>
+              <div class="">
+                <div class ='prebet'>
+    
+                    <span><button class="hom" @click="addToBetslip(item, 'home_odd')">{{ item.home_odd }}</button></span>
+                    <span><button class="hom1" @click="addToBetslip(item, 'neutral_odd')">{{ item.neutral_odd }}</button></span>
+                    <span> <button class="hom2" @click="addToBetslip(item, 'away_odd')">{{ item.away_odd }}</button></span>
+
+                    <div class="prebet-match__bottom">
+
                       <div>
-                        <!-- existing code -->
-                        <!-- <router-link :to="'/game' + gameId" class="prebet-match__markets">+92 Markets</router-link> -->
+        
                         <router-link :to="'/game/'" @click="sendParentId(item.parent_match_id)">
                           +92 Markets
                         </router-link>
-                        <div class="text-gray mb-2 hometeam prebet-match__teams" ><span>{{ item.parent_match_id }}</span> <span></span></div>
+                        <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
                       </div>
                 </div>
-                  
-              </div></div>
-           
-           
-       </div>
-          </div>
+                </div>
+ 
+                
+            </div>
+             
+             
+         </div>
+            </div>
+        
+        </div>
+        </div>      
+      </div>
       
-      </div>
-      </div>
       <div class="col col-lg-4 col-md-4 col-sm-4">
         <div class="betsslip">
           <div class="we">
@@ -266,9 +264,6 @@ updateBetslip(updatedBetslip) {
 </script>
 <style>
 .betsslip{
-
- 
-  
   background: rgba(217, 217, 217, 0.37);
   border-radius: 8.21818px;
 }
@@ -301,6 +296,10 @@ top: 223px;
 background: rgba(217, 217, 217, 0.15);
 border-radius: 10px;
 }
+.row{
+  width: 100%;
+  margin-top: 1rem;
+}
 .we{
   display: flex;
   margin-right: 1rem;
@@ -308,8 +307,99 @@ border-radius: 10px;
 .container{
   margin: auto;
   width: 100%;
-
 }
 
+.hom{
+padding: 0 !important;
+width: 140.13px;
+height: 60.72px;
+left: 583px;
+top: 562.71px;
+margin-right: 1.2rem;
+background: rgba(217, 217, 217, 0.6);
+border-radius: 9.34191px;
+}
+.hom1{
+padding: 0 !important;
+margin-right: 1.2rem;
+width: 140.13px;
+height: 60.72px;
+left: 751px;
+top: 562.71px;
+
+background: rgba(217, 217, 217, 0.6);
+border-radius: 9.34191px;
+}
+.hom2{
+padding: 0 !important;
+margin-right: 1.2rem;
+width: 140.13px;
+height: 60.72px;
+
+margin-right: 2rem !important;
+background: rgba(217, 217, 217, 0.6);
+border-radius: 9.34191px;
+}
+.games{
+width: 1048px;
+height: 98.5px;
+left: 166px;
+top: 544px;
+
+background: rgba(217, 217, 217, 0.25);
+border-radius: 9.84962px;
+}
+.prebet{
+  display: flex;
+  justify-content: space-between;
+}
+.homeaway{
+  display: flex;
+  flex-direction: column;
+  
+}
+.homei{
+
+width: 139px;
+height: 23.35px;
+left: 361.02px;
+top: 558.77px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 14.9471px;
+line-height: 175%;
+/* or 26px */
+
+letter-spacing: 0.01em;
+
+color: #000000;
+}
+.away{
+
+width: 139px;
+height: 26px;
+left: 361.02px;
+
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 14.9471px;
+line-height: 175%;
+/* or 26px */
+
+letter-spacing: 0.01em;
+
+color: #000000;
+
+}
+.whole{
+  display: flex;
+}
+.ty{
+  background-color: #fff;
+}
 </style>
 
