@@ -12,6 +12,19 @@
     </ul>
     <button v-if="betslipCopy.length > 0" @click="placeBet">Place Bet</button>
   </div>
+  <div class="total1">
+  <div class="total">
+  
+    <span class="left">TOTAL ODDS:</span>
+    <span class="right">3.60</span>
+    <h6></h6>
+  </div>
+  <h6>Accept any changes in odds prices</h6>
+  <div class="stak">
+      <span class="stake">STAKE:</span>
+      <span class="amount">3.60</span>
+  </div>
+</div>
 </template>
 
 <script>
@@ -175,6 +188,95 @@ color: #1EBA01;
 }
 .btn-remove{
   background: #1EBA01;
+}
+.total1{
+
+width: 100%;
+
+left: 1257px;
+top: 473px;
+
+background: rgba(217, 217, 217, 0.37);
+border-radius: 8.21818px;
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left {
+text-align: left;
+width: 103px;
+height: 25px;
+margin-left: 1rem;
+top: 494px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 22px;
+letter-spacing: 0.01em;
+
+color: #000000;
+}
+
+.right {
+  text-align: right;
+  margin-right: 1rem;
+
+width: 33px;
+height: 25px;
+top: 494px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 22px;
+letter-spacing: 0.01em;
+
+color: #1EBA01;
+}
+h6{
+  width: 201px;
+height: 18px;
+left: 1319px;
+top: 527px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 11px;
+line-height: 16px;
+letter-spacing: 0.01em;
+
+color: #000000;
+
+}
+.stak{
+  display: flex;
+  justify-content: space-between;
+}
+.stake{
+  width: 55px;
+  height: 25px;
+  margin-left: 1rem;
+ 
+  text-align: left;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 22px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+.amount{
+width: 255px;
+text-align: center;
+background: #D9D9D9;
+border-radius: 10px;
 }
 </style>
   
