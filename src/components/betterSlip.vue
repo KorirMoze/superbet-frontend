@@ -167,7 +167,6 @@ font-size: 14.9005px;
 line-height: 22px;
 letter-spacing: 0.01em;
 
-
 }
 
 button {
