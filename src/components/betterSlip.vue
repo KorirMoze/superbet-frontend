@@ -10,7 +10,7 @@
         @click="removeFromBetslip(index)">Remove</button>
       </li>
     </ul>
-    <button v-if="betslipCopy.length > 0" @click="placeBet">Place Bet</button>
+    
   </div>
   <div class="total1">
   <div class="total">
@@ -24,6 +24,7 @@
       <span class="stake">STAKE:</span>
       <span class="amount">3.60</span>
   </div>
+  <button  @click="placeBet">Place Bet</button>
 </div>
 </template>
 
