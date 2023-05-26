@@ -22,9 +22,10 @@
   <h6>Accept any changes in odds prices</h6>
   <div class="stak">
       <span class="stake">STAKE:</span>
-      <span class="amount">3.60</span>
+      <input type="number" id="stake-input" name="stake" step="0.01" min="0" required>
+      <!-- <span class="amount">3.60</span> -->
   </div>
-  <button  @click="placeBet">Place Bet</button>
+  <button class="btnn" @click="placeBet">Place Bet</button>
 </div>
 </template>
 
@@ -257,6 +258,8 @@ color: #000000;
 .stak{
   display: flex;
   justify-content: space-between;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
 }
 .stake{
   width: 55px;
@@ -277,6 +280,14 @@ width: 255px;
 text-align: center;
 background: #D9D9D9;
 border-radius: 10px;
+}
+#stake-input{
+  max-width: 8rem;
+  height: 2rem;
+}
+.btnn{
+  background-color: #1EBA01;
+  margin-bottom: 1rem;
 }
 </style>
   
