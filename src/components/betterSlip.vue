@@ -20,9 +20,8 @@
     </div>
   <h6>Accept any changes in odds prices</h6>
   <div class="stak">
-      <span class="stake">STAKE:</span>
-      <input type="number" id="stake-input" name="stake" step="0.01" min="0" required>
-      <!-- <span class="amount">3.60</span> -->
+    <span class="stake">STAKE:</span>
+    <input type="number" id="stake-input" name="stake" step="0.01" min="0" required v-model="stake">
   </div>
   <button class="btnn" @click="placeBet">Place Bet</button>
 </div>
@@ -42,6 +41,7 @@ export default {
   data() {
     return {
       betslipKey: 0,
+      stake: 49,
     };
   },
   computed: {
@@ -64,40 +64,9 @@ export default {
       this.betslipKey += 1;
     },
 
-//   placeBet() {
-//   console.log('Placing bets:', this.betslip);
-
-//   // Get the JWT from a cookie or local storage
-//   const token = localStorage.getItem('jwt');
-//   console.log(token)
-//   // Loop through the betslip array and send each item as a separate request
-//   for (let i = 0; i < this.betslip.length; i++) {
-//     const bet = this.betslip[i];
-
-//     // Send a POST request to the backend API for this bet, including the JWT in the headers
-//     axios.post('http://127.0.0.1:8000/place_bet/', {
-//       match: bet.match,
-//       selection: bet.selection,
-//       odds: bet.odds,
-//       stake: bet.stake
-//     }, {
-//       headers: {
-//         Authorization: `Bearer ${token}`
-//       }
-//     })
-//     .then(response => {
-//       console.log('Bet placed:', response.data);
-//       // Emit a "bet-placed" event to update the UI
-//       this.$emit('bet-placed', response.data.bet);
-//     })
-//     .catch(error => {
-//       console.error('Failed to place bet:', error);
-//     });
-//   }
-// }
 async placeBet() {
   console.log('Placing bets:', this.betslip);
-
+  console.log('Stake:', this.stake);
   // Get the JWT from a cookie or local storage
   const token = localStorage.getItem('jwt');
   console.log(token);
@@ -105,8 +74,12 @@ async placeBet() {
   try {
     // Send a POST request to the backend API with the entire betslip array,
     // including the JWT in the headers
+    const betslipWithStake = this.betslip.map(betslipItem => ({
+      ...betslipItem,
+      stake: this.stake
+    }));
     const response = await axios.post('http://127.0.0.1:8000/place_bet/', {
-      betslip: this.betslip
+      betslip: betslipWithStake
     }, {
       headers: {
         Authorization: `Bearer ${token}`
