@@ -13,12 +13,11 @@
     
   </div>
   <div class="total1">
-  <div class="total">
-  
-    <span class="left">TOTAL ODDS:</span>
-    <span class="right">3.60</span>
-    <h6></h6>
-  </div>
+    <div class="total">
+      <span class="left">TOTAL ODDS:</span>
+      <span class="right">{{ totalOdds }}</span>
+      <h6></h6>
+    </div>
   <h6>Accept any changes in odds prices</h6>
   <div class="stak">
       <span class="stake">STAKE:</span>
@@ -45,11 +44,16 @@ export default {
       betslipKey: 0,
     };
   },
-
   computed: {
     betslipCopy() {
       return [...this.betslip];
-    }
+    },
+    totalOdds() {
+    return this.betslipCopy.reduce((total, betslipItem) => {
+      const odds = parseFloat(betslipItem.odds);
+      return total + odds;
+    }, 0);
+  },
   },
 
   methods: {
