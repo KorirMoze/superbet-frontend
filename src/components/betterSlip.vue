@@ -67,6 +67,13 @@ export default {
 async placeBet() {
   console.log('Placing bets:', this.betslip);
   console.log('Stake:', this.stake);
+  
+// Calculate the total odds by summing up all the odds in the betslip
+const totalOdds = this.betslip.reduce((total, betslipItem) => {
+  const odds = parseFloat(betslipItem.odds);
+  return total + odds;
+}, 0);
+console.log('Total Odds:', totalOdds);
   // Get the JWT from a cookie or local storage
   const token = localStorage.getItem('jwt');
   console.log(token);
@@ -76,10 +83,12 @@ async placeBet() {
     // including the JWT in the headers
     const betslipWithStake = this.betslip.map(betslipItem => ({
       ...betslipItem,
-      stake: this.stake
+      stake: this.stake,
+      total_odds: totalOdds 
     }));
     const response = await axios.post('http://127.0.0.1:8000/place_bet/', {
-      betslip: betslipWithStake
+      betslip: betslipWithStake,
+      total_odds: totalOdds 
     }, {
       headers: {
         Authorization: `Bearer ${token}`
