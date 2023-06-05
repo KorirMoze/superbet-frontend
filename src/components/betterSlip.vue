@@ -4,6 +4,7 @@
     <ul>
       <li v-for="(betslipItem, index) in betslipCopy" :key="index">
         <span>{{ betslipItem.match }}</span>
+        <div class="game-id" style="display: none;">{{ betslipItem.game_id }}</div>
         <span class="selection">{{ betslipItem.selection }}</span>
         <div>{{ betslipItem.odds }}</div>
         <button class="btn-remove"

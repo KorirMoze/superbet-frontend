@@ -18,7 +18,9 @@
                   <div class="homei">
                     {{ item.home_team }} </div>
                 
-                <div class="away">{{ item.away_team }} </div>  
+                <div class="away">{{ item.away_team }} </div> 
+                <div class="away" style="display: none;">{{ item.game_id }}</div>
+ 
 
               </div>
               <div class="">
@@ -154,6 +156,7 @@ export default {
 
   const betslipItem = {
     match: item.home_team + " vs " + item.away_team,
+    game_id: item.game_id, // Add the game_id property
     selection,
     odds: odd,
   };
