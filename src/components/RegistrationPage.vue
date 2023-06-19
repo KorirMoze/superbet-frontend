@@ -1,53 +1,6 @@
 <template>
-    <div class="registratio bg-gray-700 shadow-md shadow-inner rounded-lg">
-    <div class="reg">
-        <h1>Registration</h1>
-        <form @submit.prevent="submit" method="POST">
-           
-          <!-- <div>
-            <label for="username" class="ml-0">User Name</label>
-            <input type="text" id="username"  v-model="userName" required class="px-4 py-3 rounded-lg pa">
-          </div> -->
 
-          <div>
-            <label for="firstName" class="ml-0 ">First Name</label>
-            <input type="text" class="pa px-4 py-3 rounded-lg bg-slate-500" id="fname" v-model="fname" required>
-          </div>
-          <div>
-            <label for="secondName" class="ml-0">Second Name</label>
-            <input type="text" class="pa px-4 py-3 rounded-lg bg-slate-500" id="sname" v-model="sname" required>
-          </div>
-          <div>
-            <label for="phoneNumber" class="ml-0">Phone Number</label>
-            <input type="text" class="pa px-4 py-3 rounded-lg bg-slate-500" id="phoneNumber" v-model="phoneNumber" required>
-          </div>
-          <div>
-            <label for="email" class="ml-0">Email</label>
-            <input type="email" id="email" class="pa px-4 py-3 rounded-lg bg-slate-500" v-model="email" required>
-          </div>
-          <div>
-            <label for="password" class="ml-0">Password</label>
-            <input type="password" class="pa px-4 py-3 rounded-lg bg-slate-500 mb-3" id="password" v-model="password" required>
-          </div>
-          <div>
-            <label for="gender" class="ml-0">Gender</label>
-            <select id="gender" v-model="gender" class="pa px-4 py-3 rounded-lg bg-slate-500" required>
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div>
-            <label for="dob" class="ml-0">Date of Birth</label>
-            <input type="date" class="pa px-4 py-3 rounded-lg bg-slate-500" id="dob" v-model="dob" required>
-          </div>
-          <!-- <button type="submit" class=" px-4 py-3 rounded-lg">Register</button> -->
-          <button  type="submit" @click="postData" class="px-4 py-3 text-md text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Register</button>
-  
-        </form>
-    </div>
-    </div>
+
     <div class="section section-signup" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/now-ui-kit/master/assets/img/bg4.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
       <div class="container">
         <div class="row">
@@ -74,7 +27,7 @@
                       <i class="now-ui-icons users_circle-08"></i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="First Name...">
+                  <input type="text" class="form-control" placeholder="First Name..." v-model="fname" required>
                 </div>
                 <div class="input-group no-border">
                   <div class="input-group-prepend">
@@ -82,7 +35,7 @@
                       <i class="now-ui-icons text_caps-small"></i>
                     </span>
                   </div>
-                  <input type="text" placeholder="Last Name..." class="form-control">
+                  <input type="text" placeholder="Last Name..." class="form-control" v-model="sname" required>
                 </div>
                 <div class="input-group no-border">
                   <div class="input-group-prepend">
@@ -90,7 +43,32 @@
                       <i class="now-ui-icons ui-1_email-85"></i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Email...">
+                  <input type="text" class="form-control" placeholder="Email..." v-model="email" required>
+                </div>
+
+                <div class="input-group no-border">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="now-ui-icons ui-1_email-85"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Phone Number..." v-model="phoneNumber" required>
+                </div>
+                <div class="input-group no-border">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="now-ui-icons ui-1_email-85"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Password..." v-model="password" required>
+                </div>
+                <div class="input-group no-border">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="now-ui-icons ui-1_email-85"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Date Of Birth..." v-model="dob" required>
                 </div>
                 <!-- If you want to add a checkbox to this form, uncomment this code -->
                 <!-- <div class="checkbox">
@@ -101,7 +79,7 @@
                     </div> -->
               </div>
               <div class="card-footer text-center">
-                <a href="#pablo" class="btn btn-neutral btn-round btn-lg">Get Started</a>
+                <button href="#pablo" @click="postData" class="btn btn-neutral btn-round btn-lg">Register</button>
               </div>
             </form>
           </div>
@@ -111,23 +89,7 @@
     <footer class="footer">
       <div class=" container ">
         <nav>
-          <ul>
-            <li>
-              <a href="https://www.creative-tim.com">
-                Creative Tim
-              </a>
-            </li>
-            <li>
-              <a href="http://presentation.creative-tim.com">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="http://blog.creative-tim.com">
-                Blog
-              </a>
-            </li>
-          </ul>
+  
         </nav>
  
       </div>
@@ -1015,7 +977,7 @@ img {
 }
 
 .card-signup {
-  max-width: 350px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
@@ -1255,4 +1217,5 @@ img {
 #navbar .navbar-toggler {
   pointer-events: none;
   }
+
 </style>
