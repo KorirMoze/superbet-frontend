@@ -1,40 +1,71 @@
 <template>
-    <div class="registratio bg-gray-700 shadow-md shadow-inner rounded-lg">
-    <div class="reg">
-        <h1>Login</h1>
-        <form @submit.prevent="submit" method="POST">
-           
-          <!-- <div>
-            <label for="username" class="ml-0">User Name</label>
-            <input type="text" id="username"  v-model="userName" required class="px-4 py-3 rounded-lg pa">
-          </div> -->
 
-          <!-- <div>
-            <label for="firstName" class="ml-0 ">First Name</label>
-            <input type="text" class="pa px-4 py-3 rounded-lg bg-slate-500" id="fname" v-model="fname" required>
-          </div> -->
-          <div>
-            <label for="userName" class="ml-0">User Name</label>
-            <input type="text" class="pa px-4 py-3 rounded-lg bg-slate-500" id="sname" v-model="userName" required>
-          </div>
-          <!-- <div>
-            <label for="phoneNumber" class="ml-0">Phone Number</label>
-            <input type="tel" class="pa px-4 py-3 rounded-lg bg-slate-500" id="phoneNumber" v-model="phoneNumber" required>
-          </div> -->
-          <!-- <div>
-            <label for="email" class="ml-0">Email</label>
-            <input type="email" id="email" class="pa px-4 py-3 rounded-lg bg-slate-500" v-model="email" required>
-          </div> -->
-          <div>
-            <label for="password" class="ml-0">Password</label>
-            <input type="password" class="pa px-4 py-3 rounded-lg bg-slate-500 mb-3" id="password" v-model="password" required>
-          </div>
-          <!-- <button type="submit" class=" px-4 py-3 rounded-lg">Register</button> -->
-          <button  type="submit" @click="postData" class="px-4 py-3 text-md text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Login</button>
+    <div class="section section-signup" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/now-ui-kit/master/assets/img/bg4.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
+      <div class="container">
+        <div class="row">
+          <div class="card card-signup" data-background-color="orange">
+            <form class="form" method="" action="">
+              <div class="card-header text-center">
+                <h3 class="card-title title-up">Sign Up</h3>
+                <div class="social-line">
+                  <a href="#pablo" class="btn btn-neutral btn-facebook btn-icon btn-round">
+                    <i class="fab fa-facebook-square"></i>
+                  </a>
+                  <a href="#pablo" class="btn btn-neutral btn-twitter btn-icon btn-lg btn-round">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <a href="#pablo" class="btn btn-neutral btn-google btn-icon btn-round">
+                    <i class="fab fa-google-plus"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="card-body">
+
+       
+                <div class="input-group no-border">
+                  <!-- <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="now-ui-icons ui-1_email-85"></i>
+                    </span>
+                  </div> -->
+                  <input type="text" class="form-control" placeholder="Username..." v-model="userName" required>
+                </div>
+
   
-        </form>
+                <div class="input-group no-border">
+                  <!-- <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="now-ui-icons ui-1_email-85"></i>
+                    </span>
+                  </div> -->
+                  <input type="text" class="form-control" placeholder="Password..." v-model="password" required>
+                </div>
+       
+                <!-- If you want to add a checkbox to this form, uncomment this code -->
+                <!-- <div class="checkbox">
+                    <input id="checkboxSignup" type="checkbox">
+                      <label for="checkboxSignup">
+                      Unchecked
+                      </label>
+                    </div> -->
+              </div>
+              <div class="card-footer text-center">
+                <button href="#pablo" @click="postData" class="btn btn-neutral btn-round btn-lg">Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
+    <footer class="footer">
+      <div class=" container ">
+        <nav>
+  
+        </nav>
+ 
+      </div>
+    </footer>
+
   </template>
   
   <script>
