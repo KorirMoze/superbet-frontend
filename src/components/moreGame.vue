@@ -4,16 +4,24 @@
     <h1 class="stat">Statistics</h1>
     <div class="rect">
       <h3 class="tit">{{ odd_key }}</h3>
-      <ul>
-        <li v-for="match in matches" :key="match.sub_type_id">
-          <h3 class="name">{{ match.name }}</h3>
-          <ul>
-            <li v-for="odd in match.odds" :key="odd.outcome_id">
-              {{ odd.display }}: {{ odd.odd_value }}
-            </li>
-          </ul>
-        </li>
-      </ul>
+ 
+      <div v-if="matches && matches.length">
+        <ul >
+          <h2>BOTH TEAMS TO SCORE</h2>
+          <li class="od" v-for="match in matches" :key="match.sub_type_id">
+            
+            <ul v-if="match.name === 'BOTH TEAMS TO SCORE (GG/NG)'" style="display: flex; justify-content: space-between;">
+              
+              <li class="od" v-for="odd in match.odds" :key="odd.odd_key">
+                <span class="odds">      
+                  <span class="display">{{ odd.display }}</span>
+                  <span class="odd-value">{{ odd.odd_value }}</span>
+              </span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
     <div>
@@ -83,32 +91,69 @@
     color: #000000;
   }
   .rect{
-
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
   position: absolute;
-  width: 1048px;
-  height: 252px;
-  left: 173px;
-  top: 229px;
-
-  background: rgba(217, 217, 217, 0.25);
+  width: 80%;
+  height: 7rem;
+  left: 170px;
+  top: 15rem;
+  background: #ECF8F9;
   border-radius: 9.84962px;
   }
   .name{
-    position: absolute;
-    width: 111px;
-    height: 28px;
-    left: 283px;
-    top: 381.52px;
-
+   
+  
+    height: 22.4px;
+    left: 190.69px;
+    top: 595.79px;
+    
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
-    font-size: 16px;
-    line-height: 175%;
-    /* identical to box height, or 28px */
-
+    font-size: 17.6908px;
+    line-height: 27px;
+    text-align: center;
     letter-spacing: 0.01em;
-
-    color: #000000;
+    
+    color: #1EBA01;
   }
+  .odds{
+   padding-top: 1rem;
+    width: 479.73px;
+    height: 46.1px;
+    width: 479.73px;
+    height: 46.1px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    
+    border-radius: 10; 
+  }
+.display{
+  margin-left: 1rem;
+}
+.odd-value{
+  margin-right: 1rem;
+}
+li{
+  display: inline !important;
+  height: 3rem !important;
+  padding-bottom: 1rem;
+}
+.od{
+  display: inline;
+}
+ul{
+  background-color:  transparent !important;
+  
+}
+ul h2{
+  text-align: left;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #1EBA01;
+  margin-top: -1rem;
+}
 </style>
