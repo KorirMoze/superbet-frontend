@@ -152,7 +152,7 @@
   </script>
 
 
-<style>
+<style scoped>
 button,
 input {
   font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;

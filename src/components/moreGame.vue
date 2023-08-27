@@ -23,6 +23,58 @@
         </ul>
       </div>
     </div>
+
+    <div class="rect1">
+      <h3 class="tit">{{ odd_key }}</h3>
+ 
+      <div v-if="matches && matches.length">
+        <ul >
+          <h2>DOUBLE CHANCE</h2>
+          <li class="od" v-for="match in matches" :key="match.sub_type_id">
+            
+            <ul v-if="match.name === 'DOUBLE CHANCE'" style="display: flex; justify-content: space-between;">
+              
+              <li class="od" v-for="odd in match.odds" :key="odd.odd_key">
+                <span class="odds1">      
+                  <span class="display">{{ odd.display }}</span>
+                  <span class="odd-value">{{ odd.odd_value }}</span>
+              </span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="rect2">
+      <h3 class="tit">{{ odd_key }}</h3>
+ 
+      <div v-if="matches && matches.length">
+        <ul >
+          <h2>TOTAL</h2>
+          <li class="od2" v-for="match in matches" :key="match.sub_type_id">
+            
+          <ul>
+            <li class="od2" v-for="match in matches" :key="match.sub_type_id">
+              <ul v-if="match.name === 'TOTAL'">
+                <li class="od2" v-for="odd in match.odds" :key="odd.odd_key">
+                  <span class="odds2">      
+                    <span class="display">{{ odd.display }}</span>
+                  </span>
+                  <span class="odds2">      
+                    <span class="odd-value">{{ odd.odd_value }}</span>
+                    <br>
+                  </span>
+                  <br>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
     <div>
       <div v-if="loading">Loading...</div>
@@ -61,7 +113,7 @@
     },
   };
   </script>
-  <style>
+  <style scoped>
   .back{
 
   position: absolute;
@@ -95,12 +147,36 @@
   padding-right: 1rem;
   padding-bottom: 1rem;
   position: absolute;
-  width: 80%;
+  width: 70%;
   height: 7rem;
   left: 170px;
   top: 15rem;
   background: #ECF8F9;
   border-radius: 9.84962px;
+  }
+  .rect1{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    position: absolute;
+    width: 70%;
+    height: 7rem;
+    left: 170px;
+    top: 23rem;
+    background: #ECF8F9;
+    border-radius: 9.84962px;
+  }
+  .rect2{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    position: absolute;
+    width: 70%;
+    height: 7rem;
+    left: 170px;
+    top: 31rem;
+    background: #ECF8F9;
+    border-radius: 9.84962px;
   }
   .name{
    
@@ -131,6 +207,25 @@
     
     border-radius: 10; 
   }
+  .odds1{
+    padding-top: 1rem;
+    width: 479.73px;
+    height: 46.1px;
+    width: 20rem;
+    height: 46.1px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    
+    border-radius: 10; 
+    
+  }
+  .odds2{
+    flex-wrap: wrap;
+    width: 20rem;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 .display{
   margin-left: 1rem;
 }
@@ -156,4 +251,19 @@ ul h2{
   color: #1EBA01;
   margin-top: -1rem;
 }
+.od2 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.odds2 {
+  display: flex;
+  align-items: center;
+}
+
+.display {
+  margin-right: 10px; /* Adjust the desired spacing between the display and value */
+}
+
 </style>

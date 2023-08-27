@@ -146,7 +146,7 @@ postData() {
     },
   };
   </script>
-<style>
+<style scoped>
 .registratio{
     background-color: green!important;
     width: 30%;

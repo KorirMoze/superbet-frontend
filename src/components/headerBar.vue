@@ -54,7 +54,7 @@
 
 
   
-  <style>
+  <style scoped>
   .l-menu {
     background: #1A5F7A;
     color: #fff;
