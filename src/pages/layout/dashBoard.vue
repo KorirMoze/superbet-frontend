@@ -55,17 +55,17 @@
           </div>      
       </div>
 
-      <div class="col col-lg-4 col-md-4 col-sm-4">
-        <div class="betsslip">
-          <div class="we">
-          <button class="btn1-betslip">Your Betslip</button>
-          <button class="btn1-betslip1">Your Betsrlip</button>
+        <div class="col col-lg-4 col-md-4 col-sm-4">
+            <div class="betsslip">
+                <div class="we">
+                <button class="btn1-betslip">Your Betslip</button>
+                <button class="btn1-betslip1">Your Betsrlip</button>
+              </div>
+              <div>
+              <betterSlip :betslip="betslip" @update:betslip="updateBetslip" ></betterSlip>
+              </div>
+            </div>
         </div>
-        <div>
-          <betterSlip :betslip="betslip" @update:betslip="updateBetslip" ></betterSlip>
-        </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -267,8 +267,9 @@ updateBetslip(updatedBetslip) {
 </script>
 <style>
 .betsslip{
-  background: rgba(217, 217, 217, 0.37);
+  background-color: #000000;
   border-radius: 8.21818px;
+  color: #fff;
 }
 body{
   background-color: #232323;
@@ -291,19 +292,19 @@ body{
 }
 .btn1-betslip1{
 
-width: 226.82px;
+width: 50%;
 height: 56.71px;
-padding-left: 1rem;
-margin-left: 1rem;
-background: #D9D9D9;
+
+color: #fff;
+background-color: #000000;
 border-radius: 0px 8.21818px 0px 0px;
 }
 .btn1-betslip{
-
-width: 226.82px;
+  color: #fff;
+width: 50%;
 height: 56.71px;
 
-margin-right: 1rem;
+
 background: #1EBA01;
 border-radius: 8.21818px 0px 0px 0px;
 }
@@ -325,7 +326,7 @@ border-radius: 10px;
 }
 .we{
   display: flex;
-  margin-right: 1rem;
+  
 }
 .container{
   margin: auto;

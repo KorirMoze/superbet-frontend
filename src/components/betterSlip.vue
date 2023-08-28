@@ -117,14 +117,14 @@ console.log('Total Odds:', totalOdds);
 };
 </script>
 
-<style>
+<style scoped>
 .betslip {
   border: 1px solid #ccc;
   padding: 10px;
   margin-top: 20px;
-  background: rgba(217, 217, 217, 0.57);
-border-radius: 10px;
 
+  border-radius: 10px;
+  color: #fff;
 }
 
 ul {
@@ -178,18 +178,18 @@ color: #1EBA01;
   background: #1EBA01;
 }
 .total1{
-
 width: 100%;
 
 left: 1257px;
 top: 473px;
 
-background: rgba(217, 217, 217, 0.37);
 border-radius: 8.21818px;
 }
+
 .total {
   display: flex;
   justify-content: space-between;
+  color: #fff;
 }
 
 .left {
@@ -206,25 +206,25 @@ font-size: 15px;
 line-height: 22px;
 letter-spacing: 0.01em;
 
-color: #000000;
+color: #1EBA01;
 }
 
 .right {
   text-align: right;
   margin-right: 1rem;
 
-width: 33px;
-height: 25px;
-top: 494px;
+  width: 33px;
+  height: 25px;
+  top: 494px;
 
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 700;
-font-size: 15px;
-line-height: 22px;
-letter-spacing: 0.01em;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 22px;
+  letter-spacing: 0.01em;
 
-color: #1EBA01;
+  color: #1EBA01;
 }
 h6{
   width: 201px;
@@ -275,6 +275,9 @@ border-radius: 10px;
 .btnn{
   background-color: #1EBA01;
   margin-bottom: 1rem;
+}
+h6{
+  color: #fff;
 }
 </style>
   

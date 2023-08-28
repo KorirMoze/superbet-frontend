@@ -115,7 +115,6 @@
   </script>
   <style scoped>
   .back{
-
   position: absolute;
   width: 117px;
   height: 52px;
