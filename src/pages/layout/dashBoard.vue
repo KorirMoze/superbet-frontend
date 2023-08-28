@@ -1,56 +1,58 @@
 <template>
   <div class="">
+    <div class="tit">Today Games</div>
 
     <div class="row">
 
       <div class="col col-lg-8 col-md-8 col-sm-8 ty">
-        <div class="">
 
-          <div class="games" v-for="item in Datas" :key="item.sport_id">
-            <div>
-  
-             
-              <div class="whole">
-                <div class="time">
-                  {{ item.start_time }}
-                </div>
-                  <div class="homeaway">
-                  <div class="homei">
-                    {{ item.home_team }} </div>
+          <div class="gms">
+              <div class="games" v-for="item in Datas" :key="item.sport_id">
+                <div>
+      
                 
-                <div class="away">{{ item.away_team }} </div> 
-                <div class="away" style="display: none;">{{ item.game_id }}</div>
- 
+                    <div class="whole">
+                        <div class="time">
+                          {{ item.start_time }}
+                        </div>
+                        <div class="homeaway">
+                          <div class="homei">
+                            {{ item.home_team }} 
+                          </div>
+                      
+                        <div class="away">{{ item.away_team }} </div> 
+                        <div class="away" style="display: none;">{{ item.game_id }}</div>
+      
 
-              </div>
-              <div class="">
-                <div class ='prebet'>
-    
-                    <span><button class="hom" @click="addToBetslip(item, 'home_odd')">{{ item.home_odd }}</button></span>
-                    <span><button class="hom1" @click="addToBetslip(item, 'neutral_odd')">{{ item.neutral_odd }}</button></span>
-                    <span> <button class="hom2" @click="addToBetslip(item, 'away_odd')">{{ item.away_odd }}</button></span>
+                    </div>
+                    <div class="">
+                      <div class ='prebet'>
+          
+                          <span><button class="hom" @click="addToBetslip(item, 'home_odd')">{{ item.home_odd }}</button></span>
+                          <span><button class="hom1" @click="addToBetslip(item, 'neutral_odd')">{{ item.neutral_odd }}</button></span>
+                          <span> <button class="hom2" @click="addToBetslip(item, 'away_odd')">{{ item.away_odd }}</button></span>
 
-                    <div >
+                              <div >
 
-                      <div>
-        
-                        <router-link :to="'/game/'" @click="sendParentId(item.parent_match_id)" class="more">
-                          +92 
-                        </router-link>
-                        <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
+                                  <div>
+                    
+                                    <router-link :to="'/game/'" @click="sendParentId(item.parent_match_id)" class="more">
+                                      +92 
+                                    </router-link>
+                                    <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
+                                  </div>
+                            </div>
                       </div>
-                </div>
-                </div>
- 
+      
+                      
+                  </div>
                 
+                
+                </div>
             </div>
-             
-             
-         </div>
+            
             </div>
-        
-        </div>
-        </div>      
+          </div>      
       </div>
 
       <div class="col col-lg-4 col-md-4 col-sm-4">
@@ -268,7 +270,25 @@ updateBetslip(updatedBetslip) {
   background: rgba(217, 217, 217, 0.37);
   border-radius: 8.21818px;
 }
-
+body{
+  background-color: #232323;
+}
+.tit{
+  background-color: #000000;
+  padding-top: 1rem;
+  color: #fff;
+  font-size: 2rem;
+  width: 100% !important;
+}
+.gms{
+  padding-top: 1rem;
+}
+.whole{
+  background-color: #000000;
+  color: #ffff;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 .btn1-betslip1{
 
 width: 226.82px;
@@ -298,9 +318,10 @@ background: rgba(217, 217, 217, 0.15);
 border-radius: 10px;
 }
 .row{
-  width: 95%;
+  width: 80%;
   margin-top: 1rem;
   margin: auto;
+  margin-top: 1rem;
 }
 .we{
   display: flex;
@@ -320,6 +341,7 @@ top: 562.71px;
 margin-right: 1.2rem;
 background: rgba(217, 217, 217, 0.6);
 border-radius: 9.34191px;
+color: #fff !important;
 }
 .hom1{
 padding: 0 !important;
@@ -345,7 +367,7 @@ border-radius: 9.34191px;
 .games{
 
 left: 166px;
-background-color: #E8F6EF;
+background-color: white;
 
 border-radius: 9.84962px;
 
@@ -375,7 +397,7 @@ line-height: 175%;
 
 letter-spacing: 0.01em;
 
-color: #000000;
+color: #fff !important;
 }
 .away{
 
@@ -391,7 +413,7 @@ font-size: 14.9471px;
 line-height: 175%;
 /* or 26px */
 letter-spacing: 0.01em;
-color: #000000;
+color: #fff !important;
 }
 .whole{
   display: flex;
@@ -400,9 +422,7 @@ color: #000000;
   margin-bottom: 1.5rem;
   padding-left: 1rem;
 }
-.ty{
-  background-color: #fff;
-}
+
 .time{
 
 height: 25.46px;
@@ -419,7 +439,7 @@ line-height: 25px;
 text-align: center;
 letter-spacing: 0.01em;
 
-color: #000000;
+color: #fff !important;
 }
 .more{
 
