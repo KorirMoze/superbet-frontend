@@ -119,12 +119,9 @@ console.log('Total Odds:', totalOdds);
 
 <style scoped>
 .betslip {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-top: 20px;
-
-  border-radius: 10px;
+padding-top: 2rem;
   color: #fff;
+  
 }
 
 ul {
@@ -141,10 +138,11 @@ li {
   align-items: center;
   height: 2rem;
   margin-bottom: 0.5rem;
-
-  background: rgba(217, 217, 217, 0.57);
+  background-color: #000000 !important;
   height: 4rem;
   border-radius: 10px;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 li span {
@@ -260,7 +258,7 @@ color: #000000;
   font-size: 15px;
   line-height: 22px;
   letter-spacing: 0.01em;
-  color: #000000;
+  color: white;
 }
 .amount{
 width: 255px;
@@ -278,6 +276,12 @@ border-radius: 10px;
 }
 h6{
   color: #fff;
+}
+#stake-input{
+  border-color: antiquewhite;
+  background-color:#2a2a2a;
+  border: 1px;
+  text-align: center;
 }
 </style>
   
