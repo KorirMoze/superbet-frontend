@@ -498,7 +498,7 @@ updateBetslip(updatedBetslip) {
     padding-right: 1rem;
   }
   .time{
-    display: none;
+  
   }
   .prebet{
     display: flex;
@@ -527,9 +527,28 @@ updateBetslip(updatedBetslip) {
       margin-right: 1rem;
       width: 4rem;
       height: 2rem; 
-      margin-right: 2rem !important;
+     
       background: rgba(217, 217, 217, 0.6);
       border-radius: 9.34191px;
+      }
+      .more{
+  
+        width: 4rem !important;
+       
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16.8154px;
+        line-height: 25px;
+        text-align: center;
+        letter-spacing: 0.01em;
+        
+        color: #F9F9F9;
+        
+        background: #1EBA01;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
       }
 }
 </style>
