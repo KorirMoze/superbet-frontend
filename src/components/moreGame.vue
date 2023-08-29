@@ -1,88 +1,112 @@
 <template>
-  <div>
-    <button class="back">Back</button>
-    <h1 class="stat">Statistics</h1>
-    <div class="rect">
-      <h3 class="tit">{{ odd_key }}</h3>
- 
-      <div v-if="matches && matches.length">
-        <ul >
-          <h2>BOTH TEAMS TO SCORE</h2>
-          <li class="od" v-for="match in matches" :key="match.sub_type_id">
-            
-            <ul v-if="match.name === 'BOTH TEAMS TO SCORE (GG/NG)'" style="display: flex; justify-content: space-between;">
-              
-              <li class="od" v-for="odd in match.odds" :key="odd.odd_key">
-                <span class="odds">      
-                  <span class="display">{{ odd.display }}</span>
-                  <span class="odd-value">{{ odd.odd_value }}</span>
-              </span>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <div class="row">
 
-    <div class="rect1">
-      <h3 class="tit">{{ odd_key }}</h3>
- 
-      <div v-if="matches && matches.length">
-        <ul >
-          <h2>DOUBLE CHANCE</h2>
-          <li class="od" v-for="match in matches" :key="match.sub_type_id">
-            
-            <ul v-if="match.name === 'DOUBLE CHANCE'" style="display: flex; justify-content: space-between;">
-              
-              <li class="od" v-for="odd in match.odds" :key="odd.odd_key">
-                <span class="odds1">      
-                  <span class="display">{{ odd.display }}</span>
-                  <span class="odd-value">{{ odd.odd_value }}</span>
-              </span>
+    <div class="col-12 col-lg-8 col-md-8 col-sm-8 ty">
+        <div class="bts"><button class="back">Back</button></div>
+        <h1 class="stat">Statistics</h1>
+        <div class="rect">
+          <h3 class="tit">{{ odd_key }}</h3>
+    
+          <div v-if="matches && matches.length">
+            <ul >
+              <h2 style="padding-top: 1rem;">BOTH TEAMS TO SCORE</h2>
+              <li class="od" v-for="match in matches" :key="match.sub_type_id">
+
+                <ul v-if="match.name === 'BOTH TEAMS TO SCORE (GG/NG)'" style="display: flex; justify-content: space-between; color: white;">
+                  <li class="od">
+                    <span class="odds">
+                      <button class="yes-button" @click="addToBetslip(match.odds[0])">Yes</button>
+                      <span><button class="hom" @click="addToBetslip(item, 'match.odds[0].odd_value ')">{{ match.odds[0].odd_value }}</button></span>
+<!-- 
+                      <span >{{ match.odds[0].odd_value }}</span> -->
+                    </span>
+                  </li>
+                  <li class="od">
+                    <span class="odds">
+                      <button class="yes-button" @click="addToBetslip(match.odds[1])">No</button>
+                      <span><button class="hom1" @click="addToBetslip(item, 'match.odds[1].odd_value ')">{{ match.odds[1].odd_value }}</button></span>
+
+                    </span>
+                  </li>
+                </ul>
+                
+
               </li>
             </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="rect2">
-      <h3 class="tit">{{ odd_key }}</h3>
- 
-      <div v-if="matches && matches.length">
-        <ul >
-          <h2>TOTAL</h2>
-          <li class="od2" v-for="match in matches" :key="match.sub_type_id">
-            
-          <ul>
-            <li class="od2" v-for="match in matches" :key="match.sub_type_id">
-              <ul v-if="match.name === 'TOTAL'">
-                <li class="od2" v-for="odd in match.odds" :key="odd.odd_key">
-                  <span class="odds2">      
-                    <span class="display">{{ odd.display }}</span>
+          </div>
+        </div>
+
+        <div class="rect1">
+          <h3 class="tit" >{{ odd_key }}</h3>
+    
+          <div v-if="matches && matches.length">
+            <ul >
+              <h2 style="padding-top: 1rem;">DOUBLE CHANCE</h2>
+              <li class="od" v-for="match in matches" :key="match.sub_type_id">
+                
+                <ul v-if="match.name === 'DOUBLE CHANCE'" style="display: flex; justify-content: space-between;">
+                  
+                  <li class="od" v-for="odd in match.odds" :key="odd.odd_key">
+                    <span class="odds1">      
+                      <span class="display">{{ odd.display }}</span>
+                      <span class="odd-value">{{ odd.odd_value }}</span>
                   </span>
-                  <span class="odds2">      
-                    <span class="odd-value">{{ odd.odd_value }}</span>
-                    <br>
-                  </span>
-                  <br>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="rect2">
+          <h3 class="tit">{{ odd_key }}</h3>
+    
+          <div v-if="matches && matches.length">
+            <ul >
+              <h2>TOTAL</h2>
+              <li class="od2" v-for="match in matches" :key="match.sub_type_id">
+                
+              <ul>
+                <li class="od2" v-for="match in matches" :key="match.sub_type_id">
+                  <ul v-if="match.name === 'TOTAL'">
+                    <li class="od2" v-for="odd in match.odds" :key="odd.odd_key">
+                      <span class="odds2">      
+                        <span class="display">{{ odd.display }}</span>
+                      </span>
+                      <span class="odds2">      
+                        <span class="odd-value">{{ odd.odd_value }}</span>
+                        <br>
+                      </span>
+                      <br>
+                    </li>
+                  </ul>
                 </li>
               </ul>
-            </li>
-          </ul>
 
-          </li>
-        </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div v-if="loading">Loading...</div>
+          <div v-else>
+            <h2>Game ID: {{ gameId }}</h2>
+    
+          </div>
+        </div>
       </div>
-    </div>
 
+        <div class="col-12 col-lg-4 col-md-4 col-sm-4">
+          <div class="betsslip">
+              <div class="we">
+              <button class="btn1-betslip">Your Betslip</button>
+              <button class="btn1-betslip1">Your Betsrlip</button>
+            </div>
+            <div>
+            <betterSlip :betslip="betslip" @update:betslip="updateBetslip" ></betterSlip>
+            </div>
+          </div>
+      </div>
   </div>
-    <div>
-      <div v-if="loading">Loading...</div>
-      <div v-else>
-        <h2>Game ID: {{ gameId }}</h2>
- 
-      </div>
-    </div>
   </template>
   
   <script>
@@ -114,27 +138,35 @@
   };
   </script>
   <style scoped>
+  body{
+    background-color: #232323;
+  }
+  .row{
+    width: 80%;
+    margin: auto;
+  }
+  
+  .bts{
+    align-content: left !important;
+    align-items: left;
+    text-align: left !important;
+  }
   .back{
-  position: absolute;
+ 
   width: 117px;
   height: 52px;
-  left: 173px;
-  top: 100px;
+ 
 
   background: #1EBA01;
   border-radius: 10px;
   }
   .stat{
-    position: absolute;
-    width: 71px;
-    height: 25px;
-    left: 217px;
-    top: 178px;
+
 
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 19px;
     line-height: 22px;
     text-align: center;
     letter-spacing: 0.01em;
@@ -145,12 +177,8 @@
   padding-left: 1rem;
   padding-right: 1rem;
   padding-bottom: 1rem;
- 
-  width: 70%;
-  height: 7rem;
-  left: 170px;
- 
-  background: #ECF8F9;
+  margin-bottom: 2rem;
+  background: #000000;
   border-radius: 9.84962px;
   }
   .rect1{
@@ -158,11 +186,8 @@
     padding-right: 1rem;
     padding-bottom: 1rem;
    
-    width: 70%;
-    height: 7rem;
-    left: 170px;
-  
-    background: #ECF8F9;
+    margin-bottom: 2rem;
+    background: #000000;
     border-radius: 9.84962px;
   }
   .rect2{
@@ -170,12 +195,9 @@
     padding-right: 1rem;
     padding-bottom: 1rem;
   
-    width: 70%;
- 
-    left: 170px;
-   
-    
-    background: #ECF8F9;
+
+    margin-bottom: 2rem;
+    background: #000000;
     border-radius: 9.84962px;
   }
   .name{
@@ -197,28 +219,24 @@
   }
   .odds{
    padding-top: 1rem;
-    width: 479.73px;
+  
     height: 46.1px;
-    width: 479.73px;
-    height: 46.1px;
+   
     text-align: left;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     
     border-radius: 10; 
   }
   .odds1{
     padding-top: 1rem;
-    width: 479.73px;
-    height: 46.1px;
-    width: 20rem;
-    height: 46.1px;
+    height: 2rem;  
     text-align: left;
     display: flex;
     justify-content: space-between;
     
     border-radius: 10; 
-    
+    flex-wrap: wrap;
   }
   .odds2{
     flex-wrap: wrap;
@@ -239,6 +257,7 @@ li{
 }
 .od{
   display: inline;
+  color: white;
 }
 ul{
   background-color:  transparent !important;
@@ -265,5 +284,15 @@ ul h2{
 .display {
   margin-right: 10px; /* Adjust the desired spacing between the display and value */
 }
+.hom{
+  padding: 0 !important;
+  width: 4rem;
+  height: 2rem;
 
+  top: 562.71px;
+  margin-right: 1.2rem;
+  background: rgba(217, 217, 217, 0.6);
+  border-radius: 9.34191px;
+  color: #fff !important;
+  }
 </style>
