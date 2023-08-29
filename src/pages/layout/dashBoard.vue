@@ -128,13 +128,13 @@ export default {
         });
     },
     addToBetslip(item, selection) {
-  console.log("Clicked on item: ", item);
+    console.log("Clicked on item: ", item);
   
 
-  // Check if there's already a selection for this team
-  const existingSelectionIndex = this.betslip.findIndex(
-    (betslipItem) => betslipItem.match === item.home_team + " vs " + item.away_team
-  );
+    // Check if there's already a selection for this team
+    const existingSelectionIndex = this.betslip.findIndex(
+      (betslipItem) => betslipItem.match === item.home_team + " vs " + item.away_team
+    );
 
   // If there is an existing selection, remove it before adding the new one
   if (existingSelectionIndex !== -1) {

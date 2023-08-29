@@ -15,17 +15,14 @@
                 <ul v-if="match.name === 'BOTH TEAMS TO SCORE (GG/NG)'" style="display: flex; justify-content: space-between; color: white;">
                   <li class="od">
                     <span class="odds">
-                      <button class="yes-button" @click="addToBetslip(match.odds[0])">Yes</button>
-                      <span><button class="hom" @click="addToBetslip(item, 'match.odds[0].odd_value ')">{{ match.odds[0].odd_value }}</button></span>
-<!-- 
-                      <span >{{ match.odds[0].odd_value }}</span> -->
+                      <button class="yes-button" @click="addToBetslip(match, match.odds[0])">Yes</button>
+                      <span><button class="hom" @click="addToBetslip(match, match.odds[0])">{{ match.odds[0].odd_value }}</button></span>
                     </span>
                   </li>
                   <li class="od">
                     <span class="odds">
-                      <button class="yes-button" @click="addToBetslip(match.odds[1])">No</button>
-                      <span><button class="hom1" @click="addToBetslip(item, 'match.odds[1].odd_value ')">{{ match.odds[1].odd_value }}</button></span>
-
+                      <button class="yes-button" @click="addToBetslip(match, match.odds[1])">No</button>
+                      <span><button class="hom1" @click="addToBetslip(match, match.odds[1])">{{ match.odds[1].odd_value }}</button></span>
                     </span>
                   </li>
                 </ul>
@@ -111,14 +108,20 @@
   
   <script>
   import axios from 'axios';
-  
+  import betterSlip from "@/components/betterSlip.vue";
+
   export default {
+    components: {
+    betterSlip,
+    // masterWang
+  },
     name: 'GameData',
     data() {
       return {
         gameId: this.$route.params.parent_match_id,
         matches: [],
         loading: true,
+        betslip: [],
       };
       
     },
@@ -135,6 +138,31 @@
           this.loading = false;
         });
     },
+ methods: {
+  addToBetslip(match, odd) {
+    console.log("Clicked on match: ", match);
+    console.log("Selected odd: ", odd);
+
+    // Check if there's already a selection for this match
+    const existingSelectionIndex = this.betslip.findIndex(
+      (betslipItem) => betslipItem.match === match.home_team + " vs " + match.away_team
+    );
+
+    // If there is an existing selection, remove it before adding the new one
+    if (existingSelectionIndex !== -1) {
+      this.betslip.splice(existingSelectionIndex, 1);
+    }
+
+    const betslipItem = {
+      match: match.home_team + " vs " + match.away_team,
+      game_id: match.game_id,
+      selection: odd.display,
+      odds: odd.odd_value,
+    };
+
+    this.betslip.push(betslipItem);
+  },
+}
   };
   </script>
   <style scoped>
@@ -233,10 +261,10 @@
     height: 2rem;  
     text-align: left;
     display: flex;
-    justify-content: space-between;
-    
+    flex-direction: column;
+    align-items: center;
     border-radius: 10; 
-    flex-wrap: wrap;
+    
   }
   .odds2{
     flex-wrap: wrap;
@@ -248,7 +276,7 @@
   margin-left: 1rem;
 }
 .odd-value{
-  margin-right: 1rem;
+ 
 }
 li{
  
