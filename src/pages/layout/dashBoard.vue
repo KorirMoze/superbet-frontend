@@ -265,7 +265,7 @@ updateBetslip(updatedBetslip) {
 };
 
 </script>
-<style>
+<style scoped>
 @media screen and (min-width: 992px){
   .betsslip{
     background-color: #000000;

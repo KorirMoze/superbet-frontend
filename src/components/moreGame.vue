@@ -145,11 +145,11 @@
   padding-left: 1rem;
   padding-right: 1rem;
   padding-bottom: 1rem;
-  position: absolute;
+ 
   width: 70%;
   height: 7rem;
   left: 170px;
-  top: 15rem;
+ 
   background: #ECF8F9;
   border-radius: 9.84962px;
   }
@@ -157,11 +157,11 @@
     padding-left: 1rem;
     padding-right: 1rem;
     padding-bottom: 1rem;
-    position: absolute;
+   
     width: 70%;
     height: 7rem;
     left: 170px;
-    top: 23rem;
+  
     background: #ECF8F9;
     border-radius: 9.84962px;
   }
@@ -169,11 +169,12 @@
     padding-left: 1rem;
     padding-right: 1rem;
     padding-bottom: 1rem;
-    position: absolute;
+  
     width: 70%;
-    height: 7rem;
+ 
     left: 170px;
-    top: 31rem;
+   
+    
     background: #ECF8F9;
     border-radius: 9.84962px;
   }
@@ -232,8 +233,8 @@
   margin-right: 1rem;
 }
 li{
-  display: inline !important;
-  height: 3rem !important;
+ 
+ 
   padding-bottom: 1rem;
 }
 .od{
