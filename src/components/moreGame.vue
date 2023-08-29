@@ -295,4 +295,16 @@ ul h2{
   border-radius: 9.34191px;
   color: #fff !important;
   }
+  .hom1{
+    padding: 0 !important;
+    margin-right: 1.2rem;
+    width: 4rem;
+    height: 2rem;
+   
+    top: 562.71px;
+    
+    background: rgba(217, 217, 217, 0.6);
+    border-radius: 10px;
+    color: white;
+    }
 </style>
