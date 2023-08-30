@@ -54,35 +54,31 @@
             </ul>
           </div>
         </div>
+   
         <div class="rect2">
           <h3 class="tit">{{ odd_key }}</h3>
-    
+        
           <div v-if="matches && matches.length">
-            <ul >
-              <h2>TOTAL</h2>
+            <h3 class="total">TOTAL</h3>
+        
+            <ul>
               <li class="od2" v-for="match in matches" :key="match.sub_type_id">
-                
-              <ul>
-                <li class="od2" v-for="match in matches" :key="match.sub_type_id">
-                  <ul v-if="match.name === 'TOTAL'">
-                    <li class="od2" v-for="odd in match.odds" :key="odd.odd_key">
-                      <span class="odds2">      
-                        <span class="display">{{ odd.display }}</span>
-                      </span>
-                      <span class="odds2">      
-                        <span class="odd-value">{{ odd.odd_value }}</span>
-                        <br>
-                      </span>
+                <ul v-if="match.name === 'TOTAL'">
+                  <li class="od2" v-for="odd in match.odds" :key="odd.odd_key">
+                    <span class="odds2">
+                      <button class="odd-button" @click="addToBetslip(match, odd)">{{ odd.display }}</button>
+                      <span class="odd-value">{{ odd.odd_value }}</span>
                       <br>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-
+                    </span>
+                    <br>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
         </div>
+        
+
         <div>
           <div v-if="loading">Loading...</div>
           <div v-else>
@@ -169,6 +165,11 @@
   body{
     background-color: #232323;
   }
+  .betsslip{
+    background-color: #000000;
+    border-radius: 8.21818px;
+    color: #fff;
+  }
   .row{
     width: 80%;
     margin: auto;
@@ -246,10 +247,8 @@
     color: #1EBA01;
   }
   .odds{
-   padding-top: 1rem;
-  
+    padding-top: 1rem;
     height: 46.1px;
-   
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -267,10 +266,11 @@
     
   }
   .odds2{
-    flex-wrap: wrap;
-    width: 20rem;
+    
+  
     flex-direction: column;
     justify-content: space-between;
+    color: #fff;
   }
 .display{
   margin-left: 1rem;
@@ -334,5 +334,15 @@ ul h2{
     background: rgba(217, 217, 217, 0.6);
     border-radius: 10px;
     color: white;
+    }
+    .total{
+      margin-top: 1rem  !important;
+      font-size: 17.6908px;
+      line-height: 27px;
+      text-align: center;
+      letter-spacing: 0.01em;
+      padding-top: 1rem;
+      color: #1EBA01;
+      text-align: left;
     }
 </style>
