@@ -14,3 +14,4 @@ axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
 // app.use(router);
 // app.mount('#app')
 createApp(App).use(store).use(router, axios).mount('#app');
+
