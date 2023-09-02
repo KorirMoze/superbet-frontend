@@ -48,6 +48,7 @@ export default {
   computed: {
     betslipCopy() {
       return [...this.betslip];
+     
     },
     totalOdds() {
     return this.betslipCopy.reduce((total, betslipItem) => {
@@ -55,6 +56,7 @@ export default {
       return total + odds;
     }, 0);
   },
+  
   },
 
   methods: {

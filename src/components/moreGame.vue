@@ -105,6 +105,7 @@
   <script>
   import axios from 'axios';
   import betterSlip from "@/components/betterSlip.vue";
+  import { mapGetters } from 'vuex';
 
   export default {
     components: {
@@ -121,6 +122,7 @@
       };
       
     },
+ 
     mounted() {
       axios.get(`http://127.0.0.1:8000/bet2/?parent_match_id=${this.parent_match_id}`)
         .then(response => {
@@ -134,6 +136,9 @@
           this.loading = false;
         });
     },
+    computed: {
+  ...mapGetters(['getBetslip']), // Map the getBetslip getter
+},
  methods: {
   addToBetslip(match, odd) {
     console.log("Clicked on match: ", match);

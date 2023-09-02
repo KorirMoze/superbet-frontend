@@ -78,6 +78,9 @@
 
 
 </template>
+
+
+
 <script>
 import axios from 'axios';
 import betterSlip from "@/components/betterSlip.vue";
@@ -139,6 +142,7 @@ export default {
   // If there is an existing selection, remove it before adding the new one
   if (existingSelectionIndex !== -1) {
     this.betslip.splice(existingSelectionIndex, 1);
+    this.$store.commit('addToBetslip', betslipItem);
   }
 
   let odd;
