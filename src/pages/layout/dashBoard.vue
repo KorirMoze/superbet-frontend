@@ -176,14 +176,24 @@ export default {
 updateBetslip(updatedBetslip) {
       this.betslip = updatedBetslip;
     },
-    placeBet() {
-      console.log("Placing bet:", this.betslip);
-      // Place the bet using the betslip data
-      // ...
-      // Once the bet is placed, clear the betslip
-      this.betslip = [];
-      localStorage.removeItem('betslip');
-    },
+
+ placeBet() {
+  console.log("Entering placeBet() function...");
+  console.log("Placing bet:", this.betslip);
+  
+  // Place the bet using the betslip data
+  // ...
+
+  // Once the bet is placed, clear the betslip
+  this.betslip = [];
+
+  // Add a console log to check if this line is reached
+  console.log("Removing from local storage...");
+
+  // Remove the 'betslip' item from local storage
+  localStorage.removeItem('betslip');
+},
+
 
     postData() {
       try {

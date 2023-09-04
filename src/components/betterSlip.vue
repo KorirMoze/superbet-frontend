@@ -99,8 +99,12 @@ console.log('Total Odds:', totalOdds);
     });
 
     console.log('Bets placed:', response.data.bets);
+    
     // Emit a "bet-placed" event to update the UI with the placed bets
     this.$emit('bet-placed', response.data.bets);
+    
+    this.$emit('update:betslip', []);
+    localStorage.removeItem('betslip');   
 
   } catch (error) {
     console.error('Failed to place bets:', error);
