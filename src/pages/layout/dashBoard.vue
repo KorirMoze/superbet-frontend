@@ -78,9 +78,6 @@
 
 
 </template>
-
-
-
 <script>
 import axios from 'axios';
 import betterSlip from "@/components/betterSlip.vue";
@@ -102,6 +99,12 @@ export default {
       
     };
   },
+  created() {
+  const savedBetslip = localStorage.getItem('betslip');
+  if (savedBetslip) {
+    this.betslip = JSON.parse(savedBetslip);
+  }
+},
   mounted() {
     this.getDatas();
     this.getAirtimes();
@@ -134,15 +137,14 @@ export default {
     console.log("Clicked on item: ", item);
   
 
-    // Check if there's already a selection for this team
-    const existingSelectionIndex = this.betslip.findIndex(
-      (betslipItem) => betslipItem.match === item.home_team + " vs " + item.away_team
-    );
+  // Check if there's already a selection for this team
+  const existingSelectionIndex = this.betslip.findIndex(
+    (betslipItem) => betslipItem.match === item.home_team + " vs " + item.away_team
+  );
 
   // If there is an existing selection, remove it before adding the new one
   if (existingSelectionIndex !== -1) {
     this.betslip.splice(existingSelectionIndex, 1);
-    this.$store.commit('addToBetslip', betslipItem);
   }
 
   let odd;
@@ -168,6 +170,7 @@ export default {
   };
 
   this.betslip.push(betslipItem);
+  localStorage.setItem('betslip', JSON.stringify(this.betslip));
   
 },
 updateBetslip(updatedBetslip) {
@@ -179,6 +182,7 @@ updateBetslip(updatedBetslip) {
       // ...
       // Once the bet is placed, clear the betslip
       this.betslip = [];
+      localStorage.removeItem('betslip');
     },
 
     postData() {

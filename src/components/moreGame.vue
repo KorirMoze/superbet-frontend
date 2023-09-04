@@ -122,7 +122,12 @@
       };
       
     },
- 
+    created() {
+  const savedBetslip = localStorage.getItem('betslip');
+  if (savedBetslip) {
+    this.betslip = JSON.parse(savedBetslip);
+  }
+},
     mounted() {
       axios.get(`http://127.0.0.1:8000/bet2/?parent_match_id=${this.parent_match_id}`)
         .then(response => {
@@ -162,6 +167,8 @@
     };
 
     this.betslip.push(betslipItem);
+    localStorage.setItem('betslip', JSON.stringify(this.betslip));
+
   },
 }
   };
