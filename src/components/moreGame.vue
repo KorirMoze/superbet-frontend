@@ -64,6 +64,7 @@
             <ul>
               <li class="od2" v-for="match in matches" :key="match.sub_type_id">
                 <ul v-if="match.name === 'TOTAL'">
+                  
                   <li class="od2" v-for="odd in match.odds" :key="odd.odd_key">
                     <span class="odds2">
                       <button class="odd-button" @click="addToBetslip(match, odd)">{{ odd.display }}</button>
@@ -78,8 +79,36 @@
           </div>
         </div>
         
+       
+        <div class="rect3">
+          <!-- <h3 class="tit">{{ odd_key }}</h3> -->
+        
+          <div v-if="matches && matches.length">
+            <h3 class="total">Correct Score</h3>
+        
+            <ul>
+              <li class="od3" v-for="match in matches" :key="match.sub_type_id">
+                <ul v-if="match.name === 'CORRECT SCORE'">
+                  
+                  <li class="od3" v-for="odd in match.odds" :key="odd.odd_key">
+                    <span class="odds2">
+                      <button class="odd-button" @click="addToBetslip(match, odd)">{{ odd.display }}</button>
+                      <span class="odd-value">{{ odd.odd_value }}</span>
+                      <br>
+                    </span>
+                    <br>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
 
+    
         <div>
+                 
+  
+
           <div v-if="loading">Loading...</div>
           <div v-else>
             <h2>Game ID: {{ gameId }}</h2>
@@ -173,6 +202,8 @@
 }
   };
   </script>
+
+
   <style scoped>
   body{
     background-color: #232323;
@@ -236,10 +267,17 @@
     padding-right: 1rem;
     padding-bottom: 1rem;
   
-
+    display:flex;
+    flex-direction: row !important;
     margin-bottom: 2rem;
     background: #000000;
     border-radius: 9.84962px;
+  }
+  .rect2 ul{
+    display: flex;
+  }
+  .rect2 li {
+ 
   }
   .name{
    
@@ -279,7 +317,7 @@
   }
   .odds2{
     
-  
+    width: 15rem;
     flex-direction: column;
     justify-content: space-between;
     color: #fff;
@@ -301,6 +339,7 @@ li{
 }
 ul{
   background-color:  transparent !important;
+  flex-wrap: wrap;
   
 }
 ul h2{
@@ -313,12 +352,14 @@ ul h2{
 .od2 {
   display: flex;
   flex-wrap: wrap;
+ 
 }
 
 
 .odds2 {
   display: flex;
   align-items: center;
+  margin-right: 20px; 
 }
 
 .display {
