@@ -1,4 +1,5 @@
 <template>
+<div class="bdy">
   <div class="row">
 
     <div class="col-12 col-lg-8 col-md-8 col-sm-8 ty">
@@ -44,9 +45,12 @@
                 <ul v-if="match.name === 'DOUBLE CHANCE'" style="display: flex; justify-content: space-between;">
                   
                   <li class="od" v-for="odd in match.odds" :key="odd.odd_key">
-                    <span class="odds1">      
-                      <span class="display">{{ odd.display }}</span>
-                      <span class="odd-value">{{ odd.odd_value }}</span>
+                    <span class="odds1">  
+
+                 
+                      <button class="odd-button" @click="addToBetslip(match, odd)">{{ odd.display }}</button>
+
+                      <span> <button class="hom1" @click="addToBetslip(match, odd)">{{ odd.odd_value }}</button></span>
                   </span>
                   </li>
                 </ul>
@@ -129,6 +133,7 @@
           </div>
       </div>
   </div>
+</div>
   </template>
   
   <script>
@@ -152,11 +157,17 @@
       
     },
     created() {
-  const savedBetslip = localStorage.getItem('betslip');
-  if (savedBetslip) {
-    this.betslip = JSON.parse(savedBetslip);
-  }
+    try {
+      const savedBetslip = localStorage.getItem('betslip');
+      if (savedBetslip) {
+        this.betslip = JSON.parse(savedBetslip);
+      }
+      this.getDatas();
+    } catch (error) {
+      console.error('Error in created hook:', error);
+    }
 },
+
     mounted() {
       axios.get(`http://127.0.0.1:8000/bet2/?parent_match_id=${this.parent_match_id}`)
         .then(response => {
@@ -169,13 +180,28 @@
         .finally(() => {
           this.loading = false;
         });
+        
     },
     computed: {
   ...mapGetters(['getBetslip']), // Map the getBetslip getter
 },
  methods: {
+  getDatas() {
+      axios
+        .get('http://127.0.0.1:8000/')
+        .then((response) => {
+          const allData = response.data.dataa; // Assuming your data is in response.data.dataa
+          const filteredData = allData.filter((item) => item.parent_match_id === 'this.parent_match_id');
+          this.Datas = filteredData.away_team;
+          console.log(this.Datas)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
   addToBetslip(match, odd) {
-    console.log("Clicked on match: ", match);
+    console.log("Clicked on match: ", match.name);
     console.log("Selected odd: ", odd);
 
     // Check if there's already a selection for this match
@@ -199,14 +225,18 @@
     localStorage.setItem('betslip', JSON.stringify(this.betslip));
 
   },
+  
 }
   };
   </script>
 
 
   <style scoped>
-  body{
-    background-color: #232323;
+  .bdy{
+    background-color: #918f8f !important;
+    width: 100%;
+    height: 100%;
+    overflow: scroll; /* Prevent scrolling */
   }
   .betsslip{
     background-color: #000000;
@@ -273,6 +303,18 @@
     background: #000000;
     border-radius: 9.84962px;
   }
+  .rect3{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+  
+    display:flex;
+    flex-direction: row !important;
+    margin-bottom: 2rem;
+    background: #000000 important;
+    background-color: #000000;
+    border-radius: 9.84962px;
+  }
   .rect2 ul{
     display: flex;
   }
@@ -331,7 +373,7 @@
 li{
  
  
-  padding-bottom: 1rem;
+  padding-bottom: 2rem;
 }
 .od{
   display: inline;
@@ -354,7 +396,11 @@ ul h2{
   flex-wrap: wrap;
  
 }
-
+.od3 {
+  display: flex;
+  flex-wrap: wrap;
+ 
+}
 
 .odds2 {
   display: flex;
