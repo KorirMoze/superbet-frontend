@@ -153,6 +153,9 @@
         matches: [],
         loading: true,
         betslip: [],
+        match_id: null,
+        homeTeam: null,
+        awayTeam: null,
       };
       
     },
@@ -162,7 +165,7 @@
       if (savedBetslip) {
         this.betslip = JSON.parse(savedBetslip);
       }
-      this.getDatas();
+     
     } catch (error) {
       console.error('Error in created hook:', error);
     }
@@ -170,16 +173,25 @@
 
     mounted() {
       axios.get(`http://127.0.0.1:8000/bet2/?parent_match_id=${this.parent_match_id}`)
+      
         .then(response => {
           console.log('Response from server:', response.data);
           this.matches = response.data.data;
+          this.parent_match_id = response.data.parent_match_id;
+          this.match_id = this.parent_match_id
+        
+          console.log("Game ID:", this.match_id);
+          this.getDatas();
         })
+      
         .catch(error => {
           console.error('Error retrieving matches:', error);
         })
         .finally(() => {
           this.loading = false;
         });
+       
+
         
     },
     computed: {
@@ -191,8 +203,12 @@
         .get('http://127.0.0.1:8000/')
         .then((response) => {
           const allData = response.data.dataa; // Assuming your data is in response.data.dataa
-          const filteredData = allData.filter((item) => item.parent_match_id === 'this.parent_match_id');
-          this.Datas = filteredData.away_team;
+          const filteredData = allData.filter((item) => item.parent_match_id === this.match_id);
+          this.Datas = filteredData;
+          this.homeTeam = this.Datas[0].home_team;
+          this.awayTeam = this.Datas[0].away_team;
+          // console.log("Home Team:", homeTeam);
+          // console.log("awatTeam: ",awayTeam)
           console.log(this.Datas)
         })
         .catch((error) => {
@@ -203,10 +219,10 @@
   addToBetslip(match, odd) {
     console.log("Clicked on match: ", match.name);
     console.log("Selected odd: ", odd);
-
+    console.log("Home Team:", this.homeTeam);
     // Check if there's already a selection for this match
     const existingSelectionIndex = this.betslip.findIndex(
-      (betslipItem) => betslipItem.match === match.home_team + " vs " + match.away_team
+      (betslipItem) => betslipItem.match === this.homeTeam + " vs " + this.awayTeam
     );
 
     // If there is an existing selection, remove it before adding the new one
@@ -215,7 +231,7 @@
     }
 
     const betslipItem = {
-      match: match.home_team + " vs " + match.away_team,
+      match: this.homeTeam + " vs " + this.awayTeam,
       game_id: match.game_id,
       selection: odd.display,
       odds: odd.odd_value,
