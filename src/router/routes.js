@@ -36,6 +36,11 @@ export default [
         path: '/game',
         component: import('./../components/moreGame'),
       },
+      {
+        name: 'nav',
+        path: '/nav',
+        component: import('./../components/headerBar'),
+      },
   
       // {
       //   path: "/betslip",

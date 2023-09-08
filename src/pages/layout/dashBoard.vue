@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="bdy">
     <div class="tit">Today Games</div>
 
     <div class="row">
@@ -69,12 +69,6 @@
     </div>
   </div>
 
-
-
-
-
-
- 
 
 
 </template>
@@ -284,6 +278,10 @@ updateBetslip(updatedBetslip) {
 
 </script>
 <style scoped>
+.bdy {
+  background-color: #918f8f !important;
+
+}
 @media screen and (min-width: 992px){
   .betsslip{
     background-color: #000000;
@@ -296,12 +294,15 @@ updateBetslip(updatedBetslip) {
   .tit{
     background-color: #000000;
     padding-top: 1rem;
+    padding-bottom: 1rem;
     color: #fff;
     font-size: 2rem;
     width: 100% !important;
+    text-align: left;
+   
   }
   .gms{
-    padding-top: 1rem;
+  
   }
   .whole{
     background-color: #000000;

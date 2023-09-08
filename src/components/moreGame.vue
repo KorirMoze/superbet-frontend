@@ -3,7 +3,7 @@
   <div class="row">
 
     <div class="col-12 col-lg-8 col-md-8 col-sm-8 ty">
-        <div class="bts"><button class="back">Back</button></div>
+        <!-- <div class="bts"><button class="back">Back</button></div> -->
         <h1 class="stat">Statistics</h1>
         <div class="rect">
           <h3 class="tit">{{ odd_key }}</h3>
@@ -90,11 +90,11 @@
           <div v-if="matches && matches.length">
             <h3 class="total">Correct Score</h3>
         
-            <ul>
-              <li class="od3" v-for="match in matches" :key="match.sub_type_id">
+            <ul class="cs">
+              <li class="od2" v-for="match in matches" :key="match.sub_type_id">
                 <ul v-if="match.name === 'CORRECT SCORE'">
                   
-                  <li class="od3" v-for="odd in match.odds" :key="odd.odd_key">
+                  <li class="od2" v-for="odd in match.odds" :key="odd.odd_key">
                     <span class="odds2">
                       <button class="odd-button" @click="addToBetslip(match, odd)">{{ odd.display }}</button>
                       <span class="odd-value">{{ odd.odd_value }}</span>
@@ -459,5 +459,8 @@ ul h2{
       padding-top: 1rem;
       color: #1EBA01;
       text-align: left;
+    }
+    .rect3 ul{
+      display: flex !important;
     }
 </style>

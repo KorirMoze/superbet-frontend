@@ -97,5 +97,7 @@
   </script>
   
   <style>
-  
+  .navbar{
+    margin-bottom: 0 !important;
+  }
   </style>
