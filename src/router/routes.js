@@ -22,9 +22,9 @@ export default [
         component: import('./../components/loginPage'),
       },
       {
-        name: 'betSlip',
-        path: '/betSlip',
-        component: import('./../components/betterSlip'),
+        name: 'betslip',
+        path: '/betslip',
+        component: import('./../components/slip'),
       },
       {
         name: 'account',
@@ -41,6 +41,11 @@ export default [
         path: '/nav',
         component: import('./../components/headerBar'),
       },
+      // {
+      //   name: 'betslip',
+      //   path: '/betslip',
+      //   component: import('./../components/betterSlip'),
+      // },
   
       // {
       //   path: "/betslip",

@@ -43,8 +43,10 @@ export default {
     return {
       betslipKey: 0,
       stake: 49,
+      
     };
   },
+
   computed: {
     betslipCopy() {
       return [...this.betslip];
@@ -137,7 +139,7 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  background-color: #EEEEEE;
+  background-color: #333;
    align-items: center;
 }
 
@@ -291,6 +293,17 @@ h6{
   background-color:#2a2a2a;
   border: 1px;
   text-align: center;
+}
+@media screen and (max-width:992px) {
+  .button{
+      padding: 0 !important;
+  }
+.left{
+  height: auto !important;
+}
+.row{
+  width: 100% !important;
+}
 }
 </style>
   

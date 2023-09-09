@@ -15,7 +15,9 @@
 
     <div class="navbar-menu" :class="{ 'is-active': isMenuActive }">
       <div class="navbar-start">
-        <a class="navbar-item" href="#responsive-header">Mobile App</a>
+        <router-link to="/betslip" 
+        :betslip="betslip" @update:betslip="updateBetslip" class="navbar-item">Betslip</router-link>
+
         <a class="navbar-item" href="#responsive-header">Bets Via Telegram</a>
         <a class="navbar-item" href="#responsive-header">Payments</a>
       </div>
@@ -47,7 +49,7 @@ export default {
 </script>
 <style scoped>
 .navbar-item{
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 a{
   text-decoration: none; /* This removes the underline */

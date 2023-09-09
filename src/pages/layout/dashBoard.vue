@@ -309,6 +309,7 @@ updateBetslip(updatedBetslip) {
     color: #ffff;
     padding-left: 1rem;
     padding-right: 1rem;
+    border-radius: 8px;
   }
   .btn1-betslip1{
   
@@ -515,6 +516,7 @@ updateBetslip(updatedBetslip) {
     color: #ffff;
     padding-left: 1rem;
     padding-right: 1rem;
+    font-size: 1.5rem;
   }
   .time{
   

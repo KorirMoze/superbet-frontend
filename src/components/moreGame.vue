@@ -384,7 +384,10 @@
   margin-left: 1rem;
 }
 .odd-value{
- 
+  background: rgba(217, 217, 217, 0.6);
+  padding-left: 1.5rem !important;
+  border-radius: 10px;
+  padding-right: 1.5rem !important;
 }
 li{
  
@@ -445,10 +448,11 @@ ul h2{
     height: 2rem;
    
     top: 562.71px;
-    
+    border-radius: 10px;
     background: rgba(217, 217, 217, 0.6);
     border-radius: 10px;
     color: white;
+    
     }
     .total{
       margin-top: 1rem  !important;
@@ -462,5 +466,26 @@ ul h2{
     }
     .rect3 ul{
       display: flex !important;
+    }
+    @media screen and (max-width:992px) {
+      .button{
+          padding: 0 !important;
+      }
+    .left{
+      height: auto !important;
+    }
+    .row{
+      width: 100% !important;
+    }
+    body{
+      font-size: 1.4rem !important;
+    }
+    .odds2{
+      width: auto;
+      font-size: 1.2rem;
+     
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
     }
 </style>
