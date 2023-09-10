@@ -152,6 +152,10 @@ postData() {
 
 @media screen and (min-width: 992px){
   
+
+  .section{
+    height: 100% !important;
+  }
   .registratio{
       background-color: green!important;
       width: 30%;
@@ -207,6 +211,7 @@ postData() {
     color: #fff !important ;
     border-radius: 10px;
     border: none;
+    font-size: 1.2rem;
   }
   .title-up{
     color: #fff;
@@ -249,6 +254,9 @@ postData() {
 }
 
 @media screen and (max-width: 992px){
+  .section{
+    height: 100% !important;
+  }
   .card{
     background-color: #f96332;
     padding-top: 2rem;
@@ -285,6 +293,7 @@ postData() {
     color: #fff !important ;
     border-radius: 10px;
     border: none;
+    font-size: 1.2rem;
   }
   .btn {
     -webkit-border-radius: 28;

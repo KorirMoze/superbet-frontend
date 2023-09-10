@@ -1,16 +1,16 @@
 <template>
-    <div>
-      <h1>Account Details</h1>
-      <template v-if="Object.keys(gambler).length !== 0">
+    <div class="account">
+      <h1>Your Account</h1>
+      <div class="data" v-if="Object.keys(gambler).length !== 0">
         <!-- <pre>{{ JSON.stringify(gambler, null, 2) }}</pre> -->
-        <p>Email: {{ gambler.data && gambler.data.email }}</p>
-        <p>First Name: {{ gambler.data && gambler.data.first_name }}</p>
-        <p>Last Name: {{ gambler.data && gambler.data.last_name }}</p>
-        <p>Date of Birth: {{ gambler.data && gambler.data.date_of_birth }}</p>
-        <p>Gender: {{ gambler.data && gambler.data.gender }}</p>
-        <p>Phone Number: {{ gambler.data && gambler.data.phone_number }}</p>
-        <p>Account Balance: {{ gambler.data && gambler.data.acc_balance }}</p>
-      </template>
+        <p class="detai">Email: {{ gambler.data && gambler.data.email }}</p>
+        <p class="detai">First Name: {{ gambler.data && gambler.data.first_name }}</p>
+        <p class="detai">Last Name: {{ gambler.data && gambler.data.last_name }}</p>
+        <p class="detai">Date of Birth: {{ gambler.data && gambler.data.date_of_birth }}</p>
+        <p class="detai">Gender: {{ gambler.data && gambler.data.gender }}</p>
+        <p class="detai">Phone Number: {{ gambler.data && gambler.data.phone_number }}</p>
+        <p class="detai">Account Balance: {{ gambler.data && gambler.data.acc_balance }}</p>
+      </div>
       <template v-else>
         <p>Loading...</p>
       </template>
@@ -59,4 +59,28 @@
     },
   };
   </script>
-  
+ <style scoped>
+ .account{
+  background-color: #918f8f ;
+  height: 100%;
+ }
+ h1{
+ color: #fff;
+ }
+ p{
+  color: #fff;
+  margin-bottom: 1rem;
+ }
+ .data{
+  margin-top: 4rem;
+  width: 60%;
+  margin: auto;
+ }
+ .detai{
+  background-color: #000000!important;
+  padding-bottom: 3rem;
+  padding-top: 3rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
+ }
+</style>
