@@ -41,6 +41,11 @@ export default [
         path: '/nav',
         component: import('./../components/headerBar'),
       },
+      {
+        name: 'deposit',
+        path: '/deposit',
+        component: import('./../components/depositCash'),
+      },
       // {
       //   name: 'betslip',
       //   path: '/betslip',
