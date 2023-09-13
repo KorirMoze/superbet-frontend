@@ -60,12 +60,12 @@
             <li class="coin" @click="setStake(500)">+500</li>
           </ul>
           <span class="stake">DEPOSIT:</span>
-          <input type="number" id="depo" name="stake" step="0.01" min="0" required v-model="stake" placeholder="Enter Amount">
+          <input type="number" id="depo" name="stake" step="0.01" min="10" required v-model="stake" placeholder="Enter Amount">
         </div>
       </section>
       <footer class="modal-card-foot">
         <button class="button is-success" @click="closeModal">Close</button>
-        <button class="button is-success" @click="closeModal">Deposit</button>
+        <button class="button is-success" @click="deposit" >Deposit</button>
       </footer>
     </div>
   </div>
@@ -74,6 +74,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -96,6 +98,29 @@ export default {
       // This method will be called when a list item is clicked
       this.stake = amount; // Set the stake to the selected amount
     },
+    deposit() {
+      // Get the JWT token from your storage (e.g., localStorage or Vuex store)
+      const token = localStorage.getItem('jwt'); // Adjust this according to where you store your token
+
+      // Send a POST request to the backend with the deposit amount and the JWT token in the headers
+      axios
+        .post('http://127.0.0.1:8000/deposit/', {
+          amount: this.stake, // Use the deposit amount from your component's data
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
+          },
+        })
+        .then((response) => {
+          // Handle the response from the backend, e.g., display a success message
+          console.log('Deposit successful', response.data);
+        })
+        .catch((error) => {
+          // Handle any errors, e.g., display an error message
+          console.error('Deposit failed', error);
+        });
+    },
+
   },
 };
 </script>
@@ -111,7 +136,7 @@ navbar{
   margin-bottom: 0 !important;
 }
 .button{
-  color: black;
+  color: black !important;
   background-color: yellow;
 }
 .pale{

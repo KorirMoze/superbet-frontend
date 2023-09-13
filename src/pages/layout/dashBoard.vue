@@ -2,11 +2,43 @@
   <div class="bdy">
     <div class="tit">Today Games</div>
 
+ 
+
+
     <div class="row">
 
       <div class="col-12 col-lg-8 col-md-8 col-sm-8 ty">
 
           <div class="gms">
+   
+            <div class="games" v-if="games && games.length > 0">
+              
+              <div class="whole">
+                <div class="time">{{ games[0].fields.start_time  }}</div>
+                <div class="homeaway"><div class="homei">{{ games[0].fields.home_team }}</div>
+                <div class="away" >{{ games[0].fields.away_team }}</div></div>
+                  <div class ='prebet'>
+            
+                    <span><button class="hom" @click="addToBetslip1(games[0], 'home_odd')">{{ games[0].fields.home_odd }}</button></span>
+                    <span><button class="hom1" @click="addToBetslip1(games[0], 'neutral_odd')">{{ games[0].fields.neutral_odd }}</button></span>
+                    <span> <button class="hom2" @click="addToBetslip1(games[0], 'away_odd')">{{ games[0].fields.away_odd}}</button></span>
+
+                        <div >
+
+                            <div>
+              
+                              <router-link :to="'/game/'" @click="sendParentId(games.parent_match_id)" class="more">
+                                +92 
+                              </router-link>
+                              <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
+                            </div>
+                      </div>
+                </div>
+           
+                <!-- Add more elements to display other properties as needed -->
+              </div>
+          
+              </div>
               <div class="games" v-for="item in Datas" :key="item.sport_id">
                 <div>
       
@@ -90,6 +122,7 @@ export default {
     return {
       Datas: [],
       betslip: [],
+      games: [],
       
     };
   },
@@ -102,6 +135,7 @@ export default {
   mounted() {
     this.getDatas();
     this.getAirtimes();
+    this.getcustom();
     console.log(this.betslip);
 
   },
@@ -127,6 +161,66 @@ export default {
           console.log(error);
         });
     },
+        
+    getcustom() {
+      axios
+        .get('http://127.0.0.1:8000/custom/')
+        .then((response) => {
+          const data = JSON.parse(response.data[0]);
+          this.games = data;
+          console.log(data)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+
+    addToBetslip1(game, selection) {
+  if (!game || !game.fields) {
+    console.error("Invalid game data:", game);
+    return;
+  }
+
+  console.log("Clicked on game: ", game);
+
+  // Check if there's already a selection for this team
+  const existingSelectionIndex = this.betslip.findIndex(
+    (betslipItem) => betslipItem.match === game.fields.home_team + " vs " + game.fields.away_team
+  );
+
+  // If there is an existing selection, remove it before adding the new one
+  if (existingSelectionIndex !== -1) {
+    this.betslip.splice(existingSelectionIndex, 1);
+  }
+
+  let odd;
+  switch (selection) {
+    case "home_odd":
+      odd = game.fields.home_odd;
+      break;
+    case "neutral_odd":
+      odd = game.fields.neutral_odd;
+      break;
+    case "away_odd":
+      odd = game.fields.away_odd;
+      break;
+    default:
+      break;
+  }
+
+  const betslipItem = {
+    match: game.fields.home_team + " vs " + game.fields.away_team,
+    game_id: game.pk, // Use game.pk to access the game_id property
+    selection,
+    odds: odd,
+  };
+
+  this.betslip.push(betslipItem);
+  localStorage.setItem('betslip', JSON.stringify(this.betslip));
+},
+
+
     addToBetslip(item, selection) {
     console.log("Clicked on item: ", item);
   
@@ -217,18 +311,6 @@ updateBetslip(updatedBetslip) {
           console.log(error);
         });
     },
-    // sendParentId(parent_match_id) {
-    //   axios.post('http://50.116.38.17/credit_create/bet2/', { parent_match_id })
-    //     .then(response => {
-    //       console.log('Parent ID sent to backend:', parent_match_id);
-    //       console.log('Response from server:', response.data);
-          
-    //     })
-    //     .catch(error => {
-    //       console.error('Error sending parent ID to backend:', error);
-    //     });
-    // },
-  
 
     sendParentId(parent_match_id) {
       axios.post('http://127.0.0.1:8000/bet2/', { parent_match_id })
@@ -240,23 +322,7 @@ updateBetslip(updatedBetslip) {
           console.error('Error sending parent ID to backend:', error);
         });
     },
-//     sendParentId(parent_match_id) {
-//   axios.post('http://127.0.0.1:8000/bet2/', { parent_match_id })
-//     .then(response => {
-//       console.log('Parent ID sent to backend:', parent_match_id);
-//       console.log('Response from server:', response.data);
-//       this.$router.push({
-//         name: 'moreGame',
-//         params: {
-//           parent_match_id: parent_match_id,
-//           data: response.data,
-//         },
-//       });
-//     })
-//     .catch(error => {
-//       console.error('Error sending parent ID to backend:', error);
-//     });
-// },
+
 
     scroll() {
       const element = document.getElementById('contact-me');
