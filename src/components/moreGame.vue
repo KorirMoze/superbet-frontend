@@ -182,6 +182,7 @@
         
           console.log("Game ID:", this.match_id);
           this.getDatas();
+          this.getcustom();
         })
       
         .catch(error => {
@@ -215,6 +216,21 @@
           console.log(error);
         });
     },
+
+    getcustom() {
+      axios
+        .get('http://127.0.0.1:8000/custom/')
+        .then((response) => {
+          const data = JSON.parse(response.data[0]);
+          this.games = data;
+          console.log(data)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+
 
   addToBetslip(match, odd) {
     console.log("Clicked on match: ", match.name);
