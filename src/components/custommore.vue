@@ -17,14 +17,14 @@
                         <ul  style="display: flex; justify-content: space-between; color: white;">
                           <li class="od">
                             <span class="odds">
-                              <button class="yes-button" @click="addToBetslip(games[0], 'away_odd')">Yes</button>
-                              <span><button class="hom" @click="addToBetslip(games[0], 'away_odd')">{{ games[0].fields.btts_yes_odds}}</button></span>
+                              <button class="yes-button" @click="addToBetslip(games[0], games[0].fields.btts_yes_odds)">Yes</button>
+                              <span><button class="hom" @click="addToBetslip(games[0], games[0].fields.btts_yes_odds)">{{ games[0].fields.btts_yes_odds}}</button></span>
                             </span>
                           </li>
                           <li class="od">
                             <span class="odds">
-                              <button class="yes-button" @click="addToBetslip(games[0], 'away_odd')">No</button>
-                              <span><button class="hom1" @click="addToBetslip(games[0], 'away_odd')">{{ games[0].fields.btts_no_odds}}</button></span>
+                              <button class="yes-button" @click="addToBetslip(games[0], games[0].fields.btts_no_odds)">No</button>
+                              <span><button class="hom1" @click="addToBetslip(games[0], games[0].fields.btts_no_odds)">{{ games[0].fields.btts_no_odds}}</button></span>
                             </span>
                           </li>
                         </ul>
@@ -46,8 +46,8 @@
                       <ul style="display: flex; justify-content: space-between;">
                         <li class="od" v-for="(odds, key) in games[0].fields.double_chance_odds" :key="key">
                           <span class="odds1">
-                            <button class="odd-button" @click="addToBetslip(games[0], key)">{{ key }}</button>
-                            <span><button class="hom1" @click="addToBetslip(games[0], key)">{{ odds }}</button></span>
+                            <button class="odd-button" @click="addToBetslip(games[0], odds)">{{ key }}</button>
+                            <span><button class="hom1" @click="addToBetslip(games[0], odds)">{{ odds }}</button></span>
                           </span>
                         </li>
                       </ul>
@@ -57,23 +57,21 @@
               </div>
               
          
+      
+              
               <div class="rect2">
                 <h3 class="tit">{{ odd_key }}</h3>
               
-                <div v-if="matches && matches.length">
-                  <h3 class="total">TOTAL</h3>
-              
+                <div v-if="games && games.length > 0">
                   <ul>
-                    <li class="od2" v-for="match in matches" :key="match.sub_type_id">
-                      <ul v-if="match.name === 'TOTAL'">
-                        
-                        <li class="od2" v-for="odd in match.odds" :key="odd.odd_key">
+                    <h2 style="padding-top: 1rem;">OVER/UNDER</h2>
+                    <li class="od2">
+                      <ul style="display: flex; justify-content: space-between;">
+                        <li class="od2" v-for="(odds, key) in games[0].fields.total" :key="key">
                           <span class="odds2">
-                            <button class="odd-button" @click="addToBetslip(match, odd)">{{ odd.display }}</button>
-                            <span class="odd-value">{{ odd.odd_value }}</span>
-                            <br>
+                            <button class="odd-button" @click="addToBetslip(games[0], key)">{{ key }}</button>
+                            <span><button class="odd-value" @click="addToBetslip(games[0], odds)">{{ odds }}</button></span>
                           </span>
-                          <br>
                         </li>
                       </ul>
                     </li>
@@ -81,31 +79,28 @@
                 </div>
               </div>
               
-             
+
               <div class="rect3">
-                <!-- <h3 class="tit">{{ odd_key }}</h3> -->
+           
               
-                <div v-if="matches && matches.length">
-                  <h3 class="total">Correct Score</h3>
-              
+                <div v-if="games && games.length > 0">
+                  <h2 class="total">CORRECT SCORE</h2>
                   <ul class="cs">
-                    <li class="od2" v-for="match in matches" :key="match.sub_type_id">
-                      <ul v-if="match.name === 'CORRECT SCORE'">
-                        
-                        <li class="od2" v-for="odd in match.odds" :key="odd.odd_key">
+                    
+                    <li class="od2">
+                      <ul style="display: flex; justify-content: space-between;">
+                        <li class="od2" v-for="(odds, key) in games[0].fields.correct_score_odds" :key="key">
                           <span class="odds2">
-                            <button class="odd-button" @click="addToBetslip(match, odd)">{{ odd.display }}</button>
-                            <span class="odd-value">{{ odd.odd_value }}</span>
-                            <br>
+                            <button class="odd-button" @click="addToBetslip(games[0], key)">{{ key }}</button>
+                            <span><button class="odd-value" @click="addToBetslip(games[0], odds)">{{ odds }}</button></span>
                           </span>
-                          <br>
                         </li>
                       </ul>
                     </li>
                   </ul>
                 </div>
               </div>
-      
+              
           
               <div>
                        
@@ -122,7 +117,7 @@
                 <div class="betsslip">
                     <div class="we">
                     <button class="btn1-betslip">Your Betslip</button>
-                    <button class="btn1-betslip1">Your Betsrlip</button>
+                    <button class="btn1-betslip1">Your Betstlip</button>
                   </div>
                   <div>
                   <betterSlip :betslip="betslip" @update:betslip="updateBetslip" ></betterSlip>
@@ -153,6 +148,8 @@
         Datas: [],
         betslip: [],
         games: [],
+        homeTeam: null,
+        awayTeam: null,
         
       };
     },
@@ -165,37 +162,86 @@
     mounted() {
 
       this.getcustom();
+      localStorage.removeItem('betslip');
       console.log(this.betslip);
   
     },
     methods: {
   
-          
-      getcustom() {
-        axios
-          .get('http://127.0.0.1:8000/custom/')
-          .then((response) => {
-            const data = JSON.parse(response.data[0]);
-            this.games = data;
-            console.log(data)
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+            
+        getcustom() {
+          axios
+            .get('http://127.0.0.1:8000/custom/')
+            .then((response) => {
+              console.log('API Response:', response.data); // Log the entire response
+              const data = JSON.parse(response.data[0]);
+              this.games = data;
+              this.homeTeam = this.games[0].fields.home_team;
+              this.awayTeam = this.games[0].fields.away_team;
+
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+        },
+
+  
+      
+        addToBetslip1(game, selection) {
+        if (!game || !game.fields) {
+          console.error("Invalid game data:", game);
+          return;
+        }
+      
+        console.log("Clicked on game: ",);
+        console.log('home:',this.homeTeam)
+      
+        // Check if there's already a selection for this team
+        const existingSelectionIndex = this.betslip.findIndex(
+          (betslipItem) => betslipItem.match === this.homeTeam + " vs " + this.awayTeam
+         
+        );
+        
+      
+        // If there is an existing selection, remove it before adding the new one
+        if (existingSelectionIndex !== -1) {
+          this.betslip.splice(existingSelectionIndex, 1);
+        }
+      
+        let odd;
+        switch (selection) {
+          case "home_odd":
+            odd = game.fields.home_odd;
+            break;
+          case "neutral_odd":
+            odd = game.fields.neutral_odd;
+            break;
+          case "away_odd":
+            odd = game.fields.away_odd;
+            break;
+          default:
+            break;
+        }
+      
+        const betslipItem = {
+          match: this.homeTeam + " vs " + this.awayTeam,
+          game_id: game.pk, // Use game.pk to access the game_id property
+          selection,
+          odds: odd,
+        };
+      
+        this.betslip.push(betslipItem);
+        localStorage.setItem('betslip', JSON.stringify(this.betslip));
       },
+      
   
-  
-      addToBetslip1(game, selection) {
-    if (!game || !game.fields) {
-      console.error("Invalid game data:", game);
-      return;
-    }
-  
-    console.log("Clicked on game: ", game);
+      addToBetslip(game, selection) {
+      // console.log("Clicked on item: ", game);
+      console.log("Fields:", selection);
   
     // Check if there's already a selection for this team
     const existingSelectionIndex = this.betslip.findIndex(
-      (betslipItem) => betslipItem.match === game.fields.home_team + " vs " + game.fields.away_team
+      (betslipItem) => betslipItem.match === this.homeTeam + " vs " + this.awayTeam
     );
   
     // If there is an existing selection, remove it before adding the new one
@@ -212,61 +258,23 @@
         odd = game.fields.neutral_odd;
         break;
       case "away_odd":
-        odd = game.fields.away_odd;
+        odd = game.fileds.away_odd;
         break;
+  
       default:
         break;
+      
     }
-  
+    console.log("Odd:", odd); // Log the odd 
     const betslipItem = {
-      match: game.fields.home_team + " vs " + game.fields.away_team,
-      game_id: game.pk, // Use game.pk to access the game_id property
+      match: this.homeTeam + " vs " + this.awayTeam,
+      game_id: game.id, // Add the game_id property
       selection,
-      odds: odd,
+      odds: selection,
     };
   
     this.betslip.push(betslipItem);
-    localStorage.setItem('betslip', JSON.stringify(this.betslip));
-  },
-  
-  
-      addToBetslip(item, selection) {
-      console.log("Clicked on item: ", item);
-    
-  
-    // Check if there's already a selection for this team
-    const existingSelectionIndex = this.betslip.findIndex(
-      (betslipItem) => betslipItem.match === item.home_team + " vs " + item.away_team
-    );
-  
-    // If there is an existing selection, remove it before adding the new one
-    if (existingSelectionIndex !== -1) {
-      this.betslip.splice(existingSelectionIndex, 1);
-    }
-  
-    let odd;
-    switch (selection) {
-      case "home_odd":
-        odd = item.home_odd;
-        break;
-      case "neutral_odd":
-        odd = item.neutral_odd;
-        break;
-      case "away_odd":
-        odd = item.away_odd;
-        break;
-      default:
-        break;
-    }
-  
-    const betslipItem = {
-      match: item.home_team + " vs " + item.away_team,
-      game_id: item.game_id, // Add the game_id property
-      selection,
-      odds: odd,
-    };
-  
-    this.betslip.push(betslipItem);
+    console.log(this.betslip)
     localStorage.setItem('betslip', JSON.stringify(this.betslip));
     
   },
@@ -360,6 +368,7 @@
   width: 100%;
   height: 100%;
   overflow: scroll; /* Prevent scrolling */
+  font-size: 1.3rem;
 }
 .betsslip{
   background-color: #000000;
