@@ -46,6 +46,11 @@ export default [
         path: '/deposit',
         component: import('./../components/depositCash'),
       },
+      {
+        name: 'more',
+        path: '/more',
+        component: import('./../components/custommore'),
+      },
       // {
       //   name: 'betslip',
       //   path: '/betslip',

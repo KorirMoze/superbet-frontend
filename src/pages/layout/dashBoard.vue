@@ -27,7 +27,7 @@
 
                             <div>
               
-                              <router-link :to="'/game/'" @click="sendParentId(games[0].fields.parent_match_id)" class="more">
+                              <router-link :to="'/more/'" @click="sendParentId(games[0].fields.parent_match_id)" class="more">
                                 +92 
                               </router-link>
                               <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
