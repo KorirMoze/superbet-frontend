@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row">
           <div class="card card-signup" data-background-color="orange">
-            <form class="form" method="" action="">
+            <form class="form" @submit.prevent="submitForm">
               <div class="card-header text-center">
                 <h3 class="card-title title-up">Sign Up</h3>
                 <div class="social-line">
@@ -56,7 +56,7 @@
                   <div class="input-group-prepend">
       
                   </div>
-                  <input type="text" class="form-control" placeholder="Date Of Birth..." v-model="dob" required>
+                  <input type="text" class="form-control" placeholder="Date Of Birth...2020-12-23" v-model="dob" required>
                 </div>
                 <!-- If you want to add a checkbox to this form, uncomment this code -->
                 <!-- <div class="checkbox">
@@ -67,7 +67,7 @@
                     </div> -->
               </div>
               <div class="card-footer text-center">
-                <button href="#pablo" @click="postData" class="btn btn-neutral btn-round btn-lg">Register</button>
+                <button  @click="postData" class="btn btn-neutral btn-round btn-lg">Register</button>
               </div>
             </form>
           </div>
@@ -101,38 +101,46 @@
       };
     },
     methods: {
-    //   submit() {
-    //     // Handle form submission here
-    //     console.log('Registration submitted');
-    //     console.log('Username:', this.username);
-    //     console.log('Email:', this.email);
-    //     console.log('Password:', this.password);
-    //   },
-    postData() {
-  if (!this.fname || !this.email || !this.password || !this.phoneNumber || !this.gender || !this.dob) {
+
+      postData() {
+  // Trim input values
+  this.fname = this.fname.trim();
+  this.sname = this.sname.trim();
+  this.email = this.email.trim();
+  this.phoneNumber = this.phoneNumber.trim();
+  this.password = this.password.trim();
+  this.dob = this.dob.trim();
+
+  // Check if all required fields are filled in
+  if (!this.fname || !this.sname || !this.email || !this.phoneNumber || !this.password || !this.dob) {
     console.log('All fields are required');
     return;
   }
-  
-  axios.post('http://127.0.0.1:8000/user/', {
-  firstname: this.fname,
-  secondname: this.sname,
-  email: this.email,
-  password: this.password,
-  phoneNumber: this.phoneNumber,
-  gender: this.gender,
-  dob: this.dob,
-}, { withCredentials: false })
-.then(response => {
-  console.log(response.data);
-  this.submitted = true;
-})
-.catch(error => {
-  console.error(error);
-  this.errorMessage = error.message || 'Oops! Something went wrong.';
-});
 
-},
+  // Continue with the API call
+  axios
+    .post('http://127.0.0.1:8000/user/', {
+      firstname: this.fname,
+      secondname: this.sname,
+      email: this.email,
+      password: this.password,
+      phoneNumber: this.phoneNumber,
+      gender: this.gender, // You might want to make sure that gender is set correctly
+      dob: this.dob,
+    }, { withCredentials: false })
+    .then((response) => {
+      console.log('Registration successful:', response.data);
+      this.submitted = true;
+
+    // Navigate to the login page
+    this.$router.push({ name: 'login' });
+    })
+    .catch((error) => {
+      console.error('Registration failed:', error);
+      this.errorMessage = error.message || 'Oops! Something went wrong.';
+    });
+}
+,
 
 
     },
