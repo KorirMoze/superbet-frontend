@@ -1,20 +1,59 @@
 <template>
     <div class="account">
-      <h1>Your Account</h1>
-      <div class="data" v-if="Object.keys(gambler).length !== 0">
-        <!-- <pre>{{ JSON.stringify(gambler, null, 2) }}</pre> -->
-        <p class="detai">Email: {{ gambler.data && gambler.data.email }}</p>
-        <p class="detai">First Name: {{ gambler.data && gambler.data.first_name }}</p>
-        <p class="detai">Last Name: {{ gambler.data && gambler.data.last_name }}</p>
-        <p class="detai">Date of Birth: {{ gambler.data && gambler.data.date_of_birth }}</p>
-        <p class="detai">Gender: {{ gambler.data && gambler.data.gender }}</p>
-        <p class="detai">Phone Number: {{ gambler.data && gambler.data.phone_number }}</p>
-        <p class="detai">Account Balance: {{ gambler.data && gambler.data.acc_balance }}</p>
+    <div class="hello" >g</div>
+      <div class="columns">
+
+        <div class="column is-5">  
+         
+          <img class="userimg" src="../assets/user.png" alt="Italian Trulli">
+          <i class="fa-solid fa-user"></i>
+          <p class="detai">Full Name: {{ gambler.data && gambler.data.first_name }} {{ gambler.data && gambler.data.last_name }}</p>
+          <p class="detai">Email: {{ gambler.data && gambler.data.email }}</p>
+
+        </div>
+        <div class="column is-7">
+          <div class="data" v-if="Object.keys(gambler).length !== 0">
+            <!-- <pre>{{ JSON.stringify(gambler, null, 2) }}</pre> -->
+            <p class="detai">Email: {{ gambler.data && gambler.data.email }}</p>
+        
+            <p class="detai">Date of Birth: {{ gambler.data && gambler.data.date_of_birth }}</p>
+            <p class="detai">Gender: {{ gambler.data && gambler.data.gender }}</p>
+            <p class="detai">Phone Number: {{ gambler.data && gambler.data.phone_number }}</p>
+            <p class="detai">Account Balance: {{ gambler.data && gambler.data.acc_balance }}</p>
+          </div>
+          <template v-else>
+            <p>Loading...</p>
+          </template>
+        </div>
+    
       </div>
-      <template v-else>
-        <p>Loading...</p>
-      </template>
+        <div  class="betss">
+          <ul class="bets">
+            <li v-for="bet in bets" :key="bet.id">
+             
+              <div class="bte1">
+              <div class="keys">ID: {{ bet.id }}</div>
+              <div class="keys">Odds: {{ bet.odds }}</div>
+              <div  class="keys">Possible Win: {{ bet.possible_win }}</div>
+              <div class="keys">Stake: {{ bet.stake }}</div>
+              <div class="keys">Status: {{ bet.status }}</div>
+              
+            </div>
+              <ul>
+                <li v-for="betItem in bet.bet_items" :key="betItem.id">
+                  <div class="bte2">
+                  <div class="match">Match: {{ betItem.match }}</div>
+                  <div>Selection: {{ betItem.selection }}</div>
+                  <div>Odds: {{ betItem.odds }}</div>
+                  <div>Status: {{ betItem.status }}</div>
+                </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          </div>
     </div>
+    <i class="fa-solid fa-user"></i>
   </template>
   
   
@@ -32,6 +71,9 @@
       gender: '',
       phone_number: '',
       acc_balance: '',
+      bets: [],
+      loading: false,
+      showBetSlip: false,
     },
   };
 },
@@ -49,6 +91,8 @@
             console.log(response.data);
             this.gambler = response.data;
             console.log(this.gambler);
+            this.fetchBets();
+
           })
           .catch((error) => {
             console.log(error);
@@ -57,12 +101,50 @@
         console.log("No token found");
       }
     },
+    
+    methods: {
+    fetchBets() {
+      this.loading = true;
+
+      const token = localStorage.getItem('jwt'); // Assuming your JWT token is stored in localStorage
+
+      if (!token) {
+        console.log('No JWT token found');
+        this.loading = false;
+        return;
+      }
+
+      // Replace 'your_api_endpoint' with the actual URL of your Django API endpoint
+      axios
+        .get('http://127.0.0.1:8000/bets/', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          this.bets = response.data.bets; // Assuming your API response has a 'bets' field
+          console.log(this.bets)
+          this.gambler.loading = false;
+        })
+        .catch((error) => {
+          console.error('Error fetching bets:', error);
+          this.loading = false;
+        });
+    },
+    toggleBetSlip() {
+      this.showBetSlip = !this.showBetSlip;
+      console.log('showBetSlip:', this.showBetSlip); // Add this line for debugging
+    },
+
+  },
+ 
   };
   </script>
  <style scoped>
  .account{
   background-color: #918f8f ;
-  height: 100%;
+  height: scroll;
+  padding-bottom: 1rem;
  }
  h1{
  color: #fff;
@@ -73,7 +155,7 @@
  }
  .data{
   margin-top: 4rem;
-  width: 60%;
+
   margin: auto;
  }
  .detai{
@@ -82,5 +164,75 @@
   padding-top: 3rem;
   border-radius: 10px;
   font-size: 1.5rem;
+  text-align: left;
+  font-size: 1.8rem;
  }
+ .userimg{
+
+  display: flex;
+  background-color: #000000;
+  width: 150px; /* Specify the desired width */
+  height: 150px; 
+ 
+  margin-top: 1rem;
+  border-radius: 50%;
+ }
+ .columns{
+  width: 60%;
+  margin: auto;
+  background-color: #000000;
+  border-radius: 10px;
+  margin-top: 2rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+ }
+ .hello{
+  color: #918f8f ;
+ }
+ ul{
+  color: white;
+ }
+ .bets{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 2rem;
+ }
+ .betss{
+  width: 60%;
+  margin: auto;
+  background-color: #000000;
+  border-radius: 10px;
+  margin-top: 2rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+ }
+ .keys{
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  margin-left: 2rem;
+  flex-direction: row;
+ }
+.bte1{
+  display: flex;
+  flex-direction: row;
+
+}
+.bte2{
+  text-align: left;
+
+  margin-bottom: 1rem;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  border: 2px solid green; 
+  padding-left: 4rem;
+  border-radius: 10px;
+}
+.match{
+  display: flex;
+  justify-content: space-between !important;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
 </style>

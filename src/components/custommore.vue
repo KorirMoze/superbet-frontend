@@ -162,7 +162,7 @@
     mounted() {
 
       this.getcustom();
-      localStorage.removeItem('betslip');
+    
       console.log(this.betslip);
   
     },
