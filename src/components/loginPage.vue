@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="card card-signup" >
-            <form class="form" method="" action="">
+            <form class="form"  @submit.prevent="submitForm">
               <div class="card-header text-center">
                 <h3 class="card-title title-up">Sign In</h3>
                 <div class="social-line">
@@ -82,39 +82,7 @@
       };
     },
     methods: {
-    //   submit() {
-    //     // Handle form submission here
-    //     console.log('Registration submitted');
-    //     console.log('Username:', this.username);
-    //     console.log('Email:', this.email);
-    //     console.log('Password:', this.password);
-    //   },
-//     postData() {
-//   if (!this.userName || !this.password) {
-//     console.log('All fields are required');
-//     return;
-//   }
-  
-//   axios.post('http://127.0.0.1:8000/login/', {
-// //   firstname: this.fname,
-// //   email: this.email,
-//   password: this.password,
-//   username: this.userName,
-// }, { withCredentials: false })
-// .then(response => {
-//   if (response.data.message === 'Login successful') {
-//       // Redirect to the home page
-//       this.$router.push({ path: '/' });
-//     } else {
-//       console.log('Login failed');
-//     }
-//   })
-// .catch(error => {
-//   console.error(error);
-//   this.errorMessage = error.message || 'Oops! Something went wrong.';
-// });
 
-// },
 postData() {
   if (!this.userName || !this.password) {
     console.log('All fields are required');
@@ -131,7 +99,7 @@ postData() {
       localStorage.setItem('jwt', response.data.token);
       
       // Redirect to the home page
-      this.$router.push({ path: '/' });
+      this.$router.push({ path: '/dashBoard' });
     } else {
       console.log('Login failed');
     }

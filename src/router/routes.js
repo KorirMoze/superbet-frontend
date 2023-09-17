@@ -51,6 +51,11 @@ export default [
         path: '/more',
         component: import('./../components/custommore'),
       },
+      {
+        name: 'results',
+        path: '/results',
+        component: import('./../components/results'),
+      },
       // {
       //   name: 'betslip',
       //   path: '/betslip',

@@ -1,0 +1,453 @@
+<template>
+    <div class="bdy">
+      <div class="tit">Today Games</div>
+  
+   
+  
+  
+      <div class="row">
+  
+        <div class="col-12 col-lg-8 col-md-8 col-sm-8 ty">
+  
+            <div class="gms">
+     
+              <div class="games" v-if="games && games.length > 0">
+                
+                <div class="whole">
+                  <div class="time">{{ games[0].fields.start_time  }}</div>
+                  <div class="homeaway"><div class="homei">{{ games[0].fields.home_team }}</div>
+                  <div class="away" >{{ games[0].fields.away_team }}</div></div>
+                    <div class ='prebet'>
+              
+                      <span><button class="hom" @click="addToBetslip1(games[0], 'home_odd')">{{ games[0].fields.home_odd }}</button></span>
+                      <span><button class="hom1" @click="addToBetslip1(games[0], 'neutral_odd')">{{ games[0].fields.neutral_odd }}</button></span>
+                      <span> <button class="hom2" @click="addToBetslip1(games[0], 'away_odd')">{{ games[0].fields.away_odd}}</button></span>
+  
+            
+                  </div>
+             
+                  <!-- Add more elements to display other properties as needed -->
+                </div>
+            
+                </div>
+                <div class="games" v-for="item in Datas" :key="item.sport_id">
+                  <div>
+        
+                  
+                      <div class="whole">
+                          <div class="time">
+                            {{ item.start_time }}
+                          </div>
+                          <div class="homeaway">
+                            <div class="homei">
+                              {{ item.home_team }} 
+                            </div>
+                        
+                          <div class="away">{{ item.away_team }} </div> 
+                          <div class="away" style="display: none;">{{ item.game_id }}</div>
+        
+  
+                      </div>
+                      <div class="">
+                        <div class ='prebet'>
+            
+                            <span><button class="hom" >{{ item.home_goals }}</button></span>
+                            <span><button class="hom1" >{{ item.away_goals }}</button></span>
+                            <span> <button class="hom2">{{ item.winner }}</button></span>
+  
+ 
+                        </div>
+        
+                        
+                    </div>
+                  
+                  
+                  </div>
+              </div>
+              
+              </div>
+            </div>      
+        </div>
+  
+
+      </div>
+    </div>
+  
+  
+  
+  </template>
+  <script>
+  import axios from 'axios';
+
+  
+  export default {
+
+    name: 'dropDown',
+    
+    props: ['title', 'items','gameId'],
+    data() {
+      return {
+        Datas: [],
+        betslip: [],
+        games: [],
+        
+      };
+    },
+
+    mounted() {
+      this.getDatas();
+
+    
+  
+    },
+    methods: {
+      getDatas() {
+        axios
+          .get('http://127.0.0.1:8000/results')
+          .then((response) => {
+            this.Datas = response.data;
+            console.log(this.Datas)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+      
+  
+      getcustom() {
+        axios
+          .get('http://127.0.0.1:8000/custom/')
+          .then((response) => {
+            const data = JSON.parse(response.data[0]);
+            this.games = data;
+            console.log(data)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+  
+ 
+  
+  
+  
+
+  
+  
+      scroll() {
+        const element = document.getElementById('contact-me');
+        element.scrollIntoView({ behavior: 'smooth' });
+      },
+      toggleActive() {
+        this.isActive = !this.isActive;
+      },
+      toggle1Active() {
+        this.isActive = !this.isActive;
+        this.isClicked = !this.isClicked;
+      },
+      toggleActivate() {
+        this.isClicked = true;
+        this.isActive = true;
+      },
+    },
+  };
+  
+  </script>
+  <style scoped>
+  .bdy {
+    background-color: #918f8f !important;
+  
+  }
+  @media screen and (min-width: 992px){
+    .betsslip{
+      background-color: #000000;
+      border-radius: 8.21818px;
+      color: #fff;
+    }
+    body{
+      background-color: #232323;
+    }
+    .tit{
+      background-color: #000000;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      color: #fff;
+      font-size: 2rem;
+      width: 100% !important;
+      text-align: left;
+     
+    }
+    .gms{
+    
+    }
+    .whole{
+      background-color: #000000;
+      color: #ffff;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      border-radius: 8px;
+    }
+    .btn1-betslip1{
+    
+    width: 50%;
+    height: 56.71px;
+    
+    color: #fff;
+    background-color: #000000;
+    border-radius: 0px 8.21818px 0px 0px;
+    }
+    .btn1-betslip{
+      color: #fff;
+    width: 50%;
+    height: 56.71px;
+    
+    
+    background: #1EBA01;
+    border-radius: 8.21818px 0px 0px 0px;
+    }
+    .bet3{
+    position: absolute;
+    width: 428px;
+    height: 110px;
+    left: 1269px;
+    top: 223px;
+    
+    background: rgba(217, 217, 217, 0.15);
+    border-radius: 10px;
+    }
+    .row{
+      width: 80%;
+      margin-top: 1rem;
+      margin: auto;
+      margin-top: 1rem;
+    }
+    .we{
+      display: flex;
+      
+    }
+    .container{
+      margin: auto;
+      width: 100%;
+    }
+    
+    .hom{
+    padding: 0 !important;
+    width: 140.13px;
+    height: 60.72px;
+    left: 583px;
+    top: 562.71px;
+    margin-right: 1.2rem;
+    background: rgba(217, 217, 217, 0.6);
+    border-radius: 9.34191px;
+    color: #fff !important;
+    }
+    .hom1{
+    padding: 0 !important;
+    margin-right: 1.2rem;
+    width: 140.13px;
+    height: 60.72px;
+    left: 751px;
+    top: 562.71px;
+    
+    background: rgba(217, 217, 217, 0.6);
+    border-radius: 9.34191px;
+    }
+    .hom2{
+    padding: 0 !important;
+    margin-right: 1.2rem;
+    width: 140.13px;
+    height: 60.72px;
+    
+    margin-right: 2rem !important;
+    background: rgba(217, 217, 217, 0.6);
+    border-radius: 9.34191px;
+    }
+    .games{
+    
+    left: 166px;
+    background-color: white;
+    
+    border-radius: 9.84962px;
+    
+    }
+    .prebet{
+      display: flex;
+      justify-content: space-between;
+    }
+    .homeaway{
+      display: flex;
+      flex-direction: column;
+      
+    }
+    .homei{
+    
+    width: 139px;
+    height: 23.35px;
+    left: 361.02px;
+    top: 558.77px;
+    
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14.9471px;
+    line-height: 175%;
+    /* or 26px */
+    
+    letter-spacing: 0.01em;
+    
+    color: #fff !important;
+    }
+    .away{
+    
+    width: 139px;
+    height: 26px;
+    left: 361.02px;
+    
+    
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14.9471px;
+    line-height: 175%;
+    /* or 26px */
+    letter-spacing: 0.01em;
+    color: #fff !important;
+    }
+    .whole{
+      display: flex;
+      padding-top: 1.7rem;
+      padding-bottom: 2.0rem;
+      margin-bottom: 1.5rem;
+      padding-left: 1rem;
+    }
+    
+    .time{
+    
+    height: 25.46px;
+    left: 194.56px;
+    top: 594.09px;
+    
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16.8154px;
+    line-height: 25px;
+    /* identical to box height */
+    
+    text-align: center;
+    letter-spacing: 0.01em;
+    
+    color: #fff !important;
+    }
+    .more{
+    
+      width: 5.5rem !important;
+     
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16.8154px;
+      line-height: 25px;
+      text-align: center;
+      letter-spacing: 0.01em;
+      
+      color: #F9F9F9;
+      
+      background: #1EBA01;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  
+  @media screen and (max-width: 992px) {
+    .row{
+      width: 98% !important;
+      margin: auto;
+    }
+    .ty {
+      flex-direction: column;
+    }
+    
+    .col-12.col-lg-8,
+    .col-12.col-lg-4 {
+      width: 100%;
+    }
+    .betsslip{
+      background-color: #000000;
+      border-radius: 8.21818px;
+      color: #fff;
+    }
+    body{
+      background-color: #232323;
+    }
+    .gms{
+      padding-top: 1rem;
+    }
+    .whole{
+      padding-top: 1.7rem;
+      padding-bottom: 2.0rem;
+      margin-bottom: 1.5rem;
+      background-color: #000000;
+      color: #ffff;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      font-size: 1.5rem;
+    }
+    .time{
+    
+    }
+    .prebet{
+      display: flex;
+      justify-content: space-between;
+    }
+    .hom{
+      padding: 0 !important;
+      margin-right: 1rem;
+      width: 4rem;
+      height: 2rem;
+      background: rgba(217, 217, 217, 0.6);
+      border-radius: 9.34191px;
+      color: #fff !important;
+      }
+    .hom1{
+      padding: 0 !important;
+      margin-right: 1rem;
+      width: 4rem;
+      height: 2rem;  
+      background: rgba(217, 217, 217, 0.6);
+      border-radius: 9.34191px;
+      }
+  
+      .hom2{
+        padding: 0 !important;
+        margin-right: 1rem;
+        width: 4rem;
+        height: 2rem; 
+       
+        background: rgba(217, 217, 217, 0.6);
+        border-radius: 9.34191px;
+        }
+        .more{
+    
+          width: 4rem !important;
+         
+          font-family: 'Poppins';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 16.8154px;
+          line-height: 25px;
+          text-align: center;
+          letter-spacing: 0.01em;
+          
+          color: #F9F9F9;
+          
+          background: #1EBA01;
+          border-radius: 10px;
+          display: flex;
+          justify-content: center;
+        }
+  }
+  </style>
+  
+  

@@ -18,7 +18,7 @@
         <router-link to="/betslip" 
         :betslip="betslip" @update:betslip="updateBetslip" class="navbar-item">Betslip</router-link>
 
-        <a class="navbar-item" href="#responsive-header">Bets Via Telegram</a>
+        <a class="navbar-item" href="/results">Results</a>
         <a class="navbar-item" href="#responsive-header">Payments</a>
       </div>
 
@@ -30,7 +30,7 @@
 
         <!-- Include your custom component here -->
         <router-link to="/registration" class="navbar-item">Registration</router-link>
-        <a class="navbar-item" href="#responsive-header">Logout</a>
+        <a v-if="isLoggedIn" class="navbar-item" href="#" @click="logout">Logout</a>
       </div>
     </div>
   </nav>
@@ -82,7 +82,13 @@ export default {
       isMenuActive: false,
       isModalActive: false,
       stake: 0, // Initialize stake with 0
+      isLoggedIn: false,
     };
+  },
+  created() {
+    // Check if the user is logged in (e.g., by checking if a JWT token exists)
+    const token = localStorage.getItem('jwt'); // Adjust this according to where you store your token
+    this.isLoggedIn = !!token;
   },
   methods: {
     toggleMenu() {
@@ -118,6 +124,32 @@ export default {
         .catch((error) => {
           // Handle any errors, e.g., display an error message
           console.error('Deposit failed', error);
+        });
+    },
+    logout() {
+      // Get the JWT token from your storage (e.g., localStorage or Vuex store)
+      const token = localStorage.getItem('jwt'); // Adjust this according to where you store your token
+
+      // Send a POST request to the backend to perform the logout action
+      axios
+        .get('http://127.0.0.1:8000/logout/', {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
+          },
+        })
+        .then((response) => {
+          // Handle the response from the backend, e.g., display a success message
+          console.log('Logout successful', response.data);
+
+          // Clear the JWT token from storage to log the user out
+          localStorage.removeItem('jwt'); // Adjust this according to where you store your token
+
+          // Optionally, you can redirect the user to the login page
+          this.$router.push('/login'); // Adjust the route path as needed
+        })
+        .catch((error) => {
+          // Handle any errors, e.g., display an error message
+          console.error('Logout failed', error);
         });
     },
 
