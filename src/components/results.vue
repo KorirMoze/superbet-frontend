@@ -14,14 +14,13 @@
               <div class="games" v-if="games && games.length > 0">
                 
                 <div class="whole">
-                  <div class="time">{{ games[0].fields.start_time  }}</div>
                   <div class="homeaway"><div class="homei">{{ games[0].fields.home_team }}</div>
                   <div class="away" >{{ games[0].fields.away_team }}</div></div>
                     <div class ='prebet'>
               
-                      <span><button class="hom" @click="addToBetslip1(games[0], 'home_odd')">{{ games[0].fields.home_odd }}</button></span>
-                      <span><button class="hom1" @click="addToBetslip1(games[0], 'neutral_odd')">{{ games[0].fields.neutral_odd }}</button></span>
-                      <span> <button class="hom2" @click="addToBetslip1(games[0], 'away_odd')">{{ games[0].fields.away_odd}}</button></span>
+                      <span><button class="hom" >{{ item.home_goals}}</button></span>
+                      <span><button class="hom1" >{{ item.away_goals}}</button></span>
+                      <span> <button class="hom2">{{ item.winner }}</button></span>
   
             
                   </div>
@@ -51,9 +50,9 @@
                       <div class="">
                         <div class ='prebet'>
             
-                            <span><button class="hom" >{{ item.home_goals }}</button></span>
-                            <span><button class="hom1" >{{ item.away_goals }}</button></span>
-                            <span> <button class="hom2">{{ item.winner }}</button></span>
+                            <span><button class="hom11" >{{ item.home_goals }}</button></span>
+                            <span><button class="hom11" >{{ item.away_goals }}</button></span>
+                            <span> <button class="hom21">{{ item.winner }}</button></span>
   
  
                         </div>
@@ -186,6 +185,7 @@
       padding-left: 1rem;
       padding-right: 1rem;
       border-radius: 8px;
+      justify-content: space-between;
     }
     .btn1-betslip1{
     
@@ -234,22 +234,19 @@
     padding: 0 !important;
     width: 140.13px;
     height: 60.72px;
-    left: 583px;
-    top: 562.71px;
+   
     margin-right: 1.2rem;
     background: rgba(217, 217, 217, 0.6);
     border-radius: 9.34191px;
     color: #fff !important;
     }
-    .hom1{
+    .hom11{
     padding: 0 !important;
     margin-right: 1.2rem;
-    width: 140.13px;
+    width: 1rem;
     height: 60.72px;
-    left: 751px;
-    top: 562.71px;
+ 
     
-    background: rgba(217, 217, 217, 0.6);
     border-radius: 9.34191px;
     }
     .hom2{
@@ -271,12 +268,11 @@
     
     }
     .prebet{
-      display: flex;
-      justify-content: space-between;
+        margin-right: 4rem;
     }
     .homeaway{
       display: flex;
-      flex-direction: column;
+    
       
     }
     .homei{
