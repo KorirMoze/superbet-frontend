@@ -10,25 +10,28 @@
         <div class="col-12 col-lg-8 col-md-8 col-sm-8 ty">
   
             <div class="gms">
-     
-              <div class="games" v-if="games && games.length > 0">
-                
-                <div class="whole">
-                  <div class="homeaway"><div class="homei">{{ games[0].fields.home_team }}</div>
-                  <div class="away" >{{ games[0].fields.away_team }}</div></div>
-                    <div class ='prebet'>
               
-                      <span><button class="hom" >{{ item.home_goals}}</button></span>
-                      <span><button class="hom1" >{{ item.away_goals}}</button></span>
-                      <span> <button class="hom2">{{ item.winner }}</button></span>
-  
-            
+              <div class="games" v-if="games && games.length > 0">
+                <div class="whole">
+                  <div class="time">
+                    {{ games.start_time }}
                   </div>
-             
+                  <div class="homeaway" v-if="games[0] && games[0].fields">
+                    <div class="homei">{{ games[0].fields.home_team }}</div>
+                    <div class="homei">{{ games[0].fields.away_team }}</div>
+                  </div>
+                  <div class="prebet" v-if="games[0] && games[0].fields">
+                    <span><button class="hom11">{{ games[0].fields.home_goals || 'N/A' }}</button></span>
+                    <span><button class="hom11">{{ games[0].fields.away_goals || 'N/A' }}</button></span>
+                    <span><button class="hom21">{{ games[0].fields.winner || 'N/A' }}</button></span>
+                  </div>
                   <!-- Add more elements to display other properties as needed -->
                 </div>
+              </div>
+           
             
-                </div>
+
+
                 <div class="games" v-for="item in Datas" :key="item.sport_id">
                   <div>
         
@@ -95,6 +98,7 @@
 
     mounted() {
       this.getDatas();
+      this.getcustom() ;
 
     
   
@@ -105,26 +109,25 @@
           .get('http://127.0.0.1:8000/results')
           .then((response) => {
             this.Datas = response.data;
-            console.log(this.Datas)
+          
           })
           .catch((error) => {
             console.log(error);
           });
       },
       
-  
       getcustom() {
-        axios
-          .get('http://127.0.0.1:8000/custom/')
-          .then((response) => {
-            const data = JSON.parse(response.data[0]);
-            this.games = data;
-            console.log(data)
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      },
+      axios
+        .get('http://127.0.0.1:8000/custom-results/')
+        .then((response) => {
+          const data = JSON.parse(response.data[0]);
+          this.games = data;
+          console.log(data)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   
  
   

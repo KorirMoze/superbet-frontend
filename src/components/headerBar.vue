@@ -1,16 +1,17 @@
 <template>
   <nav class="navbar is-danger" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
+      <a class="navbar-item bet" href="/">
         <!-- Add your logo or text here -->
         23 Bet
       </a>
-
-      <a role="button" class="navbar-burger burger" aria-label="menu" @click="toggleMenu">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
+      <div class="navbar-end"> <!-- Add the "navbar-end" class here -->
+        <a role="button" class="navbar-burger burger" aria-label="menu" @click="toggleMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
     </div>
 
     <div class="navbar-menu" :class="{ 'is-active': isMenuActive }">
@@ -19,17 +20,17 @@
         :betslip="betslip" @update:betslip="updateBetslip" class="navbar-item">Betslip</router-link>
 
         <a class="navbar-item" href="/results">Results</a>
-        <a class="navbar-item" href="#responsive-header">Payments</a>
+        <a v-if="isLoggedIn" class="navbar-item" href="#responsive-header">Payments</a>
       </div>
 
       <div class="navbar-end">
-        <a class="navbar-item" href="/login">Login</a>
+        <a class="navbar-item" href="/login" >Login</a>
         <a class="navbar-item" href="/account">My Account</a>
         <!-- <a class="navbar-item" href="/deposit">Deposit</a> -->
         <button class="button is-primary" @click="openModal">Deposit</button>
 
         <!-- Include your custom component here -->
-        <router-link to="/registration" class="navbar-item">Registration</router-link>
+        <router-link to="/registration" class="navbar-item" >Registration</router-link>
         <a v-if="isLoggedIn" class="navbar-item" href="#" @click="logout">Logout</a>
       </div>
     </div>
@@ -150,6 +151,7 @@ export default {
         .catch((error) => {
           // Handle any errors, e.g., display an error message
           console.error('Logout failed', error);
+          this.isLoggedIn = false;
         });
     },
 
@@ -219,4 +221,22 @@ navbar{
   font-size: 1.5rem;
   cursor: pointer; /* Add this line to change cursor to pointer */
 }
+
+@media screen and (max-width: 1023px){
+  .navbar-menu {
+      background-color: #cb0a0a;
+      box-shadow: 0 8px 16px rgba(10,10,10,.1);
+      padding: 0.5rem 0;
+      border-radius: 10px;
+  }
+  .navbar-end{
+
+  }
+  .burger{
+    margin-right: 1rem;
+  }
+  .bet{
+    margin-right: 75%;
+  }
+   }
 </style>

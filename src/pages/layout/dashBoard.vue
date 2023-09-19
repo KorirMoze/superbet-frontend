@@ -14,7 +14,7 @@
             <div class="games" v-if="games && games.length > 0">
               
               <div class="whole">
-                <div class="time">{{ games[0].fields.start_time  }}</div>
+                <div class="time">{{start_date}} {{ start_time_formatted }}</div>
                 <div class="homeaway"><div class="homei">{{ games[0].fields.home_team }}</div>
                 <div class="away" >{{ games[0].fields.away_team }}</div></div>
                   <div class ='prebet'>
@@ -123,7 +123,8 @@ export default {
       Datas: [],
       betslip: [],
       games: [],
-      
+      start_date: [],
+      start_time_formatted: [],
     };
   },
   created() {
@@ -136,7 +137,7 @@ export default {
     this.getDatas();
     this.getAirtimes();
     this.getcustom();
-    console.log(this.betslip);
+    // console.log(this.betslip);
 
   },
   methods: {
@@ -161,19 +162,52 @@ export default {
           console.log(error);
         });
     },
-        
     getcustom() {
-      axios
-        .get('http://127.0.0.1:8000/custom/')
-        .then((response) => {
-          const data = JSON.parse(response.data[0]);
-          this.games = data;
-          console.log(data)
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
+  axios
+    .get('http://127.0.0.1:8000/custom/')
+    .then((response) => {
+      const data = JSON.parse(response.data[0]);
+      this.games = data;
+      // Check if data is an array and has at least one element
+      if (Array.isArray(data) && data.length > 0) {
+        // Access the first element of the array
+        const firstItem = data[0];
+
+        // Check if the first item has 'fields' property
+        if (firstItem.fields && firstItem.fields.start_time) {
+          // Assign 'start_time' to this.start_time after formatting
+          this.start_time = new Date(firstItem.fields.start_time);
+          this.start_date = this.formatDate(this.start_time);
+          this.start_time_formatted = this.formatTime(this.start_time);
+          
+          // Log the 'start_date' and 'start_time_formatted' values
+          console.log(this.start_date);
+          console.log(this.start_time_formatted);
+        } else {
+          console.log('The expected data structure is not present in the response.');
+        }
+      } else {
+        console.log('No data found in the response.');
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+},
+
+  formatDate(date) {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  },
+  formatTime(date) {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  },
+
 
 
     addToBetslip1(game, selection) {

@@ -141,98 +141,199 @@
   };
   </script>
  <style scoped>
- .account{
-  background-color: #918f8f ;
-  height: scroll;
-  padding-bottom: 1rem;
+ @media screen and (min-width: 992px){
+  .account{
+    background-color: #918f8f ;
+    height: scroll;
+    padding-bottom: 1rem;
+   }
+   h1{
+   color: #fff;
+   }
+   p{
+    color: #fff;
+    margin-bottom: 1rem;
+   }
+   .data{
+    margin-top: 4rem;
+  
+    margin: auto;
+   }
+   .detai{
+    background-color: #000000!important;
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    text-align: left;
+    font-size: 1.8rem;
+   }
+   .userimg{
+  
+    display: flex;
+    background-color: #000000;
+    width: 150px; /* Specify the desired width */
+    height: 150px; 
+   
+    margin-top: 1rem;
+    border-radius: 50%;
+   }
+   .columns{
+    width: 60%;
+    margin: auto;
+    background-color: #000000;
+    border-radius: 10px;
+    margin-top: 2rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+   }
+   .hello{
+    color: #918f8f ;
+   }
+   ul{
+    color: white;
+   }
+   .bets{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 2rem;
+   }
+   .betss{
+    width: 60%;
+    margin: auto;
+    background-color: #000000;
+    border-radius: 10px;
+    margin-top: 2rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+   }
+   .keys{
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    margin-left: 2rem;
+    flex-direction: row;
+   }
+  .bte1{
+    display: flex;
+    flex-direction: row;
+  
+  }
+  .bte2{
+    text-align: left;
+  
+    margin-bottom: 1rem;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    border: 2px solid green; 
+    padding-left: 4rem;
+    border-radius: 10px;
+  }
+  .match{
+    display: flex;
+    justify-content: space-between !important;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+  }
  }
- h1{
- color: #fff;
+ @media screen and (max-width: 992px){
+  .account{
+    background-color: #918f8f ;
+    height: scroll;
+    padding-bottom: 1rem;
+   }
+   h1{
+   color: #fff;
+   }
+   p{
+    color: #fff;
+    margin-bottom: 1rem;
+   }
+   .data{
+    margin-top: 4rem;
+  
+    margin: auto;
+   }
+   .detai{
+    background-color: #000000!important;
+    text-align: center;
+    padding-top: 1rem;
+    border-radius: 10px;
+    font-size: 1.4rem;
+   }
+   .userimg{
+  
+    display: flex;
+    background-color: #000000;
+    width: 150px; /* Specify the desired width */
+    height: 150px; 
+   
+    margin-top: 1rem;
+    border-radius: 50%;
+    margin-left: 25%;
+   }
+   .columns{
+    width: 94%;
+    margin: auto;
+    background-color: #000000;
+    border-radius: 10px;
+   
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+   }
+   .hello{
+    color: #918f8f ;
+   }
+   ul{
+    color: white;
+   }
+   .bets{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 2rem;
+    padding-left: 0 !important;
+   }
+   .betss{
+    width: 94%;
+    margin: auto;
+    background-color: #000000;
+    border-radius: 10px;
+    margin-top: 2rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin-right: 1rem;
+   }
+   .keys{
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    margin-left: 2rem;
+    flex-direction: row;
+   }
+  .bte1{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+  }
+  .bte2{
+    text-align: left;
+  
+    margin-bottom: 1rem;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    border: 2px solid green; 
+    padding-left: 4rem;
+    border-radius: 10px;
+    margin-right: 1rem !important;
+  }
+  .match{
+    display: flex;
+    justify-content: space-between !important;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+  }
  }
- p{
-  color: #fff;
-  margin-bottom: 1rem;
- }
- .data{
-  margin-top: 4rem;
 
-  margin: auto;
- }
- .detai{
-  background-color: #000000!important;
-  padding-bottom: 3rem;
-  padding-top: 3rem;
-  border-radius: 10px;
-  font-size: 1.5rem;
-  text-align: left;
-  font-size: 1.8rem;
- }
- .userimg{
-
-  display: flex;
-  background-color: #000000;
-  width: 150px; /* Specify the desired width */
-  height: 150px; 
- 
-  margin-top: 1rem;
-  border-radius: 50%;
- }
- .columns{
-  width: 60%;
-  margin: auto;
-  background-color: #000000;
-  border-radius: 10px;
-  margin-top: 2rem;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
- }
- .hello{
-  color: #918f8f ;
- }
- ul{
-  color: white;
- }
- .bets{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-size: 1.5rem;
-  width: 70%;
-  margin: auto;
-  margin-bottom: 2rem;
- }
- .betss{
-  width: 60%;
-  margin: auto;
-  background-color: #000000;
-  border-radius: 10px;
-  margin-top: 2rem;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
- }
- .keys{
-  display: flex;
-  justify-content: space-between;
-  text-align: left;
-  margin-left: 2rem;
-  flex-direction: row;
- }
-.bte1{
-  display: flex;
-  flex-direction: row;
-
-}
-.bte2{
-  text-align: left;
-
-  margin-bottom: 1rem;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-  border: 2px solid green; 
-  padding-left: 4rem;
-  border-radius: 10px;
-}
-.match{
-  display: flex;
-  justify-content: space-between !important;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-}
 </style>
