@@ -172,7 +172,7 @@
 },
 
     mounted() {
-      axios.get(`http://127.0.0.1:8000/bet2/?parent_match_id=${this.parent_match_id}`)
+      axios.get(`http://172.233.175.33/bet2/?parent_match_id=${this.parent_match_id}`)
       
         .then(response => {
           console.log('Response from server:', response.data);
@@ -201,7 +201,7 @@
  methods: {
   getDatas() {
       axios
-        .get('http://127.0.0.1:8000/')
+        .get('http://172.233.175.33/')
         .then((response) => {
           const allData = response.data.dataa; // Assuming your data is in response.data.dataa
           const filteredData = allData.filter((item) => item.parent_match_id === this.match_id);
@@ -219,7 +219,7 @@
 
     getcustom() {
       axios
-        .get('http://127.0.0.1:8000/custom/')
+        .get('http://172.233.175.33/custom/')
         .then((response) => {
           const data = JSON.parse(response.data[0]);
           this.games = data;

@@ -82,7 +82,7 @@
       console.log(token)
       if (token) {
         axios
-          .get("http://127.0.0.1:8000/account_details/", {
+          .get("http://172.233.175.33/account_details/", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -116,7 +116,7 @@
 
       // Replace 'your_api_endpoint' with the actual URL of your Django API endpoint
       axios
-        .get('http://127.0.0.1:8000/bets/', {
+        .get('http://172.233.175.33/bets/', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

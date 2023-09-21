@@ -119,7 +119,7 @@
 
   // Continue with the API call
   axios
-    .post('http://127.0.0.1:8000/user/', {
+    .post('http://50.116.38.17/user/', {
       firstname: this.fname,
       secondname: this.sname,
       email: this.email,

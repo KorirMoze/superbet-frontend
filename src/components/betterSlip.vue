@@ -91,7 +91,7 @@ console.log('Total Odds:', totalOdds);
       stake: this.stake,
       total_odds: totalOdds 
     }));
-    const response = await axios.post('http://127.0.0.1:8000/place_bet/', {
+    const response = await axios.post('http://172.233.175.33/place_bet/', {
       betslip: betslipWithStake,
       total_odds: totalOdds 
     }, {

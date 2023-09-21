@@ -31,7 +31,7 @@
     methods: {
       getDatas() {
         axios
-          .get('http://127.0.0.1:8000/')
+          .get('http://172.233.175.33/')
           .then((response) => {
             this.Datas = response.data.dataa;
           })
@@ -41,7 +41,7 @@
       },
       getAirtimes() {
         axios
-          .get('http://127.0.0.1:8000/')
+          .get('http://172.233.175.33/')
           .then((response) => {
             this.Airtimes = response.data.dataa;
           })

@@ -106,7 +106,7 @@
     methods: {
       getDatas() {
         axios
-          .get('http://127.0.0.1:8000/results')
+          .get('http://172.233.175.33/results')
           .then((response) => {
             this.Datas = response.data;
           
@@ -118,7 +118,7 @@
       
       getcustom() {
       axios
-        .get('http://127.0.0.1:8000/custom-results/')
+        .get('http://172.233.175.33/custom-results/')
         .then((response) => {
           const data = JSON.parse(response.data[0]);
           this.games = data;

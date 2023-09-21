@@ -133,7 +133,7 @@ export default {
 
       // Send a POST request to the backend to perform the logout action
       axios
-        .get('http://127.0.0.1:8000/logout/', {
+        .get('http://172.233.175.33/logout/', {
           headers: {
             Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
           },
