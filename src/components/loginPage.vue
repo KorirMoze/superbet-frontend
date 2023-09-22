@@ -89,7 +89,7 @@ postData() {
     return;
   }
   
-  axios.post('http://50.116.38.17/login/', {
+  axios.post('http://172.233.175.33/login/', {
     password: this.password,
     username: this.userName,
   }, { withCredentials: false })

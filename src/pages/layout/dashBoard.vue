@@ -10,6 +10,18 @@
       <div class="col-12 col-lg-8 col-md-8 col-sm-8 ty">
 
           <div class="gms">
+
+            <section class="section">
+              <div class="container">
+                <div class="carousel-container">
+                  <div class="carousel-content" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+                    <div v-for="(slide, index) in slides" :key="index" class="carousel-slide">
+                      <img :src="slide.image" :alt="slide.alt" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
    
             <div class="games" v-if="games && games.length > 0">
               
@@ -125,6 +137,12 @@ export default {
       games: [],
       start_date: [],
       start_time_formatted: [],
+      currentIndex: 0,
+      slides: [
+        { image: 'image1.jpg', alt: 'Slide 1' },
+        { image: 'image2.jpg', alt: 'Slide 2' },
+        { image: 'image3.jpg', alt: 'Slide 3' },
+      ],
     };
   },
   created() {
@@ -151,7 +169,12 @@ export default {
           console.log(error);
         });
     },
-    
+    nextSlide() {
+      this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+    },
+    prevSlide() {
+      this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+    },
     getAirtimes() {
       axios
         .get('http://127.0.0.1:8000/')
@@ -381,6 +404,19 @@ updateBetslip(updatedBetslip) {
 .bdy {
   background-color: #918f8f !important;
 
+}
+.carousel-container {
+  display: flex;
+  overflow: hidden;
+}
+
+.carousel-content {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
 }
 @media screen and (min-width: 992px){
   .betsslip{
