@@ -137,12 +137,13 @@ export default {
       games: [],
       start_date: [],
       start_time_formatted: [],
-      currentIndex: 0,
+    
       slides: [
-        { image: 'image1.jpg', alt: 'Slide 1' },
-        { image: 'image2.jpg', alt: 'Slide 2' },
-        { image: 'image3.jpg', alt: 'Slide 3' },
+       
+        { image: require('@/assets/Sports.gif'), alt: 'Slide 2' },
+     
       ],
+      currentIndex: 0,
     };
   },
   created() {
@@ -405,18 +406,35 @@ updateBetslip(updatedBetslip) {
   background-color: #918f8f !important;
 
 }
+.section{
+  padding: 0 !important;
+  margin-bottom: 0.2rem;
+}
 .carousel-container {
   display: flex;
+  position: relative;
   overflow: hidden;
-}
 
+}
+.cointainer{
+  width: fit-content;
+}
 .carousel-content {
   display: flex;
   transition: transform 0.5s ease-in-out;
 }
 
 .carousel-slide {
-  flex: 0 0 100%;
+
+  width: 100%;
+}
+img, video {
+  max-width: 100%;
+  height: 100%;
+}
+.carousel-image {
+  width: 100%; /* Stretch the image to fit the container */
+  height: auto; /* Maintain aspect ratio */
 }
 @media screen and (min-width: 992px){
   .betsslip{
