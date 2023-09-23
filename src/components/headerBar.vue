@@ -111,7 +111,7 @@ export default {
 
       // Send a POST request to the backend with the deposit amount and the JWT token in the headers
       axios
-        .post('http://127.0.0.1:8000/deposit/', {
+        .post('https://www.23bet.pro/deposit/', {
           amount: this.stake, // Use the deposit amount from your component's data
         }, {
           headers: {
