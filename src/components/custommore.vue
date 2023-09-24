@@ -308,7 +308,7 @@
             selected2: this.selected2,
           };
           console.log(data);
-          const response = axios.post('http://172.233.175.33/credits/', data);
+          const response = axios.post('https://www.23bet.pro/credits/', data);
           console.log(response.data);
           this.submitted = true;
         } catch (error) {
@@ -316,7 +316,7 @@
         }
       },
       postData1() {
-        axios.post('http://172.233.175.33/credit_create/', {
+        axios.post('https://www.23bet.pro/credit_create/', {
           selected3: this.selected3,
           selected2: this.selected2,
         })

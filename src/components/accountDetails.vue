@@ -116,7 +116,7 @@
 
       // Replace 'your_api_endpoint' with the actual URL of your Django API endpoint
       axios
-        .get('http://172.233.175.33/bets/', {
+        .get('https://www.23bet.pro/bets/', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

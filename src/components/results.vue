@@ -106,7 +106,7 @@
     methods: {
       getDatas() {
         axios
-          .get('http://172.233.175.33/results')
+          .get('https://www.23bet.pro/results')
           .then((response) => {
             this.Datas = response.data;
           
@@ -118,7 +118,7 @@
       
       getcustom() {
       axios
-        .get('http://172.233.175.33/custom-results/')
+        .get('https://www.23bet.pro/custom-results/')
         .then((response) => {
           const data = JSON.parse(response.data[0]);
           this.games = data;

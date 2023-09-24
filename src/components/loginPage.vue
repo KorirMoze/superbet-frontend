@@ -89,7 +89,7 @@ postData() {
     return;
   }
   
-  axios.post('http://172.233.175.33/login/', {
+  axios.post('https://www.23bet.pro/login/', {
     password: this.password,
     username: this.userName,
   }, { withCredentials: false })

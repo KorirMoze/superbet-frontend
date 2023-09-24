@@ -119,7 +119,7 @@
 
   // Continue with the API call
   axios
-    .post('http://172.233.175.33/user/', {
+    .post('https://www.23bet.pro/user/', {
       firstname: this.fname,
       secondname: this.sname,
       email: this.email,

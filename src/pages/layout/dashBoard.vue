@@ -349,7 +349,7 @@ updateBetslip(updatedBetslip) {
           selected2: this.selected2,
         };
         console.log(data);
-        const response = axios.post('http://172.233.175.33/credits/', data);
+        const response = axios.post('https://www.23bet.pro/credits/', data);
         console.log(response.data);
         this.submitted = true;
       } catch (error) {
@@ -357,7 +357,7 @@ updateBetslip(updatedBetslip) {
       }
     },
     postData1() {
-      axios.post('http://172.233.175.33/credit_create/', {
+      axios.post('https://www.23bet.pro/credit_create/', {
         selected3: this.selected3,
         selected2: this.selected2,
       })
@@ -371,7 +371,7 @@ updateBetslip(updatedBetslip) {
     },
 
     sendParentId(parent_match_id) {
-      axios.post('http://172.233.175.33/bet2/', { parent_match_id })
+      axios.post('https://www.23bet.pro//bet2/', { parent_match_id })
         .then(response => {
           console.log('Parent ID sent to backend:', parent_match_id);
           console.log('Response from server:', response.data);
