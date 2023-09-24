@@ -31,7 +31,7 @@
     methods: {
       getDatas() {
         axios
-          .get('http://172.233.175.33/')
+          .get('https://www.23bet.pro/')
           .then((response) => {
             this.Datas = response.data.dataa;
           })
@@ -41,7 +41,7 @@
       },
       getAirtimes() {
         axios
-          .get('http://172.233.175.33/')
+          .get('https://www.23bet.pro/')
           .then((response) => {
             this.Airtimes = response.data.dataa;
           })

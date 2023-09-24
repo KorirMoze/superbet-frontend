@@ -82,7 +82,7 @@
       console.log(token)
       if (token) {
         axios
-          .get("http://172.233.175.33/account_details/", {
+          .get("https://www.23bet.pro/account_details/", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

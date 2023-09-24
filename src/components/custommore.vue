@@ -171,7 +171,7 @@
             
         getcustom() {
           axios
-            .get('http://127.0.0.1:8000/custom/')
+            .get('https://www.23bet.pro/custom/')
             .then((response) => {
               console.log('API Response:', response.data); // Log the entire response
               const data = JSON.parse(response.data[0]);

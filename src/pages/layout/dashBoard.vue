@@ -162,7 +162,7 @@ export default {
   methods: {
     getDatas() {
       axios
-        .get('http://172.233.175.33/')
+        .get('https://www.23bet.pro/')
         .then((response) => {
           this.Datas = response.data.dataa;
         })
@@ -178,7 +178,7 @@ export default {
     },
     getAirtimes() {
       axios
-        .get('http://127.0.0.1:8000/')
+        .get('https://www.23bet.pro/')
         .then((response) => {
           this.Airtimes = response.data.dataa;
         })
@@ -188,7 +188,7 @@ export default {
     },
     getcustom() {
   axios
-    .get('http://172.233.175.33/custom/')
+    .get('https://www.23bet.pro/custom/')
     .then((response) => {
       const data = JSON.parse(response.data[0]);
       this.games = data;
