@@ -371,7 +371,7 @@ updateBetslip(updatedBetslip) {
     },
 
     sendParentId(parent_match_id) {
-      axios.post('https://www.23bet.pro//bet2/', { parent_match_id })
+      axios.post('https://www.23bet.pro/bet2/', { parent_match_id })
         .then(response => {
           console.log('Parent ID sent to backend:', parent_match_id);
           console.log('Response from server:', response.data);
