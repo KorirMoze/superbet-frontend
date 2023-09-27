@@ -116,7 +116,7 @@
 
           <div v-if="loading">Loading...</div>
           <div v-else>
-            <h2>Game ID: {{ gameId }}</h2>
+       
     
           </div>
         </div>
@@ -126,7 +126,7 @@
           <div class="betsslip">
               <div class="we">
               <button class="btn1-betslip">Your Betslip</button>
-              <button class="btn1-betslip1">Your Betsrlip</button>
+              <button class="btn1-betslip1">Your Betslip</button>
             </div>
             <div>
             <betterSlip :betslip="betslip" @update:betslip="updateBetslip" ></betterSlip>
@@ -260,6 +260,26 @@
     localStorage.setItem('betslip', JSON.stringify(this.betslip));
 
   },
+  updateBetslip(updatedBetslip) {
+      this.betslip = updatedBetslip;
+    },
+
+  placeBet() {
+  console.log("Entering placeBet() function...");
+  console.log("Placing bet:", this.betslip);
+  
+  // Place the bet using the betslip data
+  // ...
+
+  // Once the bet is placed, clear the betslip
+  this.betslip = [];
+
+  // Add a console log to check if this line is reached
+  console.log("Removing from local storage...");
+
+  // Remove the 'betslip' item from local storage
+  localStorage.removeItem('betslip');
+},
   
 }
   };

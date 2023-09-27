@@ -105,7 +105,7 @@
             <div class="betsslip">
                 <div class="we">
                 <button class="btn1-betslip">Your Betslip</button>
-                <button class="btn1-betslip1">Your Betsrlip</button>
+                <button class="btn1-betslip1">Your Betslip</button>
               </div>
               <div>
               <betterSlip :betslip="betslip" @update:betslip="updateBetslip" ></betterSlip>

@@ -63,12 +63,15 @@ export default {
 
   methods: {
     removeFromBetslip(index) {
-      const updatedBetslip = this.betslipCopy.slice();
-      updatedBetslip.splice(index, 1);
-      this.$emit('update:betslip', updatedBetslip);
-      this.betslipKey += 1;
-    },
+    const updatedBetslip = this.betslipCopy.slice();
+    updatedBetslip.splice(index, 1);
+    this.$emit('update:betslip', updatedBetslip);
+    this.betslipKey += 1;
 
+    // Remove the item from local storage
+    localStorage.setItem('betslip', JSON.stringify(updatedBetslip));
+  },
+  
 async placeBet() {
   console.log('Placing bets:', this.betslip);
   console.log('Stake:', this.stake);
