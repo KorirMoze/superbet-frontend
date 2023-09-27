@@ -1,11 +1,11 @@
 <template>
-
+<headerTop />
       <div class="bdy">
         <div class="row">
       
           <div class="col-12 col-lg-8 col-md-8 col-sm-8 ty">
               <!-- <div class="bts"><button class="back">Back</button></div> -->
-              <h1 class="stat">Statistics</h1>
+             
               <div class="rect">
                 <h3 class="tit">{{ odd_key }}</h3>
           
@@ -133,11 +133,14 @@
   import axios from 'axios';
   import betterSlip from "@/views/betterSlip.vue";
   import router from '@/router' // eslint-disable-line no-unused-vars
+  import headerTop from '@/components/headerBar.vue'
+
   
   // import masterWang from "@/pages/betterSlip.vue";
   export default {
     components: {
       betterSlip,
+      headerTop,
       // masterWang
     },
     name: 'dropDown',

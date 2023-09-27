@@ -1,4 +1,5 @@
 <template>
+  <headerTop />
     <div class="account">
     <div class="hello" >g</div>
       <div class="columns">
@@ -59,8 +60,12 @@
   
   <script>
   import axios from "axios";
-  
+  import headerTop from '@/components/headerBar.vue'
+
   export default {
+    components: {
+      headerTop,
+    },
     data() {
   return {
     gambler: {

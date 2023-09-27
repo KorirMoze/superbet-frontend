@@ -1,4 +1,5 @@
 <template>
+  <headerTop />
     <div class="bdy">
       <div class="tit">Today Games</div>
   
@@ -80,9 +81,13 @@
   </template>
   <script>
   import axios from 'axios';
+  import headerTop from '@/components/headerBar.vue'
 
   
   export default {
+    components: {
+      headerTop,
+    },
 
     name: 'dropDown',
     
