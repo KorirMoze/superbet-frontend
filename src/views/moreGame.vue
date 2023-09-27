@@ -138,7 +138,7 @@
   
   <script>
   import axios from 'axios';
-  import betterSlip from "@/components/betterSlip.vue";
+  import betterSlip from "@/views/betterSlip.vue";
   import { mapGetters } from 'vuex';
 
   export default {

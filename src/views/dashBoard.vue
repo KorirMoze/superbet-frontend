@@ -1,4 +1,6 @@
 <template>
+          <headerTop  />
+
   <div class="bdy">
     <div class="tit">Today Games</div>
 
@@ -118,13 +120,15 @@
 </template>
 <script>
 import axios from 'axios';
-import betterSlip from "@/components/betterSlip.vue";
+import betterSlip from "@/views/betterSlip.vue";
 import router from '@/router' // eslint-disable-line no-unused-vars
+import headerTop from '@/components/headerBar.vue'
 
 // import masterWang from "@/pages/betterSlip.vue";
 export default {
   components: {
     betterSlip,
+    headerTop,
     // masterWang
   },
   name: 'dropDown',

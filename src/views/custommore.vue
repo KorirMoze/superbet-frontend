@@ -131,7 +131,7 @@
   </template>
   <script>
   import axios from 'axios';
-  import betterSlip from "@/components/betterSlip.vue";
+  import betterSlip from "@/views/betterSlip.vue";
   import router from '@/router' // eslint-disable-line no-unused-vars
   
   // import masterWang from "@/pages/betterSlip.vue";
