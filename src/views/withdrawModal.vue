@@ -44,6 +44,7 @@
       },
       closeModal() {
         this.isModalActive = false;
+        window.location.reload();
       },
       // withdrawFunds() {
       //   // Implement your withdrawal logic here
@@ -55,37 +56,40 @@
       //   this.closeModal();
       // },
       withdrawFunds() {
-    const token = localStorage.getItem("jwt"); // Get the JWT token
-    const amount = this.withdrawalAmount; // Get the withdrawal amount from the data property
+      const token = localStorage.getItem("jwt"); // Get the JWT token
+      const amount = this.withdrawalAmount; // Get the withdrawal amount from the data property
 
-    // Check if a token exists and if the withdrawal amount is valid
-    if (!token || amount <= 49) {
-      console.error("Invalid withdrawal request.");
-      return;
-    }
+      // Check if a token exists and if the withdrawal amount is valid
+      if (!token || amount <= 0) {
+        console.error("Invalid withdrawal request.");
+        return;
+      }
 
-    // Send a POST request to your backend API to initiate the withdrawal
-    axios
-      .post("https://www.23bet.pro/withdraw/", { amount }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        // Handle a successful withdrawal response (e.g., display a success message)
-        console.log("Withdrawal successful", response.data);
+      // Send a POST request to your backend API to initiate the withdrawal
+      axios
+        .post("https://www.23bet.pro/withdraw/", { amount }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          // Check if the response contains a 'data' property
+          if (response.data && response.data.data) {
+            // Handle a successful withdrawal response (e.g., display a success message)
+            console.log("Withdrawal successful", response.data.data);
 
-        // Optionally, you can update the user's account balance in the component's data
-        this.gambler.data.acc_balance -= amount; // Update the balance based on the withdrawal amount
+            this.closeModal();
+          } else {
+            // Handle unexpected response format
+            console.error("Invalid response format:", response);
+          }
+        })
+        .catch((error) => {
+          // Handle any errors (e.g., display an error message)
+          console.error("Withdrawal failed", error);
+        });
+    },
 
-        // Close the withdrawal modal
-        this.closeModal();
-      })
-      .catch((error) => {
-        // Handle any errors (e.g., display an error message)
-        console.error("Withdrawal failed", error);
-      });
-  },
     },
   };
   </script>
