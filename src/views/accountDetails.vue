@@ -10,7 +10,12 @@
           <i class="fa-solid fa-user"></i>
           <p class="detai">Full Name: {{ gambler.data && gambler.data.first_name }} {{ gambler.data && gambler.data.last_name }}</p>
           <p class="detai">Email: {{ gambler.data && gambler.data.email }}</p>
+          <!-- <button class="button is-primary" @click="openWithdrawalModal">Withdraw Funds</button> -->
 
+          <!-- Include the WithdrawalModal component and pass its visibility as a prop -->
+      
+          <p class="detail"><WithdrawalModal v-model="isWithdrawalModalOpen" /></p>
+         
         </div>
         <div class="column is-7">
           <div class="data" v-if="Object.keys(gambler).length !== 0">
@@ -61,10 +66,11 @@
   <script>
   import axios from "axios";
   import headerTop from '@/components/headerBar.vue'
-
+  import WithdrawalModal from "@/views/withdrawModal.vue"; 
   export default {
     components: {
       headerTop,
+      WithdrawalModal,
     },
     data() {
   return {
@@ -79,6 +85,7 @@
       bets: [],
       loading: false,
       showBetSlip: false,
+      withdrawalAmount: 0,
     },
   };
 },
@@ -140,7 +147,11 @@
       this.showBetSlip = !this.showBetSlip;
       console.log('showBetSlip:', this.showBetSlip); // Add this line for debugging
     },
+    
 
+    openWithdrawalModal() {
+      this.isWithdrawalModalOpen = true; // Open the withdrawal modal
+    },
   },
  
   };
@@ -158,6 +169,7 @@
    p{
     color: #fff;
     margin-bottom: 1rem;
+    display: flex;
    }
    .data{
     margin-top: 4rem;
