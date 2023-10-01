@@ -24,13 +24,13 @@
       </div>
 
       <div class="navbar-end">
-        <a class="navbar-item" href="/login" >Login</a>
+        <a v-if="!isLoggedIn" class="navbar-item" href="/login" >Login</a>
         <a class="navbar-item" href="/account">My Account</a>
         <!-- <a class="navbar-item" href="/deposit">Deposit</a> -->
         <button class="button is-primary" @click="openModal">Deposit</button>
 
         <!-- Include your custom component here -->
-        <router-link to="/registration" class="navbar-item" >Registration</router-link>
+        <router-link to="/registration" v-if="!isLoggedIn" class="navbar-item" >Registration</router-link>
         <a v-if="isLoggedIn" class="navbar-item" href="#" @click="logout">Logout</a>
       </div>
     </div>
@@ -90,6 +90,7 @@ export default {
     // Check if the user is logged in (e.g., by checking if a JWT token exists)
     const token = localStorage.getItem('jwt'); // Adjust this according to where you store your token
     this.isLoggedIn = !!token;
+    console.log('JWT Token:', token); 
   },
   methods: {
     toggleMenu() {
