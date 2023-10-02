@@ -56,9 +56,9 @@
         <div class="stak">
           <ul class="coins">
             <li class="coin" @click="setStake(49)">+49</li>
-            <li class="coin" @click="setStake(100)">+100</li>
-            <li class="coin" @click="setStake(200)">+200</li>
-            <li class="coin" @click="setStake(500)">+500</li>
+            <li class="coin" @click="setStake(100)">+98</li>
+            <li class="coin" @click="setStake(200)">+195</li>
+            <li class="coin" @click="setStake(500)">+490</li>
           </ul>
           <span class="stake">DEPOSIT:</span>
           <input type="number" id="depo" name="stake" step="0.01" min="10" required v-model="stake" placeholder="Enter Amount">
@@ -82,7 +82,7 @@ export default {
     return {
       isMenuActive: false,
       isModalActive: false,
-      stake: 0, // Initialize stake with 0
+      stake: 49, // Initialize stake with 0
       isLoggedIn: false,
     };
   },
