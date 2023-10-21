@@ -273,172 +273,188 @@ return `${hours}:${minutes}:${seconds}`;
 
 
 
-addToBetslip1(game, selection) {
-if (!game || !game.fields) {
-console.error("Invalid game data:", game);
-return;
-}
-
-
-
-console.log("Clicked on item: ", game.pk);
-console.log("Selected odd: ", selection);
-
-if (selection === "home_odd") {
-  const gameId = game.pk;
-  const buttonId = `button_${gameId}`;
-  const buttonId1 = `button_neutral_${gameId}`;
-  const buttonId2 = `button_away_${gameId}`;
-
-  // Ensure buttonId is defined before using it
-  const button = document.getElementById(buttonId);
-  const button1 = document.getElementById(buttonId1);
-  const button2 = document.getElementById(buttonId2);
-
-  if (button) {
-    const currentBackgroundColor = window.getComputedStyle(button).backgroundColor;
-
-    // Toggle the background color between green and the original color for the first button
-    if (currentBackgroundColor === 'rgb(0, 128, 0)') {
-      // If the background color is green, set it to the original color
-      button.style.backgroundColor = ''; // or set it to the original color value
-    } else {
-      // If the background color is not green, set it to green
-      button.style.backgroundColor = 'green';
-      button1.style.backgroundColor = ''; // Reset the background color for the second button
-      button2.style.backgroundColor = ''; // Reset the background color for the third button
+addToBetslip1(game, selection)
+ {
+    if (!game || !game.fields) {
+    console.error("Invalid game data:", game);
+    return;
     }
-  }
 
-  // Reset the background colors for the other two buttons
-  if (button1) {
-    button1.style.backgroundColor = '';
-  }
-  if (button2) {
-    button2.style.backgroundColor = '';
-  }
-}
-else if (selection === "neutral_odd") {
-  const gameId = game.pk;
-  const buttonId = `button_${gameId}`;
-  const buttonId1 = `button_neutral_${gameId}`;
-  const buttonId2 = `button_away_${gameId}`;
 
-  // Ensure buttonId is defined before using it
-  const button = document.getElementById(buttonId);
-  const button1 = document.getElementById(buttonId1);
-  const button2 = document.getElementById(buttonId2);
 
-  if (button1) {
-    const currentBackgroundColor = window.getComputedStyle(button1).backgroundColor;
 
-    // Toggle the background color between green and the original color for the first button
-    if (currentBackgroundColor === 'rgb(0, 128, 0)') {
-      // If the background color is green, set it to the original color
-      button1.style.backgroundColor = ''; // or set it to the original color value
-    } else {
-      // If the background color is not green, set it to green
-      button1.style.backgroundColor = 'green';
-      button.style.backgroundColor = ''; // Reset the background color for the second button
-      button2.style.backgroundColor = ''; // Reset the background color for the third button
+
+    if (selection === "home_odd") {
+      const gameId = game.pk;
+      const buttonId = `button_${gameId}`;
+      const buttonId1 = `button_neutral_${gameId}`;
+      const buttonId2 = `button_away_${gameId}`;
+
+      // Ensure buttonId is defined before using it
+      const button = document.getElementById(buttonId);
+      const button1 = document.getElementById(buttonId1);
+      const button2 = document.getElementById(buttonId2);
+
+      if (button) {
+        const currentBackgroundColor = window.getComputedStyle(button).backgroundColor;
+
+        // Toggle the background color between green and the original color for the first button
+        if (currentBackgroundColor === 'rgb(0, 128, 0)') {
+          // If the background color is green, set it to the original color
+          button.style.backgroundColor = ''; // or set it to the original color value
+        } else {
+          // If the background color is not green, set it to green
+          button.style.backgroundColor = 'green';
+          button1.style.backgroundColor = ''; // Reset the background color for the second button
+          button2.style.backgroundColor = ''; // Reset the background color for the third button
+        }
+      }
+
+      // Reset the background colors for the other two buttons
+      if (button1) {
+        button1.style.backgroundColor = '';
+      }
+      if (button2) {
+        button2.style.backgroundColor = '';
+      }
     }
-  }
+    else if (selection === "neutral_odd") {
+      const gameId = game.pk;
+      const buttonId = `button_${gameId}`;
+      const buttonId1 = `button_neutral_${gameId}`;
+      const buttonId2 = `button_away_${gameId}`;
 
-  // Reset the background colors for the other two buttons
-  if (button) {
-    button.style.backgroundColor = '';
-  }
-  if (button2) {
-    button2.style.backgroundColor = '';
-  }
-}
+      // Ensure buttonId is defined before using it
+      const button = document.getElementById(buttonId);
+      const button1 = document.getElementById(buttonId1);
+      const button2 = document.getElementById(buttonId2);
 
+      if (button1) {
+        const currentBackgroundColor = window.getComputedStyle(button1).backgroundColor;
 
-else if (selection === "away_odd") {
-  const gameId = game.pk;
-  const buttonId = `button_${gameId}`;
-  const buttonId1 = `button_neutral_${gameId}`;
-  const buttonId2 = `button_away_${gameId}`;
+        // Toggle the background color between green and the original color for the first button
+        if (currentBackgroundColor === 'rgb(0, 128, 0)') {
+          // If the background color is green, set it to the original color
+          button1.style.backgroundColor = ''; // or set it to the original color value
+        } else {
+          // If the background color is not green, set it to green
+          button1.style.backgroundColor = 'green';
+          button.style.backgroundColor = ''; // Reset the background color for the second button
+          button2.style.backgroundColor = ''; // Reset the background color for the third button
+        }
+      }
 
-  // Ensure buttonId is defined before using it
-  const button = document.getElementById(buttonId);
-  const button1 = document.getElementById(buttonId1);
-  const button2 = document.getElementById(buttonId2);
-
-  if (button2) {
-    const currentBackgroundColor = window.getComputedStyle(button2).backgroundColor;
-
-    // Toggle the background color between green and the original color for the first button
-    if (currentBackgroundColor === 'rgb(0, 128, 0)') {
-      // If the background color is green, set it to the original color
-      button2.style.backgroundColor = ''; // or set it to the original color value
-    } else {
-      // If the background color is not green, set it to green
-      button2.style.backgroundColor = 'green';
-      button.style.backgroundColor = ''; // Reset the background color for the second button
-      button1.style.backgroundColor = ''; // Reset the background color for the third button
+      // Reset the background colors for the other two buttons
+      if (button) {
+        button.style.backgroundColor = '';
+      }
+      if (button2) {
+        button2.style.backgroundColor = '';
+      }
     }
+
+
+    else if (selection === "away_odd") {
+      const gameId = game.pk;
+      const buttonId = `button_${gameId}`;
+      const buttonId1 = `button_neutral_${gameId}`;
+      const buttonId2 = `button_away_${gameId}`;
+
+      // Ensure buttonId is defined before using it
+      const button = document.getElementById(buttonId);
+      const button1 = document.getElementById(buttonId1);
+      const button2 = document.getElementById(buttonId2);
+
+      if (button2) {
+        const currentBackgroundColor = window.getComputedStyle(button2).backgroundColor;
+
+        // Toggle the background color between green and the original color for the first button
+        if (currentBackgroundColor === 'rgb(0, 128, 0)') {
+          // If the background color is green, set it to the original color
+          button2.style.backgroundColor = ''; // or set it to the original color value
+        } else {
+          // If the background color is not green, set it to green
+          button2.style.backgroundColor = 'green';
+          button.style.backgroundColor = ''; // Reset the background color for the second button
+          button1.style.backgroundColor = ''; // Reset the background color for the third button
+        }
+      }
+
+      // Reset the background colors for the other two buttons
+      if (button) {
+        button.style.backgroundColor = '';
+      }
+      if (button1) {
+        button1.style.backgroundColor = '';
+      }
+    }
+
+
+
+
+    // Check if there's already a selection for this team
+    const existingSelectionIndex = this.betslip.findIndex(
+    (betslipItem) => betslipItem.match === game.fields.home_team + " vs " + game.fields.away_team
+
+    );
+
+
+    // If there is an existing selection, remove it before adding the new one
+
+    if (existingSelectionIndex !== -1) {
+    const existingSelection = this.betslip[existingSelectionIndex];
+    // Check if the existing selection and the current selection are the same
+    if (existingSelection.selection === selection) {
+      // The selections are the same, splice the existing selection
+      console.log("Splicing existing selection from betslip.");
+      this.betslip.splice(existingSelectionIndex, 1);
+    } else {
+      // The selections are different, you can choose to update the existing selection
+      console.log("Updating existing selection in betslip.");
+      // Update the existing selection if needed
+      // For example, you can update the `selection` and `odds` properties.
+      existingSelection.selection = selection;
+
+      // Optionally, you can also update the color of the corresponding button.
+      // Update button color logic here
+    }
+  } else {
+
+
+    let odd;
+    switch (selection) {
+    case "home_odd":
+    odd = game.fields.home_odd;
+    break;
+    case "neutral_odd":
+    odd = game.fields.neutral_odd;
+    break;
+    case "away_odd":
+    odd = game.fields.away_odd;
+    break;
+    default:
+    break;
+    }
+  
+
+    const betslipItem = {
+    match: game.fields.home_team + " vs " + game.fields.away_team,
+    game_id: game.pk, // Use game.pk to access the game_id property
+    selection,
+    odds: odd,
+    };
+
+
+    this.betslip.push(betslipItem);
+    localStorage.setItem('betslip', JSON.stringify(this.betslip));
   }
-
-  // Reset the background colors for the other two buttons
-  if (button) {
-    button.style.backgroundColor = '';
-  }
-  if (button1) {
-    button1.style.backgroundColor = '';
-  }
-}
-
-
-
-
-// Check if there's already a selection for this team
-const existingSelectionIndex = this.betslip.findIndex(
-(betslipItem) => betslipItem.match === game.fields.home_team + " vs " + game.fields.away_team
-);
-
-
-// If there is an existing selection, remove it before adding the new one
-if (existingSelectionIndex !== -1) {
-this.betslip.splice(existingSelectionIndex, 1);
-}
-
-
-let odd;
-switch (selection) {
-case "home_odd":
-odd = game.fields.home_odd;
-break;
-case "neutral_odd":
-odd = game.fields.neutral_odd;
-break;
-case "away_odd":
-odd = game.fields.away_odd;
-break;
-default:
-break;
-}
-
-
-const betslipItem = {
-match: game.fields.home_team + " vs " + game.fields.away_team,
-game_id: game.pk, // Use game.pk to access the game_id property
-selection,
-odds: odd,
-};
-
-
-this.betslip.push(betslipItem);
-localStorage.setItem('betslip', JSON.stringify(this.betslip));
 },
 
 
 
 ////////////////////////aaaa///////////////////////////////////////////////////////////////////////////////
 addToBetslip(item, selection, ) {
-  console.log("addToBetslip function called.");
-console.log("Clicked on item: ", item);
-console.log("Selected odd: ", selection);
+
 if (selection === "home_odd") {
   const gameId = item.game_id;
   const buttonId = `button_${gameId}`;
@@ -555,8 +571,24 @@ const existingSelectionIndex = this.betslip.findIndex(
 
 // If there is an existing selection, remove it before adding the new one
 if (existingSelectionIndex !== -1) {
-this.betslip.splice(existingSelectionIndex, 1);
-}
+    const existingSelection = this.betslip[existingSelectionIndex];
+    // Check if the existing selection and the current selection are the same
+    if (existingSelection.selection === selection) {
+      // The selections are the same, splice the existing selection
+      console.log("Splicing existing selection from betslip.");
+      this.betslip.splice(existingSelectionIndex, 1);
+      localStorage.setItem('betslip', JSON.stringify(this.betslip));
+    } else {
+      // The selections are different, you can choose to update the existing selection
+      console.log("Updating existing selection in betslip.");
+      // Update the existing selection if needed
+      // For example, you can update the `selection` and `odds` properties.
+      existingSelection.selection = selection;
+
+      // Optionally, you can also update the color of the corresponding button.
+      // Update button color logic here
+    }
+  } else {
 
 
 let odd;
@@ -585,7 +617,9 @@ this.betslip.push(betslipItem);
 
 
 localStorage.setItem('betslip', JSON.stringify(this.betslip));
+  }
 },
+
 selectedButtonColor(selection) {
 // Return the background color for the selected button
 return this.selectedButtonColors[selection];
