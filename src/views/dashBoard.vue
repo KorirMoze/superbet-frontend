@@ -196,19 +196,19 @@ this.getcustom();
 methods: {
 getDatas() {
 axios
-.get('https://www.23bet.pro/')
-.then((response) => {
-  this.Datas = response.data.dataa;
-})
-.catch((error) => {
-  console.log(error);
-});
+    .get('https://www.23bet.pro/')
+    .then((response) => {
+      this.Datas = response.data.dataa;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 },
 nextSlide() {
-this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-},
+   this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+  },
 prevSlide() {
-this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+    this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
 },
 getAirtimes() {
 axios
@@ -240,8 +240,8 @@ if (firstItem.fields && firstItem.fields.start_time) {
   this.start_time_formatted = this.formatTime(this.start_time);
  
   // Log the 'start_date' and 'start_time_formatted' values
-  console.log(this.start_date);
-  console.log(this.start_time_formatted);
+  // console.log(this.start_date);
+  // console.log(this.start_time_formatted);
 } else {
   console.log('The expected data structure is not present in the response.');
 }
@@ -406,8 +406,9 @@ addToBetslip1(game, selection)
     // Check if the existing selection and the current selection are the same
     if (existingSelection.selection === selection) {
       // The selections are the same, splice the existing selection
-      console.log("Splicing existing selection from betslip.");
+     // console.log("Splicing existing selection from betslip.");
       this.betslip.splice(existingSelectionIndex, 1);
+      localStorage.setItem('betslip', JSON.stringify(this.betslip));
     } else {
       // The selections are different, you can choose to update the existing selection
       console.log("Updating existing selection in betslip.");
@@ -575,7 +576,7 @@ if (existingSelectionIndex !== -1) {
     // Check if the existing selection and the current selection are the same
     if (existingSelection.selection === selection) {
       // The selections are the same, splice the existing selection
-      console.log("Splicing existing selection from betslip.");
+    //  console.log("Splicing existing selection from betslip.");
       this.betslip.splice(existingSelectionIndex, 1);
       localStorage.setItem('betslip', JSON.stringify(this.betslip));
     } else {
