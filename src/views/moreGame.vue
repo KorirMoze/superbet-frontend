@@ -73,7 +73,7 @@
                   <li class="od2" v-for="odd in match.odds" :key="odd.odd_key">
                     <span class="odds2">
                       <button class="odd-button" @click="addToBetslip(match, odd,'TOTAL')">{{ odd.display }}</button>
-                      <span class="odd-value">{{ odd.odd_value }}</span>
+                      <span><button class="odd-value" :id='odd.display'  @click="addToBetslip(match, odd,'TOTAL')">{{ odd.odd_value }}</button></span>
                       <br>
                     </span>
                     <br>
@@ -238,19 +238,19 @@
 
   addToBetslip(match, odd,betType) {
     // console.log("Clicked on match: ", match.name);
-    console.log("Selected odd: ", odd);
+   // console.log("Selected type: ", betType);
     // console.log("Home Team:", this.homeTeam);
     // Check if there's already a selection for this match
     
 
    switch (betType)
    {
-    case 'BOTH TEAM TO SCORE':
+    case 'BOTH TEAMS TO SCORE':
 
       if (odd.display === "YES") {
         const gameId = this.match_id;
       
-        console.log("dfghbjn" ,this.match_id)
+        //console.log("dfghbjn" ,this.match_id)
         const buttonId = `button_yes_${gameId}`;
         const buttonId1 = `button_no_${gameId}`;
       
@@ -258,7 +258,7 @@
         // Ensure buttonId is defined before using it
         const button = document.getElementById(buttonId);
         const button1 = document.getElementById(buttonId1);
-
+       // console.log(button)
         if (button) {
           const currentBackgroundColor = window.getComputedStyle(button).backgroundColor;
 
@@ -279,7 +279,7 @@
         }
       
       }
-      if (odd.display === "NO") {
+      else if (odd.display === "NO") {
         const gameId = this.match_id;
       
         console.log("dfghbjn" ,this.match_id)
@@ -438,7 +438,58 @@
       break;
    
     case 'TOTAL':
-      break;
+    {
+      const total = ['OVER 0.5', 'UNDER 0.5', 'OVER 1.5', 'UNDER 1.5', 'OVER 2.5', 'UNDER 2.5', 'OVER 3.5', 'UNDER 3.5', 'OVER 4.5', 'UNDER 4.5', 'OVER 5.5', 'UNDER 5.5'];
+        if (total.includes(odd.display)) {
+          // const gameId = this.odd.display;
+          
+          
+            const buttonId = odd.display;
+          
+            
+            // Ensure buttonId is defined before using it
+            const button = document.getElementById(buttonId);
+            // const button1 = document.getElementById(buttonId1);
+            // const button2 = document.getElementById(buttonId2);
+            if (button) {
+              const currentBackgroundColor = window.getComputedStyle(button).backgroundColor;
+              console.log('bbtbtbtb',currentBackgroundColor)
+              
+              total.forEach(value => {
+            const button = document.getElementById(value);
+            if (button) {
+                button.style.backgroundColor = ''; // Reset the background color to default
+            }
+        });
+              // Toggle the background color between green and the original color for the first button
+              if (currentBackgroundColor === 'rgb(0, 128, 0)') {
+                // If the background color is green, set it to the original color
+                button.style.backgroundColor = ''; // or set it to the original color value
+              } else {
+                // If the background color is not green, set it to green
+                button.style.backgroundColor = 'green';
+                // button.style.backgroundColor = ''; // Reset the background color for the second button
+                // button.style.backgroundColor = '';
+              }
+            }
+
+            // Reset the background colors for the other two buttons
+            // if (button) {
+            //   button.style.backgroundColor = '';
+
+            // }
+            // if (button2) {
+            //   button2.style.backgroundColor = '';
+              
+            // }
+          
+          }
+    
+
+          break;
+      }
+    
+   
     
     case 'CORRECT SCORE':
     {
@@ -487,47 +538,7 @@
             // }
           
           }
-          if (odd.display === "1/2") {
-          // const gameId = this.odd.display;
-          
-          
-            const buttonId = '1/X';
-            const buttonId1 = 'X/2';
-            const buttonId2 = '1/2';
-          
-
-            // Ensure buttonId is defined before using it
-            const button = document.getElementById(buttonId);
-            const button1 = document.getElementById(buttonId1);
-            const button2 = document.getElementById(buttonId2);
-
-            if (button2) {
-              const currentBackgroundColor = window.getComputedStyle(button2).backgroundColor;
-
-              // Toggle the background color between green and the original color for the first button
-              if (currentBackgroundColor === 'rgb(0, 128, 0)') {
-                // If the background color is green, set it to the original color
-                button2.style.backgroundColor = ''; // or set it to the original color value
-              } else {
-                // If the background color is not green, set it to green
-                button2.style.backgroundColor = 'green';
-                button1.style.backgroundColor = ''; // Reset the background color for the second button
-                button.style.backgroundColor = '';
-              }
-            }
-
-            // Reset the background colors for the other two buttons
-            if (button1) {
-              button1.style.backgroundColor = '';
-
-            }
-            if (button) {
-              button.style.backgroundColor = '';
-              
-            }
-          
-          }
-        
+    
 
           break;
       }
@@ -546,8 +557,31 @@
 
     // If there is an existing selection, remove it before adding the new one
     if (existingSelectionIndex !== -1) {
+      const existingSelection = this.betslip[existingSelectionIndex];
+      console.log(odd.display)
+      console.log(existingSelection.selection)
+      if (existingSelection.selection === odd.display) {
+      // The selections are the same, splice the existing selection
+     // console.log("Splicing existing selection from betslip.");
       this.betslip.splice(existingSelectionIndex, 1);
+      localStorage.setItem('betslip', JSON.stringify(this.betslip));
     }
+    else {
+      // The selections are different, you can choose to update the existing selection
+      console.log("Updating existing selection in betslip.");
+      // Update the existing selection if needed
+      // For example, you can update the `selection` and `odds` properties.
+      existingSelection.selection = odd.display;
+
+      // Optionally, you can also update the color of the corresponding button.
+      // Update button color logic here
+    }
+   
+   
+    }else
+    {
+
+    
 
     const betslipItem = {
       match: this.homeTeam + " vs " + this.awayTeam,
@@ -558,7 +592,7 @@
 
     this.betslip.push(betslipItem);
     localStorage.setItem('betslip', JSON.stringify(this.betslip));
-
+  }
   },
   updateBetslip(updatedBetslip) {
       this.betslip = updatedBetslip;
