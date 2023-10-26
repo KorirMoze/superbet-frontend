@@ -85,6 +85,12 @@ console.log('Total Odds:', totalOdds);
   // Get the JWT from a cookie or local storage
   const token = localStorage.getItem('jwt');
   console.log(token);
+    // Check if the JWT token is available
+    if (!token) {
+    // Token is not available, redirect to the login page
+    this.$router.push({ name: 'login' });
+    return; // Stop further execution
+  }
 
   try {
     // Send a POST request to the backend API with the entire betslip array,

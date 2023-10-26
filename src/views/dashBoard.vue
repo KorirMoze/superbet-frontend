@@ -31,35 +31,37 @@
       </div>
     </section>
 
+
     <div class="games" v-if="games && games.length > 0">
      
-      <div class="whole">
-        <div class="time">{{start_date}} {{ start_time_formatted }}</div>
-        <div class="homeaway"><div class="homei">{{ games[0].fields.home_team }}</div>
-        <div class="away" >{{ games[0].fields.away_team }}</div></div>
-          <div class ='prebet'>
-   
-            <span><button :id="'button_' + games[0].pk" class="hom" @click="addToBetslip1(games[0], 'home_odd')">{{ games[0].fields.home_odd }}</button></span>
-            <span><button :id="'button_neutral_' + games[0].pk" class="hom1" @click="addToBetslip1(games[0], 'neutral_odd')">{{ games[0].fields.neutral_odd }}</button></span>
-            <span> <button :id="'button_away_' + games[0].pk" class="hom2" @click="addToBetslip1(games[0], 'away_odd')">{{ games[0].fields.away_odd}}</button></span>
+      <div class="whole" v-for="(game, index) in games" :key="index">
+          <div class = "for" >
+                <div class="time" >{{start_date}} {{ start_time_formatted }}</div>
+                <div class="homeaway"><div class="homei">{{ game.fields.home_team }}</div>
+                <div class="away" >{{ game.fields.away_team }}</div></div>
+                  <div class ='prebet'>
+          
+                    <span><button :id="game.fields.home_team+game.fields.home_odd" class="hom" @click="addToBetslip1(game, 'home_odd')">{{ game.fields.home_odd }}</button></span>
+                    <span><button :id="game.fields.neutral_odd" class="hom1" @click="addToBetslip1(game, 'neutral_odd')">{{ game.fields.neutral_odd }}</button></span>
+                    <span> <button :id="game.fields.away_team+game.fields.away_odd" class="hom2" @click="addToBetslip1(game, 'away_odd')">{{ game.fields.away_odd}}</button></span>
 
 
-                <div >
+                        <div >
 
 
-                    <div>
-     
-                      <router-link :to="'/more/'" @click="sendParentId(games[0].fields.parent_match_id)" class="more">
-                        +92
-                      </router-link>
-                      <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
-                    </div>
+                            <div>
+            
+                              <router-link :to="'/more/'" @click="sendParentId(games[0].fields.parent_match_id)" class="more">
+                                +92
+                              </router-link>
+                              <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
+                            </div>
+                      </div>
+                </div>
+          
+                <!-- Add more elements to display other properties as needed -->
               </div>
-        </div>
-  
-        <!-- Add more elements to display other properties as needed -->
-      </div>
- 
+          </div>
       </div>
       <div class="games" v-for="item in Datas" :key="item.sport_id">
         <div>
@@ -224,8 +226,9 @@ getcustom() {
 axios
 .get('https://www.23bet.pro/custom/')
 .then((response) => {
-const data = JSON.parse(response.data[0]);
+const data = JSON.parse(response.data);
 this.games = data;
+console.log(this.games)
 // Check if data is an array and has at least one element
 if (Array.isArray(data) && data.length > 0) {
 // Access the first element of the array
@@ -279,21 +282,22 @@ addToBetslip1(game, selection)
     console.error("Invalid game data:", game);
     return;
     }
-
+console.log(selection)
 
 
 
 
     if (selection === "home_odd") {
-      const gameId = game.pk;
-      const buttonId = `button_${gameId}`;
-      const buttonId1 = `button_neutral_${gameId}`;
-      const buttonId2 = `button_away_${gameId}`;
+      
+      const buttonId = game.fields.home_team+game.fields.home_odd;
+      const buttonId1 = game.fields.neutral_odd;
+      const buttonId2 = game.fields.away_team+game.fields.away_odd;
 
       // Ensure buttonId is defined before using it
       const button = document.getElementById(buttonId);
       const button1 = document.getElementById(buttonId1);
       const button2 = document.getElementById(buttonId2);
+      
 
       if (button) {
         const currentBackgroundColor = window.getComputedStyle(button).backgroundColor;
@@ -319,10 +323,9 @@ addToBetslip1(game, selection)
       }
     }
     else if (selection === "neutral_odd") {
-      const gameId = game.pk;
-      const buttonId = `button_${gameId}`;
-      const buttonId1 = `button_neutral_${gameId}`;
-      const buttonId2 = `button_away_${gameId}`;
+      const buttonId = game.fields.home_team+game.fields.home_odd;
+      const buttonId1 = game.fields.neutral_odd;
+      const buttonId2 = game.fields.away_team+game.fields.away_odd;
 
       // Ensure buttonId is defined before using it
       const button = document.getElementById(buttonId);
@@ -355,10 +358,9 @@ addToBetslip1(game, selection)
 
 
     else if (selection === "away_odd") {
-      const gameId = game.pk;
-      const buttonId = `button_${gameId}`;
-      const buttonId1 = `button_neutral_${gameId}`;
-      const buttonId2 = `button_away_${gameId}`;
+      const buttonId = game.fields.home_team+game.fields.home_odd;
+      const buttonId1 = game.fields.neutral_odd;
+      const buttonId2 = game.fields.away_team+game.fields.away_odd;
 
       // Ensure buttonId is defined before using it
       const button = document.getElementById(buttonId);
