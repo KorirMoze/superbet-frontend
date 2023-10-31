@@ -31,7 +31,6 @@
             <a class="nav-link" href="/account">My Account</a>
           </li>
           <li class="nav-item">
-            <!-- Assuming betterSlip is a Bootstrap component, replace the below line with your actual component -->
             <a class="nav-link">Your Component</a>
           </li>
           <li class="nav-item">

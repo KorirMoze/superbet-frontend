@@ -1,5 +1,7 @@
 <template>
-  <headerTop  />
+  <div class="nav-topp">
+    <headerTop  />
+  </div>
 
 
 <div class="bdy">
@@ -101,7 +103,9 @@
                             </router-link>
                             <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
                           </div>
+                          
                     </div>
+                    
               </div>
 
              
@@ -130,6 +134,9 @@
 </div>
 </div>
 
+<div class="bottom-nav-container">
+  <bottomNav />
+</div>
 
 
 
@@ -141,7 +148,8 @@ import axios from 'axios';
 import betterSlip from "@/views/betterSlip.vue";
 import router from '@/router' // eslint-disable-line no-unused-vars
 import headerTop from '@/components/headerBar.vue'
-;
+import bottomNav from '@/views/bottomNav.vue'
+
 
 
 // import masterWang from "@/pages/betterSlip.vue";
@@ -149,6 +157,7 @@ export default {
 components: {
 betterSlip,
 headerTop,
+bottomNav,
 // masterWang
 },
 name: 'dropDown',
@@ -719,8 +728,39 @@ this.isActive = true;
 
 </script>
 <style scoped>
+  .nav-topp {
+   
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Adjust as needed */
+  }
+
+/* Default styles for larger screens */
+.bottom-nav-container {
+  display: none; /* Hide the container by default */
+}
+
+/* Media query for mobile devices (adjust the max-width as needed) */
+@media (max-width: 767px) {
+  .bottom-nav-container {
+    display: block; /* Show the container on mobile devices */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000; /* Adjust as needed */
+    color: #fff; /* Adjust as needed */
+    padding: 10px; /* Adjust as needed */
+    z-index: 1000; /* Adjust as needed */
+  }
+}
+
+
 .bdy {
 background-color: #918f8f !important;
+margin-top: 4rem;
 
 
 }
