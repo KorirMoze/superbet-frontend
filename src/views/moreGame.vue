@@ -683,7 +683,7 @@
       margin-left: 1rem;
     }
     .odd-value{
-      background: rgba(217, 217, 217, 0.6);
+      background: #23313d;
       padding-left: 1.5rem !important;
       border-radius: 10px;
       padding-right: 1.5rem !important;
@@ -736,7 +736,7 @@
 
       top: 562.71px;
       margin-right: 1.2rem;
-      background: rgba(217, 217, 217, 0.6);
+      background: #23313d;
       border-radius: 9.34191px;
       color: #fff !important;
       }
@@ -748,7 +748,7 @@
       
         top: 562.71px;
         border-radius: 10px;
-        background: rgba(217, 217, 217, 0.6);
+        background: #23313d;
         border-radius: 10px;
         color: white;
         

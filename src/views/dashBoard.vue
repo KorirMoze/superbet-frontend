@@ -874,9 +874,11 @@ height: 60.72px;
 left: 583px;
 top: 562.71px;
 margin-right: 1.2rem;
-background: rgba(217, 217, 217, 0.6);
-border-radius: 9.34191px;
+background: #23313d;
+border-radius: 15px;
 color: #fff !important;
+
+
 }
 .hom1{
 padding: 0 !important;
@@ -885,7 +887,7 @@ width: 140.13px;
 height: 60.72px;
 left: 751px;
 top: 562.71px;
-background: rgba(217, 217, 217, 0.6);
+background: #23313d;
 border-radius: 9.34191px;
 }
 .hom2{
@@ -894,7 +896,7 @@ margin-right: 1.2rem;
 width: 140.13px;
 height: 60.72px;
 margin-right: 2rem !important;
-background: rgba(217, 217, 217, 0.6);
+background: #23313d;
 border-radius: 9.34191px;
 }
 .games{
@@ -1021,32 +1023,45 @@ display: flex;
 justify-content: space-between;
 }
 .hom{
-padding: 0 !important;
+
 margin-right: 1rem;
 width: 4rem;
 height: 2rem;
-background: rgba(217, 217, 217, 0.6);
-border-radius: 9.34191px;
+background: #23313d;
+border-radius: 15px;
 color: #fff !important;
+padding-top: 5px;
+padding-left: 10px;
+padding-bottom: 23px;
+padding-right: 40px;
 }
 .hom1{
-padding: 0 !important;
+
 margin-right: 1rem;
 width: 4rem;
 height: 2rem; 
-background: rgba(217, 217, 217, 0.6);
-border-radius: 9.34191px;
+background: #23313d;
+border-radius: 15px;
+color: #fff !important;
+padding-top: 5px;
+padding-left: 10px;
+padding-bottom: 23px;
+padding-right: 40px;
 }
 
 
 .hom2{
-padding: 0 !important;
 margin-right: 1rem;
 width: 4rem;
 height: 2rem;
 
-background: rgba(217, 217, 217, 0.6);
-border-radius: 9.34191px;
+background: #23313d;
+border-radius: 15px;
+color: #fff !important;
+padding-top: 5px;
+padding-left: 10px;
+padding-bottom: 23px;
+padding-right: 40px;
 }
 .more{
  width: 4rem !important;
