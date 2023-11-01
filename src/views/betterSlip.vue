@@ -26,6 +26,44 @@
   </div>
   <button class="btnn" @click="placeBet">Place Bet</button>
 </div>
+
+
+<div :class="['modal', { 'is-active': isModalActive }]">
+    <div class="modal-background" @click="closeModal"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        
+          <h5 class="modal-card-title">Deposit</h5>
+         
+     
+        <button class="delete" aria-label="close" @click="closeModal"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Modal content goes here -->
+        
+        <div class="box">
+          <p class="pale">Send Money to Your Account</p>
+
+        </div>
+        <div class="stak">
+          <ul class="coins">
+            <li class="coin" @click="setStake(49)">+49</li>
+            <li class="coin" @click="setStake(100)">+98</li>
+            <li class="coin" @click="setStake(200)">+195</li>
+            <li class="coin" @click="setStake(500)">+490</li>
+          </ul>
+          <span class="stake">DEPOSIT:</span>
+          <input type="number" id="depo" name="stake" step="0.01" min="10" required v-model="stake" placeholder="Enter Amount">
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success" @click="closeModal">Close</button>
+        <button class="button is-success" @click="deposit" >Deposit</button>
+      </footer>
+    </div>
+  </div>
+
+
 </template>
 
 <script>
@@ -43,6 +81,21 @@ export default {
     return {
       betslipKey: 0,
       stake: 49,
+      gambler: {
+      email: '',
+      first_name: '',
+      last_name: '',
+      date_of_birth: '',
+      gender: '',
+      phone_number: '',
+      acc_balance: '',
+      bets: [],
+      loading: false,
+      showBetSlip: false,
+      withdrawalAmount: 0,
+      isModalActive: false,
+
+    },
       
     };
   },
@@ -61,6 +114,32 @@ export default {
   
   },
 
+  mounted() {
+  const token = localStorage.getItem("jwt");
+
+  if (token) {
+    axios
+      .get("https://www.23bet.pro/account_details/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        this.gambler = response.data;
+        console.log(this.gambler.data.acc_balance)
+
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  } else {
+    console.log("No token found");
+  }
+},
+
+
+    
+
   methods: {
     removeFromBetslip(index) {
     const updatedBetslip = this.betslipCopy.slice();
@@ -73,8 +152,8 @@ export default {
   },
   
 async placeBet() {
-  console.log('Placing bets:', this.betslip);
-  console.log('Stake:', this.stake);
+ // console.log('Placing bets:', this.betslip);
+  //console.log('Stake:', this.stake);
   
 // Calculate the total odds by summing up all the odds in the betslip
 const totalOdds = this.betslip.reduce((total, betslipItem) => {
@@ -84,12 +163,16 @@ const totalOdds = this.betslip.reduce((total, betslipItem) => {
 console.log('Total Odds:', totalOdds);
   // Get the JWT from a cookie or local storage
   const token = localStorage.getItem('jwt');
-  console.log(token);
+ // console.log(token);
     // Check if the JWT token is available
     if (!token) {
     // Token is not available, redirect to the login page
     this.$router.push({ name: 'login' });
     return; // Stop further execution
+  }
+  if (this.gambler.data.acc_balance<1){
+      this.$router.push({name: 'deposit'})
+
   }
 
   try {
@@ -109,7 +192,7 @@ console.log('Total Odds:', totalOdds);
       }
     });
 
-    console.log('Bets placed:', response.data.bets);
+   // console.log('Bets placed:', response.data.bets);
     
     // Emit a "bet-placed" event to update the UI with the placed bets
     this.$emit('bet-placed', response.data.bets);

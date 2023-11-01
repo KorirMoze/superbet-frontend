@@ -91,7 +91,7 @@
 },
     mounted() {
       const token = localStorage.getItem("jwt");
-      console.log(token)
+     // console.log(token)
       if (token) {
         axios
           .get("https://www.23bet.pro/account_details/", {
@@ -100,9 +100,9 @@
             },
           })
           .then((response) => {
-            console.log(response.data);
+          //  console.log(response.data);
             this.gambler = response.data;
-            console.log(this.gambler);
+            this.gambler.acc_balance = response.data.acc_balance;
             this.fetchBets();
 
           })
@@ -121,7 +121,7 @@
       const token = localStorage.getItem('jwt'); // Assuming your JWT token is stored in localStorage
 
       if (!token) {
-        console.log('No JWT token found');
+      //  console.log('No JWT token found');
         this.loading = false;
         return;
       }
@@ -135,7 +135,7 @@
         })
         .then((response) => {
           this.bets = response.data.bets; // Assuming your API response has a 'bets' field
-          console.log(this.bets)
+         // console.log(this.bets)
           this.gambler.loading = false;
         })
         .catch((error) => {
@@ -145,7 +145,7 @@
     },
     toggleBetSlip() {
       this.showBetSlip = !this.showBetSlip;
-      console.log('showBetSlip:', this.showBetSlip); // Add this line for debugging
+      //console.log('showBetSlip:', this.showBetSlip); // Add this line for debugging
     },
     
 

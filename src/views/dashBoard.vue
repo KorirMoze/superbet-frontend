@@ -237,7 +237,7 @@ axios
 .then((response) => {
 const data = JSON.parse(response.data);
 this.games = data;
-console.log(this.games)
+//console.log(this.games)
 // Check if data is an array and has at least one element
 if (Array.isArray(data) && data.length > 0) {
 // Access the first element of the array
@@ -255,10 +255,10 @@ if (firstItem.fields && firstItem.fields.start_time) {
   // console.log(this.start_date);
   // console.log(this.start_time_formatted);
 } else {
-  console.log('The expected data structure is not present in the response.');
+  //console.log('The expected data structure is not present in the response.');
 }
 } else {
-console.log('No data found in the response.');
+//console.log('No data found in the response.');
 }
 })
 .catch((error) => {
@@ -291,7 +291,7 @@ addToBetslip1(game, selection)
     console.error("Invalid game data:", game);
     return;
     }
-console.log(selection)
+//console.log(selection)
 
 
 
@@ -422,7 +422,7 @@ console.log(selection)
       localStorage.setItem('betslip', JSON.stringify(this.betslip));
     } else {
       // The selections are different, you can choose to update the existing selection
-      console.log("Updating existing selection in betslip.");
+     // console.log("Updating existing selection in betslip.");
       // Update the existing selection if needed
       // For example, you can update the `selection` and `odds` properties.
       existingSelection.selection = selection;
@@ -431,8 +431,6 @@ console.log(selection)
       // Update button color logic here
     }
   } else {
-
-
     let odd;
     switch (selection) {
     case "home_odd":

@@ -155,7 +155,7 @@
         match_id: [],
         homeTeam: [],
         awayTeam: [],
-
+        isModalActive: false,
       };
       
     },
