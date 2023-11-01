@@ -88,6 +88,12 @@ const routes = [
         component: () => import( '../views/results.vue'),
      
       },
+      {
+        name: 'bottomnav',
+        path: '/bottomnav',
+        component: () => import( '../views/bottomNav.vue'),
+     
+      },
   
 ]
 

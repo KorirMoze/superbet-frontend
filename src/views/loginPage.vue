@@ -53,6 +53,11 @@
                 <button href="#pablo" @click="postData" class="btn btn-neutral btn-round btn-lg">Login</button>
               </div>
             </form>
+            <div class="rege">
+             
+              <p>Dont have An Account?  <router-link to="/registration" v-if="!isLoggedIn" >Register Here</router-link></p>
+
+            </div>
           </div>
         </div>
       </div>
@@ -103,7 +108,7 @@ postData() {
       localStorage.setItem('jwt', response.data.token);
       
       // Redirect to the home page
-      this.$router.push({ path: '/dashBoard' });
+      this.$router.push({ path: '/' });
     } else {
       console.log('Login failed');
     }
@@ -121,6 +126,13 @@ postData() {
 
 
 <style scoped>
+.rege{
+  color: #888;
+}
+.rege a{
+  text-decoration: none;
+  color: black;
+}
 
 @media screen and (min-width: 992px){
   
