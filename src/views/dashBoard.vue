@@ -997,6 +997,7 @@ width: 100%;
 background-color: #000000;
 border-radius: 8.21818px;
 color: #fff;
+margin-bottom: 10rem;
 }
 body{
 background-color: #232323;

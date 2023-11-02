@@ -1,5 +1,5 @@
 <template>
-  <div class="navtopp">
+  <div class="nav-topp">
     <headerTop />
 
   </div>
@@ -45,7 +45,7 @@
               <div class="keys">Odds: {{ bet.odds }}</div>
               <div  class="keys">Possible Win: {{ bet.possible_win }}</div>
               <div class="keys">Stake: {{ bet.stake }}</div>
-              <div class="keys">Status: {{ bet.status }}</div>
+              <div class="keys" :class="{'green-text': bet.status === 'won', 'red-text': bet.status === 'lost','grey-text':bet.status === 'pending'}">Status: {{ bet.status }}</div>
               
             </div>
               <ul>
@@ -54,7 +54,7 @@
                   <div class="match">Match: {{ betItem.match }}</div>
                   <div>Selection: {{ betItem.selection }}</div>
                   <div>Odds: {{ betItem.odds }}</div>
-                  <div>Status: {{ betItem.status }}</div>
+                  <div :class="{'green-text': betItem.status === 'won', 'red-text': betItem.status === 'lost','grey-text':bet.status === 'pending'}">Status: {{ betItem.status }}</div>
                 </div>
                 </li>
               </ul>
@@ -149,7 +149,27 @@
         .then((response) => {
           this.bets = response.data.bets; // Assuming your API response has a 'bets' field
          // console.log(this.bets)
+         this.bets = this.bets.reverse()
+         this.bets.forEach((bet) => {
+  // Reverse the order of bet_items within each bet
+  // bet.bet_items = bet.bet_items.reverse();
+
+  // Initialize the bet status as "won"
+        bet.status = 'won';
+
+        bet.bet_items.forEach((betItem) => {
+          console.log(`Status of bet item: ${betItem.status}`);
+
+          if (betItem.status === 'lost') {
+            bet.status = 'lost';
+          } else if (betItem.status === 'pending') {
+            bet.status = 'pending';
+          }
+        });
+      });
+
           this.gambler.loading = false;
+          console.log(response.data.bets[0].bet_items)
         })
         .catch((error) => {
           console.error('Error fetching bets:', error);
@@ -170,7 +190,15 @@
   };
   </script>
  <style scoped>
- 
+ .green-text{
+  color: #ffd000;
+ }
+ .red-text{
+  color: red;
+ }
+ .grey-text{
+  color: #427D9D;
+ }
  .nav-topp {
    
    position: fixed;
@@ -204,6 +232,7 @@
     background-color: #918f8f ;
     height: scroll;
     padding-bottom: 1rem;
+    margin-top: 4rem;
    }
    h1{
    color: #fff;
@@ -302,6 +331,7 @@
     height: scroll;
     padding-bottom: 1rem;
     margin-bottom: 5rem;
+    margin-top: 5rem;
    }
    h1{
    color: #fff;
@@ -365,6 +395,7 @@
     margin-top: 2rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     margin-right: 1rem;
+    margin-bottom: 4rem;
    }
    .keys{
     display: flex;

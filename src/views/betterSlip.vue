@@ -1,11 +1,13 @@
 <template>
+
+
   <div class="betslip" :key="betslipKey">
    
     <ul>
       <li v-for="(betslipItem, index) in betslipCopy" :key="index">
         <span>{{ betslipItem.match }}</span>
         <div class="game-id" style="display: none;">{{ betslipItem.game_id }}</div>
-        <span class="selection">{{ betslipItem.selection }}</span>
+        <span class="selection">{{ getBetOutcome(betslipItem.selection) }}</span>
         <div>{{ betslipItem.odds }}</div>
         <button class="btn-remove"
         @click="removeFromBetslip(index)">Remove</button>
@@ -63,11 +65,18 @@
     </div>
   </div>
 
+  <div class="bottom-nav-container">
+  <bottomNav />
+</div>
+
+
 
 </template>
 
 <script>
 import axios from 'axios';
+import bottomNav from '@/views/bottomNav.vue'
+
 
 export default {
   props: {
@@ -76,6 +85,11 @@ export default {
       default: () => [],
     },
   },
+  components:
+  {
+  bottomNav,
+  },
+  
 
   data() {
     return {
@@ -104,6 +118,19 @@ export default {
     betslipCopy() {
       return [...this.betslip];
       
+    },
+    getBetOutcome() {
+      return (odds) => {
+        if (odds === 'home_odd') {
+          return 'Home';
+        } else if (odds === 'away_odd') {
+          return 'Away';
+        } else if (odds === 'neutral_odd') {
+          return 'Draw';
+        }else {
+          return odds; // Keep the original odds value for other cases
+        }
+      };
     },
     totalOdds() {
     return this.betslipCopy.reduce((total, betslipItem) => {
@@ -221,6 +248,25 @@ console.log('Total Odds:', totalOdds);
 
 
 <style scoped>
+
+.bottom-nav-container {
+    display: none; /* Hide the container by default */
+  }
+
+  /* Media query for mobile devices (adjust the max-width as needed) */
+  @media (max-width: 767px) {
+    .bottom-nav-container {
+      display: block; /* Show the container on mobile devices */
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #000; /* Adjust as needed */
+      color: #fff; /* Adjust as needed */
+      padding: 10px; /* Adjust as needed */
+      z-index: 1000; /* Adjust as needed */
+    }
+  }
 .betslip {
 padding-top: 2rem;
   color: #fff;
