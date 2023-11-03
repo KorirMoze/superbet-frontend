@@ -153,6 +153,8 @@
         games: [],
         homeTeam: null,
         awayTeam: null,
+        parentMatchId:null,
+
         
       };
     },
@@ -165,77 +167,82 @@
     mounted() {
 
       this.getcustom();
-    
-      console.log(this.betslip);
+    // Retrieve the parent_match_id from local storage
+      //  this.parentMatchId = localStorage.getItem('parent_match_id');
+
+      // if (parentMatchId) {
+      //   console.log('Parent Match ID retrieved:', this.parentMatchId);
+      //   // You can use the parentMatchId as needed on this page
+      // } else {
+      //   console.log('Parent Match ID not found in local storage');
+      // }
+
+     // console.log(this.betslip);
   
     },
     methods: {
   
             
         getcustom() {
-          axios
-            .get('https://www.23bet.pro/custom/')
-            .then((response) => {
-              console.log('API Response:', response.data); // Log the entire response
-              const data = JSON.parse(response.data[0]);
-              this.games = data;
+          // axios
+          //   .get('https://www.23bet.pro/custom/')
+          //   .then((response) => {
+          //     console.log('API Response:', response.data); // Log the entire response
+              // const data = JSON.parse(response.data[0]);
+              // this.games = data;
+          //     console.log(this.games)
+          //     // this.homeTeam = this.games[0].fields.home_team;
+          //     // this.awayTeam = this.games[0].fields.away_team;
+
+          //   })
+          //   .catch((error) => {
+          //     console.error('Error:', error);
+          //   });
+          axios.get(`https://www.23bet.pro/custom/`)
+          .then(response => {
+            // Retrieve the parent_match_id from local storage
+            const parentMatchId = localStorage.getItem('parent_match_id');
+
+            const data = JSON.parse(response.data);
+            //this.games = data;
+            console.log(this.games)
+
+            if (parentMatchId) {
+              console.log('Parent Match ID retrieved:', parentMatchId);
+
+           
+          //     data.forEach(customGame => {
+          //     const parentMatchId1 = customGame.fields.parent_match_id;
+          // //    console.log('Parent Match ID1:', parentMatchId1);
+          //   });
+              // Filter the games array to select items with the matching parent_match_id
+              this.filteredGames = data.filter(game => game.fields.parent_match_id === parentMatchId);
+
+//              console.log('Filtered Games:', this.filteredGames);
+              this.games = this.filteredGames
               this.homeTeam = this.games[0].fields.home_team;
               this.awayTeam = this.games[0].fields.away_team;
+              // Call your functions to process the filtered data
+           
+            } else {
+              console.log('Parent Match ID not found in local storage');
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching data from the server:', error);
+          });
 
-            })
-            .catch((error) => {
-              console.error('Error:', error);
-            });
+    
+      // .catch(error => {
+      //   console.error('Error retrieving matches:', error);
+      // })
+      // .finally(() => {
+      //   this.loading = false;
+      // });
+
         },
 
   
-      
-        addToBetslip1(game, selection) {
-        if (!game || !game.fields) {
-          console.error("Invalid game data:", game);
-          return;
-        }
-      
-        console.log("Clicked on game: ",);
-        console.log('home:',this.homeTeam)
-      
-        // Check if there's already a selection for this team
-        const existingSelectionIndex = this.betslip.findIndex(
-          (betslipItem) => betslipItem.match === this.homeTeam + " vs " + this.awayTeam
-         
-        );
-        
-      
-        // If there is an existing selection, remove it before adding the new one
-        if (existingSelectionIndex !== -1) {
-          this.betslip.splice(existingSelectionIndex, 1);
-        }
-      
-        let odd;
-        switch (selection) {
-          case "home_odd":
-            odd = game.fields.home_odd;
-            break;
-          case "neutral_odd":
-            odd = game.fields.neutral_odd;
-            break;
-          case "away_odd":
-            odd = game.fields.away_odd;
-            break;
-          default:
-            break;
-        }
-      
-        const betslipItem = {
-          match: this.homeTeam + " vs " + this.awayTeam,
-          game_id: game.pk, // Use game.pk to access the game_id property
-          selection,
-          odds: odd,
-        };
-      
-        this.betslip.push(betslipItem);
-        localStorage.setItem('betslip', JSON.stringify(this.betslip));
-      },
       
   
       addToBetslip(game, selection) {

@@ -39,7 +39,8 @@
       <div class="whole" v-for="(game, index) in games" :key="index">
           <div class = "for" >
                 <div class="time" >{{start_date}} {{ start_time_formatted }}</div>
-                <div class="homeaway"><div class="homei">{{ game.fields.home_team }}</div>
+                <div class="homeaway">
+                  <div class="homei">{{ game.fields.home_team }}</div>
                 <div class="away" >{{ game.fields.away_team }}</div></div>
                   <div class ='prebet'>
           
@@ -53,7 +54,7 @@
 
                             <div>
             
-                              <router-link :to="'/more/'" @click="sendParentId(games[0].fields.parent_match_id)" class="more">
+                              <router-link :to="'/more/'" @click="sendParentId(game.fields.parent_match_id)" class="more">
                                 +92
                               </router-link>
                               <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
@@ -692,6 +693,9 @@ selected2: this.selected2,
 
 
 sendParentId(parent_match_id) {
+  localStorage.removeItem('parent_match_id');
+
+  localStorage.setItem('parent_match_id', parent_match_id);
 axios.post('https://www.23bet.pro/bet2/', { parent_match_id })
 .then(response => {
   console.log('Parent ID sent to backend:', parent_match_id);
@@ -726,6 +730,10 @@ this.isActive = true;
 
 </script>
 <style scoped>
+
+.for{
+  display: flex;
+}
   .nav-topp {
    
     position: fixed;

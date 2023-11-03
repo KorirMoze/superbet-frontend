@@ -108,7 +108,6 @@ export default {
       showBetSlip: false,
       withdrawalAmount: 0,
       isModalActive: false,
-
     },
       
     };
@@ -153,7 +152,7 @@ export default {
       })
       .then((response) => {
         this.gambler = response.data;
-        console.log(this.gambler.data.acc_balance)
+       // console.log(this.gambler.data.acc_balance)
 
       })
       .catch((error) => {
@@ -187,7 +186,7 @@ const totalOdds = this.betslip.reduce((total, betslipItem) => {
   const odds = parseFloat(betslipItem.odds);
   return total + odds;
 }, 0);
-console.log('Total Odds:', totalOdds);
+//console.log('Total Odds:', totalOdds);
   // Get the JWT from a cookie or local storage
   const token = localStorage.getItem('jwt');
  // console.log(token);
@@ -299,7 +298,7 @@ li span {
 font-family: 'Poppins';
 font-style: normal;
 font-weight: 600;
-font-size: 14.9005px;
+font-size: 12px;
 line-height: 22px;
 letter-spacing: 0.01em;
 
@@ -322,7 +321,10 @@ button:hover {
 color: #1EBA01;
 }
 .btn-remove{
-  background: #1EBA01;
+  background: #4F709C;
+  color: rgb(223, 166, 166);
+  padding: 3px 8px;
+
 }
 .total1{
 width: 100%;
