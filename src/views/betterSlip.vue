@@ -7,7 +7,7 @@
       <li v-for="(betslipItem, index) in betslipCopy" :key="index">
         <span>{{ betslipItem.match }}</span>
         <div class="game-id" style="display: none;">{{ betslipItem.game_id }}</div>
-        <span class="selection">{{ getBetOutcome(betslipItem.selection) }}</span>
+        <span class="selection">  {{ betslipItem.selection === betslipItem.odds ? betslipItem.key : getBetOutcome(betslipItem.selection, betslipItem.odds, betslipItem.key) }}</span>
         <div>{{ betslipItem.odds }}</div>
         <button class="btn-remove"
         @click="removeFromBetslip(index)">Remove</button>
@@ -18,7 +18,7 @@
   <div class="total1">
     <div class="total">
       <span class="left">TOTAL ODDS:</span>
-      <span class="right">{{ totalOdds }}</span>
+      <span class="right" v-if="totalOdds !== 1">{{ totalOdds.toFixed(2) }}</span>
       <h6></h6>
     </div>
   <h6>Accept any changes in odds prices</h6>
@@ -134,8 +134,8 @@ export default {
     totalOdds() {
     return this.betslipCopy.reduce((total, betslipItem) => {
       const odds = parseFloat(betslipItem.odds);
-      return total + odds;
-    }, 0);
+      return total * odds;
+    }, 1);
   },
   
   },
@@ -169,10 +169,19 @@ export default {
   methods: {
     removeFromBetslip(index) {
     const updatedBetslip = this.betslipCopy.slice();
+    const removedBetslip = this.betslip[0]
+    console.log(removedBetslip.key)
+    localStorage.setItem('removedBetslip', JSON.stringify(removedBetslip));
     updatedBetslip.splice(index, 1);
     this.$emit('update:betslip', updatedBetslip);
     this.betslipKey += 1;
+    console.log(this.betslip[index])
 
+
+    const associatedButton = document.querySelector(`.btn-remove-${index}`);
+    ///////
+    console.log(associatedButton)
+   
     // Remove the item from local storage
     localStorage.setItem('betslip', JSON.stringify(updatedBetslip));
   },

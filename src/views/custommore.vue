@@ -1,5 +1,7 @@
 <template>
-<headerTop />
+<div class="nav-topp">
+  <headerTop />
+</div>
       <div class="bdy">
         <div class="row">
       
@@ -13,22 +15,16 @@
                     <ul >
                       <h2 style="padding-top: 1rem;">BOTH TEAMS TO SCORE</h2>
                       <li class="od" >
-            
-                        <ul  style="display: flex; justify-content: space-between; color: white;">
-                          <li class="od">
-                            <span class="odds">
-                              <button class="yes-button" @click="addToBetslip(games[0], games[0].fields.btts_yes_odds)">Yes</button>
-                              <span><button class="hom" @click="addToBetslip(games[0], games[0].fields.btts_yes_odds)">{{ games[0].fields.btts_yes_odds}}</button></span>
-                            </span>
-                          </li>
-                          <li class="od">
-                            <span class="odds">
-                              <button class="yes-button" @click="addToBetslip(games[0], games[0].fields.btts_no_odds)">No</button>
-                              <span><button class="hom1" @click="addToBetslip(games[0], games[0].fields.btts_no_odds)">{{ games[0].fields.btts_no_odds}}</button></span>
-                            </span>
-                          </li>
-                        </ul>
-                        
+
+                        <ul style="display: flex; justify-content: space-between;">
+                        <li class="od" v-for="(odds, key) in games[0].fields.both_teams_to_score" :key="key">
+                          <span class="odds1">
+                            <button class="odd-button" @click="addToBetslip(games[0], key,'BOTH TEAMS TO SCORE',odds)">{{ key }}</button>
+                            <span><button :id="key" class="hom1" @click="addToBetslip(games[0], key,'BOTH TEAMS TO SCORE',odds)">{{ odds }}</button></span>
+                          </span>
+                        </li>
+                      </ul>
+
             
                       </li>
                     </ul>
@@ -46,8 +42,8 @@
                       <ul style="display: flex; justify-content: space-between;">
                         <li class="od" v-for="(odds, key) in games[0].fields.double_chance_odds" :key="key">
                           <span class="odds1">
-                            <button class="odd-button" @click="addToBetslip(games[0], odds)">{{ key }}</button>
-                            <span><button class="hom1" @click="addToBetslip(games[0], odds)">{{ odds }}</button></span>
+                            <button class="odd-button" @click="addToBetslip(games[0], key,'DOUBLE CHANCE',odds)">{{ key }}</button>
+                            <span><button :id="key" class="hom1" @click="addToBetslip(games[0], key,'DOUBLE CHANCE',odds)">{{ odds }}</button></span>
                           </span>
                         </li>
                       </ul>
@@ -69,8 +65,8 @@
                       <ul style="display: flex; justify-content: space-between;">
                         <li class="od2" v-for="(odds, key) in games[0].fields.total" :key="key">
                           <span class="odds2">
-                            <button class="odd-button" @click="addToBetslip(games[0], key)">{{ key }}</button>
-                            <span><button class="odd-value" @click="addToBetslip(games[0], odds)">{{ odds }}</button></span>
+                            <button class="odd-button" @click="addToBetslip(games[0], key,'TOTAL',odds)">{{ key }}</button>
+                            <span><button :id="key" class="odd-value" @click="addToBetslip(games[0], key,'TOTAL',odds)">{{ odds }}</button></span>
                           </span>
                         </li>
                       </ul>
@@ -91,8 +87,8 @@
                       <ul style="display: flex; justify-content: space-between;">
                         <li class="od2" v-for="(odds, key) in games[0].fields.correct_score_odds" :key="key">
                           <span class="odds2">
-                            <button class="odd-button" @click="addToBetslip(games[0], key)">{{ key }}</button>
-                            <span><button class="odd-value" @click="addToBetslip(games[0], odds)">{{ odds }}</button></span>
+                            <button class="odd-button" @click="addToBetslip(games[0], key,'CORRECT SCORE',odds)">{{ key }}</button>
+                            <span><button :id="key" class="odd-value" @click="addToBetslip(games[0], key,'CORRECT SCORE',odds)">{{ odds }}</button></span>
                           </span>
                         </li>
                       </ul>
@@ -167,37 +163,14 @@
     mounted() {
 
       this.getcustom();
-    // Retrieve the parent_match_id from local storage
-      //  this.parentMatchId = localStorage.getItem('parent_match_id');
-
-      // if (parentMatchId) {
-      //   console.log('Parent Match ID retrieved:', this.parentMatchId);
-      //   // You can use the parentMatchId as needed on this page
-      // } else {
-      //   console.log('Parent Match ID not found in local storage');
-      // }
-
-     // console.log(this.betslip);
+ 
   
     },
     methods: {
   
             
         getcustom() {
-          // axios
-          //   .get('https://www.23bet.pro/custom/')
-          //   .then((response) => {
-          //     console.log('API Response:', response.data); // Log the entire response
-              // const data = JSON.parse(response.data[0]);
-              // this.games = data;
-          //     console.log(this.games)
-          //     // this.homeTeam = this.games[0].fields.home_team;
-          //     // this.awayTeam = this.games[0].fields.away_team;
-
-          //   })
-          //   .catch((error) => {
-          //     console.error('Error:', error);
-          //   });
+   
           axios.get(`https://www.23bet.pro/custom/`)
           .then(response => {
             // Retrieve the parent_match_id from local storage
@@ -205,16 +178,12 @@
 
             const data = JSON.parse(response.data);
             //this.games = data;
-            console.log(this.games)
+          
 
             if (parentMatchId) {
               console.log('Parent Match ID retrieved:', parentMatchId);
 
            
-          //     data.forEach(customGame => {
-          //     const parentMatchId1 = customGame.fields.parent_match_id;
-          // //    console.log('Parent Match ID1:', parentMatchId1);
-          //   });
               // Filter the games array to select items with the matching parent_match_id
               this.filteredGames = data.filter(game => game.fields.parent_match_id === parentMatchId);
 
@@ -222,6 +191,7 @@
               this.games = this.filteredGames
               this.homeTeam = this.games[0].fields.home_team;
               this.awayTeam = this.games[0].fields.away_team;
+            //  console.log('wer', this.games[0].fields.both_teams_to_score)
               // Call your functions to process the filtered data
            
             } else {
@@ -233,31 +203,246 @@
           });
 
     
-      // .catch(error => {
-      //   console.error('Error retrieving matches:', error);
-      // })
-      // .finally(() => {
-      //   this.loading = false;
-      // });
 
         },
 
   
       
   
-      addToBetslip(game, selection) {
+      addToBetslip(game, key,betType,selection) {
       // console.log("Clicked on item: ", game);
-      console.log("Fields:", selection);
+      console.log("Fields:", key);
   
+
+      switch (betType)
+   {
+    case 'BOTH TEAMS TO SCORE':
+      {
+    const bothTeams = ['Yes','No','0:0', '0:1', '0:2', '0:3', '0:4', '1:0', '1:1', '1:2', '1:3', '1:4', '2:0', '2:1', '2:2', '2:3', '2:4', '3:0', '3:1', '3:2', '3:3', '3:4', '4:0', '4:1', '4:2', '4:3', '4:4', 'OTHER', 'OVER 0.5', 'UNDER 0.5', 'OVER 1.5', 'UNDER 1.5', 'OVER 2.5', 'UNDER 2.5', 'OVER 3.5', 'UNDER 3.5', 'OVER 4.5', 'UNDER 4.5', 'OVER 5.5', 'UNDER 5.5', 'YES', 'NO', '1/X', '1/2', 'X/2'];
+
+      if (bothTeams.includes(key)) {
+        
+      
+       // console.log("dfghbjn" ,this.match_id)
+        const buttonId = key;
+
+        // Ensure buttonId is defined before using it
+        const button = document.getElementById(buttonId);
+ 
+        console.log(button)
+        if (button) {
+          const currentBackgroundColor = window.getComputedStyle(button).backgroundColor;
+
+          bothTeams.forEach(value => {
+            const button = document.getElementById(value);
+            if (button) {
+                button.style.backgroundColor = ''; // Reset the background color to default
+              //  button1.style.backgroundColor = '';
+            }
+        });
+
+          // Toggle the background color between green and the original color for the first button
+          if (currentBackgroundColor === 'rgb(0, 128, 0)') {
+            // If the background color is green, set it to the original color
+            button.style.backgroundColor = ''; // or set it to the original color value
+          } else {
+            // If the background color is not green, set it to green
+            button.style.backgroundColor = 'green';
+          }
+        }
+
+        // Reset the background colors for the other two buttons
+      
+      
+      }
+   
+      break;
+    }
+    case 'DOUBLE CHANCE':
+      {
+    const doubleChance = ['Yes','No','0:0', '0:1', '0:2', '0:3', '0:4', '1:0', '1:1', '1:2', '1:3', '1:4', '2:0', '2:1', '2:2', '2:3', '2:4', '3:0', '3:1', '3:2', '3:3', '3:4', '4:0', '4:1', '4:2', '4:3', '4:4', 'OTHER', 'OVER 0.5', 'UNDER 0.5', 'OVER 1.5', 'UNDER 1.5', 'OVER 2.5', 'UNDER 2.5', 'OVER 3.5', 'UNDER 3.5', 'OVER 4.5', 'UNDER 4.5', 'OVER 5.5', 'UNDER 5.5', 'YES', 'NO', '1/X', '1/2', 'X/2'];
+
+    if (doubleChance.includes(key)) {
+       // const gameId = this.selection;
+      const buttonId = key;
+
+        // Ensure buttonId is defined before using it
+        const button = document.getElementById(buttonId);
+    
+
+        if (button) {
+          const currentBackgroundColor = window.getComputedStyle(button).backgroundColor;
+
+          doubleChance.forEach(value => {
+            const button = document.getElementById(value);
+            if (button) {
+                button.style.backgroundColor = ''; // Reset the background color to default
+              //  button1.style.backgroundColor = '';
+            }
+        });
+
+          // Toggle the background color between green and the original color for the first button
+          if (currentBackgroundColor === 'rgb(0, 128, 0)') {
+            // If the background color is green, set it to the original color
+            button.style.backgroundColor = ''; // or set it to the original color value
+          } else {
+            // If the background color is not green, set it to green
+            button.style.backgroundColor = 'green';
+        
+          }
+        }
+
+        // Reset the background colors for the other two buttons
+   
+      
+      }
+  
+  
+      break;
+    }
+    case 'TOTAL':
+    {
+  //    const total = ['OVER 0.5', 'UNDER 0.5', 'OVER 1.5', 'UNDER 1.5', 'OVER 2.5', 'UNDER 2.5', 'OVER 3.5', 'UNDER 3.5', 'OVER 4.5', 'UNDER 4.5', 'OVER 5.5', 'UNDER 5.5'];
+      const total = ['Yes','No','0:0', '0:1', '0:2', '0:3', '0:4', '1:0', '1:1', '1:2', '1:3', '1:4', '2:0', '2:1', '2:2', '2:3', '2:4', '3:0', '3:1', '3:2', '3:3', '3:4', '4:0', '4:1', '4:2', '4:3', '4:4', 'OTHER', 'OVER 0.5', 'UNDER 0.5', 'OVER 1.5', 'UNDER 1.5', 'OVER 2.5', 'UNDER 2.5', 'OVER 3.5', 'UNDER 3.5', 'OVER 4.5', 'UNDER 4.5', 'OVER 5.5', 'UNDER 5.5', 'YES', 'NO', '1/X', '1/2', 'X/2'];
+
+      if (total.includes(key)) {
+          // const gameId = this.selection;
+          
+          
+            const buttonId = key;
+          
+            
+            // Ensure buttonId is defined before using it
+            const button = document.getElementById(buttonId);
+            // const button1 = document.getElementById(buttonId1);
+            // const button2 = document.getElementById(buttonId2);
+            if (button) {
+              const currentBackgroundColor = window.getComputedStyle(button).backgroundColor;
+            //  console.log('bbtbtbtb',currentBackgroundColor)
+              
+              total.forEach(value => {
+            const button = document.getElementById(value);
+            if (button) {
+                button.style.backgroundColor = ''; // Reset the background color to default
+              //  button1.style.backgroundColor = '';
+            }
+        });
+              // Toggle the background color between green and the original color for the first button
+              if (currentBackgroundColor === 'rgb(0, 128, 0)') {
+                // If the background color is green, set it to the original color
+                button.style.backgroundColor = ''; // or set it to the original color value
+              } else {
+                // If the background color is not green, set it to green
+                button.style.backgroundColor = 'green';
+                // button.style.backgroundColor = ''; // Reset the background color for the second button
+                // button.style.backgroundColor = '';
+              }
+            }
+
+            // Reset the background colors for the other two buttons
+            // if (button) {
+            //   button.style.backgroundColor = '';
+
+            // }
+            // if (button2) {
+            //   button2.style.backgroundColor = '';
+              
+            // }
+          
+          }
+    
+
+          break;
+      }
+    
+   
+    
+    case 'CORRECT SCORE':
+    {
+     // const targetValues = ['0:0','0:1', '0:2', '0:3', '0:4', '1:0', '1:1', '1:2', '1:3', '1:4', '2:0', '2:1', '2:2', '2:3', '2:4', '3:0', '3:1', '3:2', '3:3', '3:4', '4:0', '4:1', '4:2', '4:3', '4:4', 'OTHER'];
+      const targetValues = ['Yes','No','0:0', '0:1', '0:2', '0:3', '0:4', '1:0', '1:1', '1:2', '1:3', '1:4', '2:0', '2:1', '2:2', '2:3', '2:4', '3:0', '3:1', '3:2', '3:3', '3:4', '4:0', '4:1', '4:2', '4:3', '4:4', 'OTHER', 'OVER 0.5', 'UNDER 0.5', 'OVER 1.5', 'UNDER 1.5', 'OVER 2.5', 'UNDER 2.5', 'OVER 3.5', 'UNDER 3.5', 'OVER 4.5', 'UNDER 4.5', 'OVER 5.5', 'UNDER 5.5', 'YES', 'NO', '1/X', '1/2', 'X/2'];
+
+        if (targetValues.includes(key)) {
+          // const gameId = this.selection;
+          
+          
+            const buttonId = key;
+          
+            
+            // Ensure buttonId is defined before using it
+            const button = document.getElementById(buttonId);
+            // const button1 = document.getElementById(buttonId1);
+            // const button2 = document.getElementById(buttonId2);
+            if (button) {
+              const currentBackgroundColor = window.getComputedStyle(button).backgroundColor;
+              console.log('bbtbtbtb',currentBackgroundColor)
+              
+              targetValues.forEach(value => {
+            const button = document.getElementById(value);
+            if (button) {
+                button.style.backgroundColor = ''; // Reset the background color to default
+            }
+        });
+              // Toggle the background color between green and the original color for the first button
+              if (currentBackgroundColor === 'rgb(0, 128, 0)') {
+                // If the background color is green, set it to the original color
+                button.style.backgroundColor = ''; // or set it to the original color value
+              } else {
+                // If the background color is not green, set it to green
+                button.style.backgroundColor = 'green';
+                // button.style.backgroundColor = ''; // Reset the background color for the second button
+                // button.style.backgroundColor = '';
+              }
+            }
+
+            // Reset the background colors for the other two buttons
+            // if (button) {
+            //   button.style.backgroundColor = '';
+
+            // }
+            // if (button2) {
+            //   button2.style.backgroundColor = '';
+              
+            // }
+          
+          }
+    
+
+          break;
+      }
+    }
+
     // Check if there's already a selection for this team
     const existingSelectionIndex = this.betslip.findIndex(
       (betslipItem) => betslipItem.match === this.homeTeam + " vs " + this.awayTeam
     );
   
     // If there is an existing selection, remove it before adding the new one
+    // if (existingSelectionIndex !== -1) {
+    //   this.betslip.splice(existingSelectionIndex, 1);
+    //   localStorage.setItem('betslip', JSON.stringify(this.betslip));
+    // }
     if (existingSelectionIndex !== -1) {
-      this.betslip.splice(existingSelectionIndex, 1);
-    }
+    const existingSelection = this.betslip[existingSelectionIndex];
+    console.log(existingSelection.key,'selected')
+      console.log(key)
+    // Check if the existing selection and the current selection are the same
+        if (existingSelection.key === key) {
+          // The selections are the same, splice the existing selection
+          console.log("Splicing existing selection from betslip.");
+          this.betslip.splice(existingSelectionIndex, 1);
+          localStorage.setItem('betslip', JSON.stringify(this.betslip));
+        } else {
+          // The selections are different, you can choose to update the existing selection
+          console.log("Updating existing selection in betslip.");
+          // Update the existing selection if needed
+          // For example, you can update the `selection` and `odds` properties.
+          existingSelection.key = key;
+
+          // Optionally, you can also update the color of the corresponding button.
+          // Update button color logic here
+        }
+  }else{
   
     let odd;
     switch (selection) {
@@ -281,12 +466,14 @@
       game_id: game.id, // Add the game_id property
       selection,
       odds: selection,
+      key
+      
     };
   
     this.betslip.push(betslipItem);
-    console.log(this.betslip)
+    //console.log(betslipItem)
     localStorage.setItem('betslip', JSON.stringify(this.betslip));
-    
+  }
   },
   updateBetslip(updatedBetslip) {
         this.betslip = updatedBetslip;
@@ -373,17 +560,28 @@
 
 
 <style scoped>
+  .nav-topp {
+   
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   z-index: 1000; /* Adjust as needed */
+ }
 .bdy{
   background-color: #918f8f !important;
   width: 100%;
   height: 100%;
   overflow: scroll; /* Prevent scrolling */
   font-size: 1.3rem;
+  margin-top: 7rem;
+  padding-top: 1rem;
 }
 .betsslip{
   background-color: #000000;
   border-radius: 8.21818px;
   color: #fff;
+  margin-bottom: 10rem;
 }
 .row{
   width: 80%;
@@ -613,5 +811,14 @@ color: #fff !important;
     padding-left: 1rem;
     padding-right: 1rem;
   }
+  .bdy{
+  background-color: #918f8f !important;
+  width: 100%;
+  height: 100%;
+  overflow: scroll; /* Prevent scrolling */
+  font-size: 1.3rem;
+  margin-top: 7rem;
+  padding-top: 1rem;
+}
   }
 </style>

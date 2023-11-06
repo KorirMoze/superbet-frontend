@@ -731,9 +731,7 @@ this.isActive = true;
 </script>
 <style scoped>
 
-.for{
-  display: flex;
-}
+
   .nav-topp {
    
     position: fixed;
@@ -808,6 +806,9 @@ width: 100%; /* Stretch the image to fit the container */
 height: auto; /* Maintain aspect ratio */
 }
 @media screen and (min-width: 992px){
+  .for{
+  display: flex;
+}
 .betsslip{
 background-color: #000000;
 border-radius: 8.21818px;
