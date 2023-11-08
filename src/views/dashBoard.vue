@@ -764,7 +764,7 @@ this.isActive = true;
 
 .bdy {
 background-color: #918f8f !important;
-margin-top: 4rem;
+margin-top: 6rem;
 
 
 }

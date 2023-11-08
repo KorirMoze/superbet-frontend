@@ -195,6 +195,7 @@ export default {
         // Use the item.selection_id or other identifier to find the button
         const buttonId = removedBetslip.selection;
         const button = document.getElementById(buttonId);
+        console.log(button,"svhadbansbghanjhsgwbnasbhna")
         const button1 = document.getElementById(buttonId1);
         const button2 = document.getElementById(buttonId2);
         const button3 = document.getElementById(buttonId3)
@@ -203,11 +204,7 @@ export default {
 
         }
 
-        // const button4 = document.getElementById(buttonId4);
-        // const button5 = document.getElementById(buttonId5);
-        // const button6 = document.getElementById(buttonId6);
-
-        if (button && removedBetslip.game_id.length >4 ) {
+        if (button ) {
           button.style.backgroundColor = ''; // Reset the background color
 
         }
@@ -225,7 +222,7 @@ export default {
           button3.style.backgroundColor = '';
         
         }
-      } else if (removedBetslip.key != null && leength >3) {
+      } else if (removedBetslip.key != null ) {
         // Reset the background color for key buttons
         // Use the item.game_id or other identifier to find the button
         const buttonId = removedBetslip.key;
@@ -233,6 +230,12 @@ export default {
         if (button) {
           button.style.backgroundColor = ''; // Reset the background color
         }
+      }else if (removedBetslip.selection != null)
+      {
+        const buttonId = removedBetslip.selection;
+        const button = document.getElementById(buttonId);
+        button.style.backgroundColor = ''; // Reset the background color
+
       }
       // else if (removedBetslip.gameId != null) {
         
