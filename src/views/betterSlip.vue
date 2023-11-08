@@ -169,18 +169,94 @@ export default {
   methods: {
     removeFromBetslip(index) {
     const updatedBetslip = this.betslipCopy.slice();
-    const removedBetslip = this.betslip[0]
-    console.log(removedBetslip.key)
-    localStorage.setItem('removedBetslip', JSON.stringify(removedBetslip));
+    const removedBetslip = updatedBetslip[index]
+    console.log(removedBetslip)
+    const gameId = removedBetslip.game_id;
+    
+   // localStorage.setItem('removedBetslip', JSON.stringify(removedBetslip));
     updatedBetslip.splice(index, 1);
     this.$emit('update:betslip', updatedBetslip);
     this.betslipKey += 1;
-    console.log(this.betslip[index])
 
+    const buttonId1 = `button_home_${gameId}`;
+    const buttonId2 = `button_neutral_${gameId}`;
+    const buttonId3 = `button_away_${gameId}`;
 
-    const associatedButton = document.querySelector(`.btn-remove-${index}`);
+    // const buttonId4 = removedBetslip.fields.home_team+removedBetslip.fields.home_odd;
+    // const buttonId5 = removedBetslip.fields.neutral_odd;
+    // const buttonId6 = removedBetslip.fields.away_team+removedBetslip.fields.away_odd;
+
+    console.log(buttonId1,'buttonID')
+   // console.log(this.betslip[index])
+  
+
+   if (removedBetslip.selection != null && removedBetslip.game_id) {
+        // Reset the background color for selection buttons
+        // Use the item.selection_id or other identifier to find the button
+        const buttonId = removedBetslip.selection;
+        const button = document.getElementById(buttonId);
+        const button1 = document.getElementById(buttonId1);
+        const button2 = document.getElementById(buttonId2);
+        const button3 = document.getElementById(buttonId3)
+        if (removedBetslip.game_id){
+          var leength = removedBetslip.game_id.length
+
+        }
+
+        // const button4 = document.getElementById(buttonId4);
+        // const button5 = document.getElementById(buttonId5);
+        // const button6 = document.getElementById(buttonId6);
+
+        if (button && removedBetslip.game_id.length >4 ) {
+          button.style.backgroundColor = ''; // Reset the background color
+
+        }
+        else if (removedBetslip.selection ==='home_odd' && leength >3)
+        {
+          button1.style.backgroundColor = '';
+          console.log(button1)
+
+        }
+        else if (removedBetslip.selection === 'neutral_odd' && leength >3){
+          button2.style.backgroundColor = '';
+   
+        }
+        else if (removedBetslip.selection === 'away_odd' && leength >3){
+          button3.style.backgroundColor = '';
+        
+        }
+      } else if (removedBetslip.key != null && leength >3) {
+        // Reset the background color for key buttons
+        // Use the item.game_id or other identifier to find the button
+        const buttonId = removedBetslip.key;
+        const button = document.getElementById(buttonId);
+        if (button) {
+          button.style.backgroundColor = ''; // Reset the background color
+        }
+      }
+      // else if (removedBetslip.gameId != null) {
+        
+      
+      //   // Reset the background color for key buttons
+      //   // Use the item.game_id or other identifier to find the button
+      //   // const button1 = document.getElementById(buttonId1);
+      //   // const button2 = document.getElementById(buttonId2);
+      //   // const button3 = document.getElementById(buttonId3)
+      //   if (button1) {
+      //     button1.style.backgroundColor = ''; // Reset the background color
+          
+      //   }
+      //   else if (button2){
+      //     button2.style.backgroundColor = ''; // Reset the background color
+      //   }
+      //   else if (button3){
+      //     button3.style.backgroundColor = ''; // Reset the background color
+      //   }
+      // }
+
+   // const associatedButton = document.querySelector(`.btn-remove-${index}`);
     ///////
-    console.log(associatedButton)
+   // console.log(associatedButton)
    
     // Remove the item from local storage
     localStorage.setItem('betslip', JSON.stringify(updatedBetslip));

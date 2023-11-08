@@ -88,7 +88,7 @@
             <div class="">
               <div class ='prebet'>
  
-                  <span> <button :id="'button_' + item.game_id" class="hom" @click="addToBetslip(item, 'home_odd', index)"  :style="{ backgroundColor: selectedButtonColor('home_odd') }">{{ item.home_odd }}</button>
+                  <span> <button :id="'button_home_' + item.game_id" class="hom" @click="addToBetslip(item, 'home_odd', index)" >{{ item.home_odd }}</button>
                   </span>
                   <span><button :id="'button_neutral_' + item.game_id"  class="hom1" @click="addToBetslip(item, 'neutral_odd',index)" >{{ item.neutral_odd }}</button></span>
                   <span> <button :id="'button_away_' + item.game_id"  class="hom2" @click="addToBetslip(item, 'away_odd', index)" >{{ item.away_odd }}</button></span>
@@ -468,7 +468,7 @@ addToBetslip(item, selection, ) {
 
 if (selection === "home_odd") {
   const gameId = item.game_id;
-  const buttonId = `button_${gameId}`;
+  const buttonId = `button_home_${gameId}`;
   const buttonId1 = `button_neutral_${gameId}`;
   const buttonId2 = `button_away_${gameId}`;
 
@@ -504,7 +504,7 @@ if (selection === "home_odd") {
 
 else if (selection === "neutral_odd") {
   const gameId = item.game_id;
-  const buttonId = `button_${gameId}`;
+  const buttonId = `button_home_${gameId}`;
   const buttonId1 = `button_neutral_${gameId}`;
   const buttonId2 = `button_away_${gameId}`;
 
@@ -540,7 +540,7 @@ else if (selection === "neutral_odd") {
 
 else if (selection === "away_odd") {
   const gameId = item.game_id;
-  const buttonId = `button_${gameId}`;
+  const buttonId = `button_home_${gameId}`;
   const buttonId1 = `button_neutral_${gameId}`;
   const buttonId2 = `button_away_${gameId}`;
 
@@ -641,8 +641,8 @@ this.betslip = updatedBetslip;
 
 
 placeBet() {
-console.log("Entering placeBet() function...");
-console.log("Placing bet:", this.betslip);
+//console.log("Entering placeBet() function...");
+//console.log("Placing bet:", this.betslip);
 // Place the bet using the betslip data
 // ...
 
@@ -652,7 +652,7 @@ this.betslip = [];
 
 
 // Add a console log to check if this line is reached
-console.log("Removing from local storage...");
+//console.log("Removing from local storage...");
 
 
 // Remove the 'betslip' item from local storage
