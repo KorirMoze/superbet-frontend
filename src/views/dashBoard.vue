@@ -1037,6 +1037,7 @@ color: #ffff;
 padding-left: 1rem;
 padding-right: 1rem;
 font-size: 1.5rem;
+border-radius: 10px;
 }
 .time{
 }

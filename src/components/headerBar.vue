@@ -137,7 +137,12 @@ export default {
     {
       // Get the JWT token from your storage (e.g., localStorage or Vuex store)
       const token = localStorage.getItem('jwt'); // Adjust this according to where you store your token
-
+      if (!token)
+       {
+        // Token is not available, redirect to the login page
+        this.$router.push({ name: 'login' });
+        return; // Stop further execution
+      }
       // Send a POST request to the backend with the deposit amount and the JWT token in the headers
       axios
         .post('https://www.23bet.pro/deposit/', {
