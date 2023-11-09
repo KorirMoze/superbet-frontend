@@ -14,7 +14,7 @@
       </div>
       <a class="navbar-item bet" href="/">
         <!-- Add your logo or text here -->
-        23 Bet
+        23 <span class="skewed-text">Bet</span>
       </a>
       <div class="custom-start">
         <ul>
@@ -198,6 +198,14 @@ export default {
 };
 </script>
 <style scoped>
+
+
+.skewed-text {
+      color: yellow;
+      transform: skew(14deg);
+      transform-origin: 0 0;
+      font-size: 1.6rem
+    }
 .customnav {
   background-color: #cb0a0a;
   color: white;
@@ -207,8 +215,7 @@ export default {
   padding: 1.5rem 1.5rem;
   font-size: 1.5rem;
   border-radius: 5px;
-
-
+  
 }
 
 .customnav a {
@@ -402,6 +409,9 @@ li:hover {
 
   .custom-end ul {
     margin-right: 1rem;
+  }
+  .custom-nav{
+    padding-left: 0;
   }
 }</style>
   
