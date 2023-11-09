@@ -764,7 +764,7 @@ this.isActive = true;
 
 .bdy {
 background-color: #918f8f !important;
-margin-top: 6rem;
+margin-top: 7rem;
 
 
 }
@@ -806,6 +806,7 @@ width: 100%; /* Stretch the image to fit the container */
 height: auto; /* Maintain aspect ratio */
 }
 @media screen and (min-width: 992px){
+  
   .for{
   display: flex;
 }
@@ -813,6 +814,7 @@ height: auto; /* Maintain aspect ratio */
 background-color: #000000;
 border-radius: 8.21818px;
 color: #fff;
+position: fixed;
 }
 body{
 background-color: #232323;
@@ -824,7 +826,8 @@ padding-bottom: 1rem;
 color: #fff;
 font-size: 2rem;
 width: 100% !important;
-text-align: left;
+text-align: center;
+font-weight: 900;
 
 }
 .gms{
@@ -994,6 +997,17 @@ justify-content: center;
 .row{
 width: 98% !important;
 margin: auto;
+}
+.tit{
+background-color: #000000;
+padding-top: 1rem;
+padding-bottom: 1rem;
+color: #fff;
+font-size: 2rem;
+width: 100% !important;
+text-align: center;
+font-weight: 900;
+
 }
 .ty {
 flex-direction: column;

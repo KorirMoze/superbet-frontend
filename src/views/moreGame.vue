@@ -601,7 +601,6 @@
       }
       .stat{
 
-
         font-family: 'Poppins';
         font-style: normal;
         font-weight: 500;
@@ -623,8 +622,7 @@
       .rect1{
         padding-left: 1rem;
         padding-right: 1rem;
-        padding-bottom: 1rem;
-      
+        padding-bottom: 1rem; 
         margin-bottom: 2rem;
         background: #000000;
         border-radius: 9.84962px;
