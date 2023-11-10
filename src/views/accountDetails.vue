@@ -1,5 +1,8 @@
 <template>
-  <headerTop />
+  <div class="nav-topp">
+    <headerTop />
+
+  </div>
     <div class="account">
     <div class="hello" >g</div>
       <div class="columns">
@@ -42,7 +45,7 @@
               <div class="keys">Odds: {{ bet.odds }}</div>
               <div  class="keys">Possible Win: {{ bet.possible_win }}</div>
               <div class="keys">Stake: {{ bet.stake }}</div>
-              <div class="keys">Status: {{ bet.status }}</div>
+              <div class="keys" :class="{'green-text': bet.status === 'won', 'red-text': bet.status === 'lost','grey-text':bet.status === 'pending'}">Status: {{ bet.status }}</div>
               
             </div>
               <ul>
@@ -51,7 +54,7 @@
                   <div class="match">Match: {{ betItem.match }}</div>
                   <div>Selection: {{ betItem.selection }}</div>
                   <div>Odds: {{ betItem.odds }}</div>
-                  <div>Status: {{ betItem.status }}</div>
+                  <div :class="{'green-text': betItem.status === 'won', 'red-text': betItem.status === 'lost','grey-text':bet.status === 'pending'}">Status: {{ betItem.status }}</div>
                 </div>
                 </li>
               </ul>
@@ -60,6 +63,13 @@
           </div>
     </div>
     <i class="fa-solid fa-user"></i>
+
+
+    
+<div class="bottom-nav-container">
+  <bottomNav />
+</div>
+
   </template>
   
   
@@ -67,10 +77,13 @@
   import axios from "axios";
   import headerTop from '@/components/headerBar.vue'
   import WithdrawalModal from "@/views/withdrawModal.vue"; 
+  import bottomNav from '@/views/bottomNav.vue'
+
   export default {
     components: {
       headerTop,
       WithdrawalModal,
+      bottomNav,
     },
     data() {
   return {
@@ -91,7 +104,7 @@
 },
     mounted() {
       const token = localStorage.getItem("jwt");
-      console.log(token)
+     // console.log(token)
       if (token) {
         axios
           .get("https://www.23bet.pro/account_details/", {
@@ -100,9 +113,9 @@
             },
           })
           .then((response) => {
-            console.log(response.data);
+          //  console.log(response.data);
             this.gambler = response.data;
-            console.log(this.gambler);
+            this.gambler.acc_balance = response.data.acc_balance;
             this.fetchBets();
 
           })
@@ -121,7 +134,7 @@
       const token = localStorage.getItem('jwt'); // Assuming your JWT token is stored in localStorage
 
       if (!token) {
-        console.log('No JWT token found');
+      //  console.log('No JWT token found');
         this.loading = false;
         return;
       }
@@ -135,8 +148,28 @@
         })
         .then((response) => {
           this.bets = response.data.bets; // Assuming your API response has a 'bets' field
-          console.log(this.bets)
+         // console.log(this.bets)
+         this.bets = this.bets.reverse()
+         this.bets.forEach((bet) => {
+  // Reverse the order of bet_items within each bet
+  // bet.bet_items = bet.bet_items.reverse();
+
+  // Initialize the bet status as "won"
+        bet.status = 'won';
+
+        bet.bet_items.forEach((betItem) => {
+          console.log(`Status of bet item: ${betItem.status}`);
+
+          if (betItem.status === 'lost') {
+            bet.status = 'lost';
+          } else if (betItem.status === 'pending') {
+            bet.status = 'pending';
+          }
+        });
+      });
+
           this.gambler.loading = false;
+          console.log(response.data.bets[0].bet_items)
         })
         .catch((error) => {
           console.error('Error fetching bets:', error);
@@ -145,7 +178,7 @@
     },
     toggleBetSlip() {
       this.showBetSlip = !this.showBetSlip;
-      console.log('showBetSlip:', this.showBetSlip); // Add this line for debugging
+      //console.log('showBetSlip:', this.showBetSlip); // Add this line for debugging
     },
     
 
@@ -157,11 +190,49 @@
   };
   </script>
  <style scoped>
+ .green-text{
+  color: #ffd000;
+ }
+ .red-text{
+  color: red;
+ }
+ .grey-text{
+  color: #427D9D;
+ }
+ .nav-topp {
+   
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   z-index: 1000; /* Adjust as needed */
+ }
+
+/* Default styles for larger screens */
+.bottom-nav-container {
+ display: none; /* Hide the container by default */
+}
+
+/* Media query for mobile devices (adjust the max-width as needed) */
+@media (max-width: 767px) {
+ .bottom-nav-container {
+   display: block; /* Show the container on mobile devices */
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background-color: #000; /* Adjust as needed */
+   color: #fff; /* Adjust as needed */
+   padding: 10px; /* Adjust as needed */
+   z-index: 1000; /* Adjust as needed */
+ }
+}
  @media screen and (min-width: 992px){
   .account{
     background-color: #918f8f ;
     height: scroll;
     padding-bottom: 1rem;
+    margin-top: 4rem;
    }
    h1{
    color: #fff;
@@ -259,6 +330,8 @@
     background-color: #918f8f ;
     height: scroll;
     padding-bottom: 1rem;
+    margin-bottom: 5rem;
+    margin-top: 5rem;
    }
    h1{
    color: #fff;
@@ -322,6 +395,7 @@
     margin-top: 2rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     margin-right: 1rem;
+    margin-bottom: 4rem;
    }
    .keys{
     display: flex;

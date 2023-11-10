@@ -94,6 +94,12 @@ const routes = [
         component: () => import( '../views/bottomNav.vue'),
      
       },
+      {
+        name: 'newnav',
+        path: '/newnav',
+        component: () => import( '../views/newNav.vue'),
+     
+      },
   
 ]
 

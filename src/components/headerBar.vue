@@ -1,54 +1,77 @@
 <template>
-  <nav class="navbar is-danger" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
+  <div class="customnav">
+
+    <div class="custom-nav-brand1">
+      <div class="burger">
+        <button is-active="false" @click="toggleMenu">
+          <svg xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" background-color="white"
+            viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path
+              d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+              fill="white" />
+          </svg>
+        </button>
+      </div>
       <a class="navbar-item bet" href="/">
         <!-- Add your logo or text here -->
-        23 Bet
+        23 <span class="skewed-text">Bet</span>
       </a>
-      <div class="navbar-end"> <!-- Add the "navbar-end" class here -->
-        <a role="button" class="navbar-burger burger" aria-label="menu" @click="toggleMenu">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
+      <div class="custom-start">
+        <ul>
+          <li class="custom-nav-items">
+            <router-link to="/betslip" :betslip="betslip" @update:betslip="updateBetslip">Betslip</router-link>
+          </li>
+          <li class="custom-nav-items">
+            <a href="/results">Results</a>
+          </li>
+          <li class="custom-nav-items">
+            <a v-if="isLoggedIn" href="#responsive-header">Payments</a>
+
+          </li>
+        </ul>
       </div>
     </div>
 
-    <div class="navbar-menu" :class="{ 'is-active': isMenuActive }">
-      <div class="navbar-start">
-        <router-link to="/betslip" 
-        :betslip="betslip" @update:betslip="updateBetslip" class="navbar-item">Betslip</router-link>
+    <ul class="custom-nav">
 
-        <a class="navbar-item" href="/results">Results</a>
-        <a v-if="isLoggedIn" class="navbar-item" href="#responsive-header">Payments</a>
+      <div class="custom-end">
+        <ul>
+          <li class="custom-nav-items">
+            <a v-if="!isLoggedIn" href="/login">Login</a>
+
+          </li>
+          <li class="custom-nav-items">
+            <a  v-if="isLoggedIn" href="/account">Account</a>
+
+          </li>
+          <li class="custom-nav-items">
+            <button class="butto" @click="openModal">Deposit</button>
+
+          </li>
+          <li class="custom-nav-items">
+            <router-link to="/registration" v-if="!isLoggedIn">Registration</router-link>
+          </li>
+          <li>
+            <a v-if="isLoggedIn" href="#" @click="logout">Logout</a>
+
+          </li>
+        </ul>
       </div>
-
-      <div class="navbar-end">
-        <a v-if="!isLoggedIn" class="navbar-item" href="/login" >Login</a>
-        <a class="navbar-item" href="/account">My Account</a>
-        <!-- <a class="navbar-item" href="/deposit">Deposit</a> -->
-        <button class="button is-primary" @click="openModal">Deposit</button>
-
-        <!-- Include your custom component here -->
-        <router-link to="/registration" v-if="!isLoggedIn" class="navbar-item" >Registration</router-link>
-        <a v-if="isLoggedIn" class="navbar-item" href="#" @click="logout">Logout</a>
-      </div>
-    </div>
-  </nav>
-
+    </ul>
+  </div>
   <div :class="['modal', { 'is-active': isModalActive }]">
     <div class="modal-background" @click="closeModal"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        
-          <h5 class="modal-card-title">Deposit</h5>
-         
-     
+
+        <h5 class="modal-card-title">Deposit</h5>
+
+
         <button class="delete" aria-label="close" @click="closeModal"></button>
       </header>
       <section class="modal-card-body">
         <!-- Modal content goes here -->
-        
+
         <div class="box">
           <p class="pale">Send Money to Your Account</p>
 
@@ -56,29 +79,28 @@
         <div class="stak">
           <ul class="coins">
             <li class="coin" @click="setStake(49)">+49</li>
-            <li class="coin" @click="setStake(100)">+98</li>
-            <li class="coin" @click="setStake(200)">+195</li>
-            <li class="coin" @click="setStake(500)">+490</li>
+            <li class="coin" @click="setStake(98)">+98</li>
+            <li class="coin" @click="setStake(195)">+195</li>
+            <li class="coin" @click="setStake(490)">+490</li>
           </ul>
           <span class="stake">DEPOSIT:</span>
-          <input type="number" id="depo" name="stake" step="0.01" min="10" required v-model="stake" placeholder="Enter Amount">
+          <input type="number" id="depo" name="stake" step="0.01" min="10" required v-model="stake"
+            placeholder="Enter Amount">
         </div>
       </section>
       <footer class="modal-card-foot">
         <button class="button is-success" @click="closeModal">Close</button>
-        <button class="button is-success" @click="deposit" >Deposit</button>
+        <button class="button is-success" @click="deposit">Deposit</button>
       </footer>
     </div>
   </div>
-
-
 </template>
-
 <script>
 import axios from 'axios';
 
 export default {
-  data() {
+  data()
+  {
     return {
       isMenuActive: false,
       isModalActive: false,
@@ -86,30 +108,41 @@ export default {
       isLoggedIn: false,
     };
   },
-  created() {
+  created()
+  {
     // Check if the user is logged in (e.g., by checking if a JWT token exists)
     const token = localStorage.getItem('jwt'); // Adjust this according to where you store your token
     this.isLoggedIn = !!token;
-    console.log('JWT Token:', token); 
+    console.log('JWT Token:', token);
   },
   methods: {
-    toggleMenu() {
+    toggleMenu()
+    {
       this.isMenuActive = !this.isMenuActive;
     },
-    openModal() {
+    openModal()
+    {
       this.isModalActive = true;
     },
-    closeModal() {
+    closeModal()
+    {
       this.isModalActive = false;
     },
-    setStake(amount) {
+    setStake(amount)
+    {
       // This method will be called when a list item is clicked
       this.stake = amount; // Set the stake to the selected amount
     },
-    deposit() {
+    deposit()
+    {
       // Get the JWT token from your storage (e.g., localStorage or Vuex store)
       const token = localStorage.getItem('jwt'); // Adjust this according to where you store your token
-
+      if (!token)
+       {
+        // Token is not available, redirect to the login page
+        this.$router.push({ name: 'login' });
+        return; // Stop further execution
+      }
       // Send a POST request to the backend with the deposit amount and the JWT token in the headers
       axios
         .post('https://www.23bet.pro/deposit/', {
@@ -119,16 +152,19 @@ export default {
             Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
           },
         })
-        .then((response) => {
+        .then((response) =>
+        {
           // Handle the response from the backend, e.g., display a success message
           console.log('Deposit successful', response.data);
         })
-        .catch((error) => {
+        .catch((error) =>
+        {
           // Handle any errors, e.g., display an error message
           console.error('Deposit failed', error);
         });
     },
-    logout() {
+    logout()
+    {
       // Get the JWT token from your storage (e.g., localStorage or Vuex store)
       const token = localStorage.getItem('jwt'); // Adjust this according to where you store your token
 
@@ -139,7 +175,8 @@ export default {
             Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
           },
         })
-        .then((response) => {
+        .then((response) =>
+        {
           // Handle the response from the backend, e.g., display a success message
           console.log('Logout successful', response.data);
 
@@ -149,7 +186,8 @@ export default {
           // Optionally, you can redirect the user to the login page
           this.$router.push('/login'); // Adjust the route path as needed
         })
-        .catch((error) => {
+        .catch((error) =>
+        {
           // Handle any errors, e.g., display an error message
           console.error('Logout failed', error);
           this.isLoggedIn = false;
@@ -160,34 +198,128 @@ export default {
 };
 </script>
 <style scoped>
-.navbar-item{
+
+
+.skewed-text {
+      color: yellow;
+      transform: skew(14deg);
+      transform-origin: 0 0;
+      font-size: 1.6rem
+    }
+.customnav {
+  background-color: #cb0a0a;
+  color: white;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 1.5rem;
   font-size: 1.5rem;
+  border-radius: 5px;
+  
 }
-a{
-  text-decoration: none; /* This removes the underline */
- 
+
+.customnav a {
+  text-decoration: none;
+  color: white;
+  align-items: center;
+  border-radius: 10px;
+  font-weight: 800;
 }
-navbar{
-  margin-bottom: 0 !important;
+
+.customnav a:hover {
+  background-color: black;
+  padding: 5px 10px 5px 10px;
+
 }
-.button{
-  color: black !important;
-  background-color: yellow;
+
+.custom-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between !important;
 }
-.pale{
-  text-decoration: muted;
+
+.custom-start {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
-.titlee{
+
+.custom-start ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between important;
+  align-items: center;
+}
+
+.custom-end {
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  margin-right: 0%;
+}
+
+.custom-end ul {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+}
+
+.custom-nav-brand1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ul {
+  margin-bottom: 0;
+}
+
+li {
+  margin-left: 1.5rem;
+  padding: 5px 10px 5px 10px;
+
+}
+
+li:hover {
+  background-color: black;
+  border-radius: 10px;
+
+}
+
+.butto {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 10px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 15px;
+  background: #050505;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+}
+
+.butto:hover {
+  background: #3cb0fd;
+  text-decoration: none;
+}
+
+.titlee {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
-.modal-card-foot{
+
+.modal-card-foot {
   display: flex;
   justify-content: space-between;
 }
-#depo{
+
+#depo {
   border: 1px;
   background-color: rgba(217, 217, 217, 0.6);
   color: #000000;
@@ -200,12 +332,14 @@ navbar{
 
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-.stak{
+
+.stak {
   justify-content: space-between;
   border-color: green !important;
 
 }
-.coins{
+
+.coins {
   display: flex !important;
   flex-direction: row;
   align-items: center;
@@ -214,30 +348,70 @@ navbar{
   margin: auto;
   margin-bottom: 3rem;
 }
-.coin{
+
+.coin {
   background-color: rgba(217, 217, 217, 0.6);
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: 10px;
   font-size: 1.5rem;
-  cursor: pointer; /* Add this line to change cursor to pointer */
+  cursor: pointer;
+  /* Add this line to change cursor to pointer */
 }
 
-@media screen and (max-width: 1023px){
-  .navbar-menu {
-      background-color: #cb0a0a;
-      box-shadow: 0 8px 16px rgba(10,10,10,.1);
-      padding: 0.5rem 0;
-      border-radius: 10px;
-  }
-  .navbar-end{
+.button:hover {
+  background-color: #cb0a0a;
+}
 
+@media (min-width: 768px) {
+  .burger {
+    display: none;
   }
-  .burger{
+}
+
+@media (max-width: 768px) {
+  .custom-start {
+    display: none;
+  }
+
+  .custom-end {
+    font-size: 1.2rem;
+  }
+
+  .custom-end ul {
+    padding: 0 0;
+  }
+
+  .butto {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 10px;
+    font-family: Georgia;
+    color: #ffffff;
+    font-size: 15px;
+    background: #050505;
+    padding: 2px 5px 2px 5px;
+    text-decoration: none;
+  }
+
+  .butto:hover {
+    background: #3cb0fd;
+    text-decoration: none;
+  }
+
+  li {
+    margin: 0 0;
+  }
+
+  .navtopp {
+    padding-right: 1rem;
+  }
+
+  .custom-end ul {
     margin-right: 1rem;
   }
-  .bet{
-    margin-right: 75%;
+  .custom-nav{
+    padding-left: 0;
   }
-   }
-</style>
+}</style>
+  

@@ -1,11 +1,10 @@
 <template>
-  <headerTop />
+  <div class="nav-topp">
+    <headerTop />
+
+  </div>
     <div class="bdy">
-      <div class="tit">Today Games</div>
-  
-   
-  
-  
+      
       <div class="row">
   
         <div class="col-12 col-lg-8 col-md-8 col-sm-8 ty">
@@ -77,16 +76,20 @@
     </div>
   
   
-  
+  <div class="bottom-nav-container">
+  <bottomNav />
+</div>
   </template>
   <script>
   import axios from 'axios';
   import headerTop from '@/components/headerBar.vue'
+  import bottomNav from '@/views/bottomNav.vue'
 
   
   export default {
     components: {
       headerTop,
+      bottomNav
     },
 
     name: 'dropDown',
@@ -161,9 +164,39 @@
   
   </script>
   <style scoped>
+
+.nav-topp {
+   
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   z-index: 1000; /* Adjust as needed */
+ }
+
+/* Default styles for larger screens */
+.bottom-nav-container {
+ display: none; /* Hide the container by default */
+}
+
+/* Media query for mobile devices (adjust the max-width as needed) */
+@media (max-width: 767px) {
+ .bottom-nav-container {
+   display: block; /* Show the container on mobile devices */
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background-color: #000; /* Adjust as needed */
+   color: #fff; /* Adjust as needed */
+   padding: 10px; /* Adjust as needed */
+   z-index: 1000; /* Adjust as needed */
+ }
+}
+
   .bdy {
-    background-color: #918f8f !important;
-  
+    margin-bottom: 8rem;
+    margin-top: 8rem;
   }
   @media screen and (min-width: 992px){
     .betsslip{
@@ -189,11 +222,12 @@
     }
     .whole{
       background-color: #000000;
-      color: #ffff;
+      color: #ffd000;
       padding-left: 1rem;
       padding-right: 1rem;
       border-radius: 8px;
       justify-content: space-between;
+      border-radius: 15px;
     }
     .btn1-betslip1{
     
@@ -393,10 +427,12 @@
       padding-bottom: 2.0rem;
       margin-bottom: 1.5rem;
       background-color: #000000;
-      color: #ffff;
+      color: #ffd000;
       padding-left: 1rem;
       padding-right: 1rem;
       font-size: 1.5rem;
+      border-radius: 15px;
+
     }
     .time{
     

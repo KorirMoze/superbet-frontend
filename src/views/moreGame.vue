@@ -131,6 +131,9 @@
       </div>
   </div>
 </div>
+<div class="bottom-nav-container">
+  <bottomNav />
+</div>
   </template>
   
   <script>
@@ -138,12 +141,12 @@
   import betterSlip from "@/views/betterSlip.vue";
   import { mapGetters } from 'vuex';
   import headerTop from '@/components/headerBar.vue'
-
+  import bottomNav from '@/views/bottomNav.vue'
   export default {
     components: {
     betterSlip,
     headerTop,
-    // masterWang
+    bottomNav,
   },
     name: 'GameData',
     data() {
@@ -155,7 +158,7 @@
         match_id: [],
         homeTeam: [],
         awayTeam: [],
-
+        isModalActive: false,
       };
       
     },
@@ -546,6 +549,24 @@
 
 
 <style scoped>
+  .bottom-nav-container {
+    display: none; /* Hide the container by default */
+  }
+
+  /* Media query for mobile devices (adjust the max-width as needed) */
+  @media (max-width: 767px) {
+    .bottom-nav-container {
+      display: block; /* Show the container on mobile devices */
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #000; /* Adjust as needed */
+      color: #fff; /* Adjust as needed */
+      padding: 10px; /* Adjust as needed */
+      z-index: 1000; /* Adjust as needed */
+    }
+  }
       .bdy{
         background-color: #918f8f !important;
         width: 100%;
@@ -557,6 +578,7 @@
         background-color: #000000;
         border-radius: 8.21818px;
         color: #fff;
+        margin-bottom: 9rem;
       }
       .row{
         width: 80%;
@@ -579,7 +601,6 @@
       }
       .stat{
 
-
         font-family: 'Poppins';
         font-style: normal;
         font-weight: 500;
@@ -601,8 +622,7 @@
       .rect1{
         padding-left: 1rem;
         padding-right: 1rem;
-        padding-bottom: 1rem;
-      
+        padding-bottom: 1rem; 
         margin-bottom: 2rem;
         background: #000000;
         border-radius: 9.84962px;

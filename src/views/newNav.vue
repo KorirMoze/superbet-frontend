@@ -1,42 +1,55 @@
 <template>
-  <nav class="navbar is-danger" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item bet" href="/">
+<div class="customnav">
+    <div class="custom-nav-brand1">
+        <a class="navbar-item bet" href="/">
         <!-- Add your logo or text here -->
         23 Bet
       </a>
-      <div class="navbar-end"> <!-- Add the "navbar-end" class here -->
-        <a role="button" class="navbar-burger burger" aria-label="menu" @click="toggleMenu">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
+      <div class="custom-start">
+                <ul >
+                    <li class="custom-nav-items">
+                    <router-link to="/betslip" 
+                    :betslip="betslip" @update:betslip="updateBetslip" >Betslip</router-link>
+                    </li>
+                    <li  class="custom-nav-items">
+                        <a  href="/results">Results</a>
+                    </li>
+                    <li  class="custom-nav-items">
+                        <a v-if="isLoggedIn"  href="#responsive-header">Payments</a>
+
+                    </li>
+                </ul>
+             </div>
     </div>
+    
+        <ul class="custom-nav">
+        
+            <div class="custom-end">
+                <ul >           
+                        <li  class="custom-nav-items">
+                            <a v-if="!isLoggedIn" href="/login" >Login</a>
 
-    <div class="navbar-menu" :class="{ 'is-active': isMenuActive }">
-      <div class="navbar-start">
-        <router-link to="/betslip" 
-        :betslip="betslip" @update:betslip="updateBetslip" class="navbar-item">Betslip</router-link>
+                        </li>
+                        <li  class="custom-nav-items">
+                            <a  href="/account">My Account</a>
 
-        <a class="navbar-item" href="/results">Results</a>
-        <a v-if="isLoggedIn" class="navbar-item" href="#responsive-header">Payments</a>
-      </div>
+                        </li>
+                        <li  class="custom-nav-items">
+                            <button class="butto" @click="openModal">Deposit</button>
 
-      <div class="navbar-end">
-        <a v-if="!isLoggedIn" class="navbar-item" href="/login" >Login</a>
-        <a class="navbar-item" href="/account">My Account</a>
-        <!-- <a class="navbar-item" href="/deposit">Deposit</a> -->
-        <button class="button is-primary" @click="openModal">Deposit</button>
+                        </li>
+                        <li  class="custom-nav-items">
+                            <router-link to="/registration" v-if="!isLoggedIn" >Registration</router-link>
+                        </li>
+                        <li>
+                            <a v-if="isLoggedIn"  href="#" @click="logout">Logout</a>
 
-        <!-- Include your custom component here -->
-        <router-link to="/registration" v-if="!isLoggedIn" class="navbar-item" >Registration</router-link>
-        <a v-if="isLoggedIn" class="navbar-item" href="#" @click="logout">Logout</a>
-      </div>
-    </div>
-  </nav>
-
-  <div :class="['modal', { 'is-active': isModalActive }]">
+                        </li>
+                </ul>
+            </div>
+        </ul>
+</div>
+<div :class="['modal', { 'is-active': isModalActive }]">
     <div class="modal-background" @click="closeModal"></div>
     <div class="modal-card">
       <header class="modal-card-head">
@@ -56,9 +69,9 @@
         <div class="stak">
           <ul class="coins">
             <li class="coin" @click="setStake(49)">+49</li>
-            <li class="coin" @click="setStake(100)">+98</li>
-            <li class="coin" @click="setStake(200)">+195</li>
-            <li class="coin" @click="setStake(500)">+490</li>
+            <li class="coin" @click="setStake(98)">+98</li>
+            <li class="coin" @click="setStake(195)">+195</li>
+            <li class="coin" @click="setStake(490)">+490</li>
           </ul>
           <span class="stake">DEPOSIT:</span>
           <input type="number" id="depo" name="stake" step="0.01" min="10" required v-model="stake" placeholder="Enter Amount">
@@ -71,9 +84,7 @@
     </div>
   </div>
 
-
 </template>
-
 <script>
 import axios from 'axios';
 
@@ -160,23 +171,97 @@ export default {
 };
 </script>
 <style scoped>
-.navbar-item{
-  font-size: 1.5rem;
+.customnav{
+    background-color: #cb0a0a;
+    color: white;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 1.5rem;
+    font-size: 1.5rem;
+    border-radius: 5px;
+   
+
 }
-a{
-  text-decoration: none; /* This removes the underline */
- 
+.customnav a{
+    text-decoration: none;
+    color: white;
+    align-items: center;
+    border-radius: 10px;
+    font-weight: 800;
 }
-navbar{
-  margin-bottom: 0 !important;
+.customnav a:hover{
+    background-color: black;
+    padding: 5px 10px 5px 10px;
+
 }
-.button{
-  color: black !important;
-  background-color: yellow;
+.custom-nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between !important;
 }
-.pale{
-  text-decoration: muted;
+.custom-start{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
+.custom-start ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between important;
+    align-items: center;
+}
+.custom-end{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    margin-right: 0%;
+}
+.custom-end ul{
+    display: flex;
+    flex-direction: row;
+   
+    align-items: center;
+}
+.custom-nav-brand1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ul{
+    margin-bottom: 0;
+}
+li{
+    margin-left: 1.5rem;
+    padding: 5px 10px 5px 10px;
+
+}
+li:hover{
+    background-color: black;
+    border-radius: 10px;
+
+}
+
+.butto {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 10px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 15px;
+  background: #050505;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+}
+
+.butto:hover {
+  background: #3cb0fd;
+  text-decoration: none;
+}
+
 .titlee{
   display: flex;
   flex-direction: column;
@@ -222,22 +307,7 @@ navbar{
   font-size: 1.5rem;
   cursor: pointer; /* Add this line to change cursor to pointer */
 }
-
-@media screen and (max-width: 1023px){
-  .navbar-menu {
-      background-color: #cb0a0a;
-      box-shadow: 0 8px 16px rgba(10,10,10,.1);
-      padding: 0.5rem 0;
-      border-radius: 10px;
-  }
-  .navbar-end{
-
-  }
-  .burger{
-    margin-right: 1rem;
-  }
-  .bet{
-    margin-right: 75%;
-  }
-   }
+.button:hover{
+    background-color: #cb0a0a;
+}
 </style>

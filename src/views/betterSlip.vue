@@ -1,11 +1,13 @@
 <template>
+
+
   <div class="betslip" :key="betslipKey">
    
     <ul>
       <li v-for="(betslipItem, index) in betslipCopy" :key="index">
         <span>{{ betslipItem.match }}</span>
         <div class="game-id" style="display: none;">{{ betslipItem.game_id }}</div>
-        <span class="selection">{{ betslipItem.selection }}</span>
+        <span class="selection">  {{ betslipItem.selection === betslipItem.odds ? betslipItem.key : getBetOutcome(betslipItem.selection, betslipItem.odds, betslipItem.key) }}</span>
         <div>{{ betslipItem.odds }}</div>
         <button class="btn-remove"
         @click="removeFromBetslip(index)">Remove</button>
@@ -16,7 +18,7 @@
   <div class="total1">
     <div class="total">
       <span class="left">TOTAL ODDS:</span>
-      <span class="right">{{ totalOdds }}</span>
+      <span class="right" v-if="totalOdds !== 1">{{ totalOdds.toFixed(2) }}</span>
       <h6></h6>
     </div>
   <h6>Accept any changes in odds prices</h6>
@@ -26,10 +28,55 @@
   </div>
   <button class="btnn" @click="placeBet">Place Bet</button>
 </div>
+
+
+<div :class="['modal', { 'is-active': isModalActive }]">
+    <div class="modal-background" @click="closeModal"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        
+          <h5 class="modal-card-title">Deposit</h5>
+         
+     
+        <button class="delete" aria-label="close" @click="closeModal"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Modal content goes here -->
+        
+        <div class="box">
+          <p class="pale">Send Money to Your Account</p>
+
+        </div>
+        <div class="stak">
+          <ul class="coins">
+            <li class="coin" @click="setStake(49)">+49</li>
+            <li class="coin" @click="setStake(100)">+98</li>
+            <li class="coin" @click="setStake(200)">+195</li>
+            <li class="coin" @click="setStake(500)">+490</li>
+          </ul>
+          <span class="stake">DEPOSIT:</span>
+          <input type="number" id="depo" name="stake" step="0.01" min="10" required v-model="stake" placeholder="Enter Amount">
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success" @click="closeModal">Close</button>
+        <button class="button is-success" @click="deposit" >Deposit</button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="bottom-nav-container">
+  <bottomNav />
+</div>
+
+
+
 </template>
 
 <script>
 import axios from 'axios';
+import bottomNav from '@/views/bottomNav.vue'
+
 
 export default {
   props: {
@@ -38,11 +85,30 @@ export default {
       default: () => [],
     },
   },
+  components:
+  {
+  bottomNav,
+  },
+  
 
   data() {
     return {
       betslipKey: 0,
       stake: 49,
+      gambler: {
+      email: '',
+      first_name: '',
+      last_name: '',
+      date_of_birth: '',
+      gender: '',
+      phone_number: '',
+      acc_balance: '',
+      bets: [],
+      loading: false,
+      showBetSlip: false,
+      withdrawalAmount: 0,
+      isModalActive: false,
+    },
       
     };
   },
@@ -52,44 +118,175 @@ export default {
       return [...this.betslip];
       
     },
+    getBetOutcome() {
+      return (odds) => {
+        if (odds === 'home_odd') {
+          return 'Home';
+        } else if (odds === 'away_odd') {
+          return 'Away';
+        } else if (odds === 'neutral_odd') {
+          return 'Draw';
+        }else {
+          return odds; // Keep the original odds value for other cases
+        }
+      };
+    },
     totalOdds() {
     return this.betslipCopy.reduce((total, betslipItem) => {
       const odds = parseFloat(betslipItem.odds);
-      return total + odds;
-    }, 0);
+      return total * odds;
+    }, 1);
   },
   
   },
 
+  mounted() {
+  const token = localStorage.getItem("jwt");
+
+  if (token) {
+    axios
+      .get("https://www.23bet.pro/account_details/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        this.gambler = response.data;
+       // console.log(this.gambler.data.acc_balance)
+
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  } else {
+    console.log("No token found");
+  }
+},
+
+
+    
+
   methods: {
     removeFromBetslip(index) {
     const updatedBetslip = this.betslipCopy.slice();
+    const removedBetslip = updatedBetslip[index]
+    console.log(removedBetslip)
+    const gameId = removedBetslip.game_id;
+    
+   // localStorage.setItem('removedBetslip', JSON.stringify(removedBetslip));
     updatedBetslip.splice(index, 1);
     this.$emit('update:betslip', updatedBetslip);
     this.betslipKey += 1;
 
+    const buttonId1 = `button_home_${gameId}`;
+    const buttonId2 = `button_neutral_${gameId}`;
+    const buttonId3 = `button_away_${gameId}`;
+
+    // const buttonId4 = removedBetslip.fields.home_team+removedBetslip.fields.home_odd;
+    // const buttonId5 = removedBetslip.fields.neutral_odd;
+    // const buttonId6 = removedBetslip.fields.away_team+removedBetslip.fields.away_odd;
+
+    console.log(buttonId1,'buttonID')
+   // console.log(this.betslip[index])
+  
+
+   if (removedBetslip.selection != null && removedBetslip.game_id) {
+        // Reset the background color for selection buttons
+        // Use the item.selection_id or other identifier to find the button
+        const buttonId = removedBetslip.selection;
+        const button = document.getElementById(buttonId);
+        console.log(button,"svhadbansbghanjhsgwbnasbhna")
+        const button1 = document.getElementById(buttonId1);
+        const button2 = document.getElementById(buttonId2);
+        const button3 = document.getElementById(buttonId3)
+        if (removedBetslip.game_id){
+          var leength = removedBetslip.game_id.length
+
+        }
+
+        if (button ) {
+          button.style.backgroundColor = ''; // Reset the background color
+
+        }
+        else if (removedBetslip.selection ==='home_odd' && leength >3)
+        {
+          button1.style.backgroundColor = '';
+          console.log(button1)
+
+        }
+        else if (removedBetslip.selection === 'neutral_odd' && leength >3){
+          button2.style.backgroundColor = '';
+   
+        }
+        else if (removedBetslip.selection === 'away_odd' && leength >3){
+          button3.style.backgroundColor = '';
+        
+        }
+      } else if (removedBetslip.key != null ) {
+        // Reset the background color for key buttons
+        // Use the item.game_id or other identifier to find the button
+        const buttonId = removedBetslip.key;
+        const button = document.getElementById(buttonId);
+        if (button) {
+          button.style.backgroundColor = ''; // Reset the background color
+        }
+      }else if (removedBetslip.selection != null)
+      {
+        const buttonId = removedBetslip.selection;
+        const button = document.getElementById(buttonId);
+        button.style.backgroundColor = ''; // Reset the background color
+
+      }
+      // else if (removedBetslip.gameId != null) {
+        
+      
+      //   // Reset the background color for key buttons
+      //   // Use the item.game_id or other identifier to find the button
+      //   // const button1 = document.getElementById(buttonId1);
+      //   // const button2 = document.getElementById(buttonId2);
+      //   // const button3 = document.getElementById(buttonId3)
+      //   if (button1) {
+      //     button1.style.backgroundColor = ''; // Reset the background color
+          
+      //   }
+      //   else if (button2){
+      //     button2.style.backgroundColor = ''; // Reset the background color
+      //   }
+      //   else if (button3){
+      //     button3.style.backgroundColor = ''; // Reset the background color
+      //   }
+      // }
+
+   // const associatedButton = document.querySelector(`.btn-remove-${index}`);
+    ///////
+   // console.log(associatedButton)
+   
     // Remove the item from local storage
     localStorage.setItem('betslip', JSON.stringify(updatedBetslip));
   },
   
 async placeBet() {
-  console.log('Placing bets:', this.betslip);
-  console.log('Stake:', this.stake);
+ // console.log('Placing bets:', this.betslip);
+  //console.log('Stake:', this.stake);
   
 // Calculate the total odds by summing up all the odds in the betslip
 const totalOdds = this.betslip.reduce((total, betslipItem) => {
   const odds = parseFloat(betslipItem.odds);
   return total + odds;
 }, 0);
-console.log('Total Odds:', totalOdds);
+//console.log('Total Odds:', totalOdds);
   // Get the JWT from a cookie or local storage
   const token = localStorage.getItem('jwt');
-  console.log(token);
+ // console.log(token);
     // Check if the JWT token is available
     if (!token) {
     // Token is not available, redirect to the login page
     this.$router.push({ name: 'login' });
     return; // Stop further execution
+  }
+  if (this.gambler.data.acc_balance<1){
+      this.$router.push({name: 'deposit'})
+
   }
 
   try {
@@ -109,7 +306,7 @@ console.log('Total Odds:', totalOdds);
       }
     });
 
-    console.log('Bets placed:', response.data.bets);
+   // console.log('Bets placed:', response.data.bets);
     
     // Emit a "bet-placed" event to update the UI with the placed bets
     this.$emit('bet-placed', response.data.bets);
@@ -138,6 +335,25 @@ console.log('Total Odds:', totalOdds);
 
 
 <style scoped>
+
+.bottom-nav-container {
+    display: none; /* Hide the container by default */
+  }
+
+  /* Media query for mobile devices (adjust the max-width as needed) */
+  @media (max-width: 767px) {
+    .bottom-nav-container {
+      display: block; /* Show the container on mobile devices */
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #000; /* Adjust as needed */
+      color: #fff; /* Adjust as needed */
+      padding: 10px; /* Adjust as needed */
+      z-index: 1000; /* Adjust as needed */
+    }
+  }
 .betslip {
 padding-top: 2rem;
   color: #fff;
@@ -170,7 +386,7 @@ li span {
 font-family: 'Poppins';
 font-style: normal;
 font-weight: 600;
-font-size: 14.9005px;
+font-size: 12px;
 line-height: 22px;
 letter-spacing: 0.01em;
 
@@ -193,7 +409,10 @@ button:hover {
 color: #1EBA01;
 }
 .btn-remove{
-  background: #1EBA01;
+  background: #4F709C;
+  color: rgb(223, 166, 166);
+  padding: 3px 8px;
+
 }
 .total1{
 width: 100%;

@@ -39,7 +39,8 @@
       <div class="whole" v-for="(game, index) in games" :key="index">
           <div class = "for" >
                 <div class="time" >{{start_date}} {{ start_time_formatted }}</div>
-                <div class="homeaway"><div class="homei">{{ game.fields.home_team }}</div>
+                <div class="homeaway">
+                  <div class="homei">{{ game.fields.home_team }}</div>
                 <div class="away" >{{ game.fields.away_team }}</div></div>
                   <div class ='prebet'>
           
@@ -53,7 +54,7 @@
 
                             <div>
             
-                              <router-link :to="'/more/'" @click="sendParentId(games[0].fields.parent_match_id)" class="more">
+                              <router-link :to="'/more/'" @click="sendParentId(game.fields.parent_match_id)" class="more">
                                 +92
                               </router-link>
                               <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
@@ -87,7 +88,7 @@
             <div class="">
               <div class ='prebet'>
  
-                  <span> <button :id="'button_' + item.game_id" class="hom" @click="addToBetslip(item, 'home_odd', index)"  :style="{ backgroundColor: selectedButtonColor('home_odd') }">{{ item.home_odd }}</button>
+                  <span> <button :id="'button_home_' + item.game_id" class="hom" @click="addToBetslip(item, 'home_odd', index)" >{{ item.home_odd }}</button>
                   </span>
                   <span><button :id="'button_neutral_' + item.game_id"  class="hom1" @click="addToBetslip(item, 'neutral_odd',index)" >{{ item.neutral_odd }}</button></span>
                   <span> <button :id="'button_away_' + item.game_id"  class="hom2" @click="addToBetslip(item, 'away_odd', index)" >{{ item.away_odd }}</button></span>
@@ -237,7 +238,7 @@ axios
 .then((response) => {
 const data = JSON.parse(response.data);
 this.games = data;
-console.log(this.games)
+//console.log(this.games)
 // Check if data is an array and has at least one element
 if (Array.isArray(data) && data.length > 0) {
 // Access the first element of the array
@@ -255,10 +256,10 @@ if (firstItem.fields && firstItem.fields.start_time) {
   // console.log(this.start_date);
   // console.log(this.start_time_formatted);
 } else {
-  console.log('The expected data structure is not present in the response.');
+  //console.log('The expected data structure is not present in the response.');
 }
 } else {
-console.log('No data found in the response.');
+//console.log('No data found in the response.');
 }
 })
 .catch((error) => {
@@ -291,7 +292,7 @@ addToBetslip1(game, selection)
     console.error("Invalid game data:", game);
     return;
     }
-console.log(selection)
+//console.log(selection)
 
 
 
@@ -422,7 +423,7 @@ console.log(selection)
       localStorage.setItem('betslip', JSON.stringify(this.betslip));
     } else {
       // The selections are different, you can choose to update the existing selection
-      console.log("Updating existing selection in betslip.");
+     // console.log("Updating existing selection in betslip.");
       // Update the existing selection if needed
       // For example, you can update the `selection` and `odds` properties.
       existingSelection.selection = selection;
@@ -431,8 +432,6 @@ console.log(selection)
       // Update button color logic here
     }
   } else {
-
-
     let odd;
     switch (selection) {
     case "home_odd":
@@ -469,7 +468,7 @@ addToBetslip(item, selection, ) {
 
 if (selection === "home_odd") {
   const gameId = item.game_id;
-  const buttonId = `button_${gameId}`;
+  const buttonId = `button_home_${gameId}`;
   const buttonId1 = `button_neutral_${gameId}`;
   const buttonId2 = `button_away_${gameId}`;
 
@@ -505,7 +504,7 @@ if (selection === "home_odd") {
 
 else if (selection === "neutral_odd") {
   const gameId = item.game_id;
-  const buttonId = `button_${gameId}`;
+  const buttonId = `button_home_${gameId}`;
   const buttonId1 = `button_neutral_${gameId}`;
   const buttonId2 = `button_away_${gameId}`;
 
@@ -541,7 +540,7 @@ else if (selection === "neutral_odd") {
 
 else if (selection === "away_odd") {
   const gameId = item.game_id;
-  const buttonId = `button_${gameId}`;
+  const buttonId = `button_home_${gameId}`;
   const buttonId1 = `button_neutral_${gameId}`;
   const buttonId2 = `button_away_${gameId}`;
 
@@ -642,8 +641,8 @@ this.betslip = updatedBetslip;
 
 
 placeBet() {
-console.log("Entering placeBet() function...");
-console.log("Placing bet:", this.betslip);
+//console.log("Entering placeBet() function...");
+//console.log("Placing bet:", this.betslip);
 // Place the bet using the betslip data
 // ...
 
@@ -653,7 +652,7 @@ this.betslip = [];
 
 
 // Add a console log to check if this line is reached
-console.log("Removing from local storage...");
+//console.log("Removing from local storage...");
 
 
 // Remove the 'betslip' item from local storage
@@ -694,6 +693,9 @@ selected2: this.selected2,
 
 
 sendParentId(parent_match_id) {
+  localStorage.removeItem('parent_match_id');
+
+  localStorage.setItem('parent_match_id', parent_match_id);
 axios.post('https://www.23bet.pro/bet2/', { parent_match_id })
 .then(response => {
   console.log('Parent ID sent to backend:', parent_match_id);
@@ -728,6 +730,8 @@ this.isActive = true;
 
 </script>
 <style scoped>
+
+
   .nav-topp {
    
     position: fixed;
@@ -760,7 +764,7 @@ this.isActive = true;
 
 .bdy {
 background-color: #918f8f !important;
-margin-top: 4rem;
+margin-top: 7rem;
 
 
 }
@@ -802,10 +806,15 @@ width: 100%; /* Stretch the image to fit the container */
 height: auto; /* Maintain aspect ratio */
 }
 @media screen and (min-width: 992px){
+  
+  .for{
+  display: flex;
+}
 .betsslip{
 background-color: #000000;
 border-radius: 8.21818px;
 color: #fff;
+position: fixed;
 }
 body{
 background-color: #232323;
@@ -817,7 +826,8 @@ padding-bottom: 1rem;
 color: #fff;
 font-size: 2rem;
 width: 100% !important;
-text-align: left;
+text-align: center;
+font-weight: 900;
 
 }
 .gms{
@@ -988,6 +998,17 @@ justify-content: center;
 width: 98% !important;
 margin: auto;
 }
+.tit{
+background-color: #000000;
+padding-top: 1rem;
+padding-bottom: 1rem;
+color: #fff;
+font-size: 2rem;
+width: 100% !important;
+text-align: center;
+font-weight: 900;
+
+}
 .ty {
 flex-direction: column;
 }
@@ -999,6 +1020,7 @@ width: 100%;
 background-color: #000000;
 border-radius: 8.21818px;
 color: #fff;
+margin-bottom: 10rem;
 }
 body{
 background-color: #232323;
@@ -1015,6 +1037,7 @@ color: #ffff;
 padding-left: 1rem;
 padding-right: 1rem;
 font-size: 1.5rem;
+border-radius: 10px;
 }
 .time{
 }
