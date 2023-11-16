@@ -789,12 +789,6 @@ this.isActive = true;
     padding: 10px; /* Adjust as needed */
     z-index: 1000; /* Adjust as needed */
   }
-  .col-12 .col-lg-4 .col-md-4 .col-sm-4{
-    flex: 0 0 auto;
-    width: 100%;
-    padding: 0;
-    background-color: #000000;
-  }
 }
 
 
@@ -804,11 +798,7 @@ margin-top: 7rem;
 
 
 }
-.col-12 {
-    flex: 0 0 auto;
-    width: 100%;
-    padding: 0;
-}
+
 .green-button {
 background-color: green !important;
 /* You can adjust other styles as needed */
