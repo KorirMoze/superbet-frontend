@@ -40,7 +40,7 @@
         <div class="timedate">
                 <div class="time" >{{ gameData[index].start_date }} {{ gameData[index].start_time_formatted }}</div>
               </div>
-          <div class = "" >
+       
       
                 <div class="bothgamesandodds">
                     <div class="homeaway">
@@ -53,6 +53,7 @@
                         <span> <button :id="game.fields.away_team+game.fields.away_odd" class="hom2" @click="addToBetslip1(game, 'away_odd')">{{ game.fields.away_odd}}</button></span>
                     </div>
                   </div>
+
                   <div class ='preebet'>
           
     
@@ -71,7 +72,7 @@
                 </div>
           
                 <!-- Add more elements to display other properties as needed -->
-              </div>
+             
           </div>
           
       </div>
@@ -788,6 +789,12 @@ this.isActive = true;
     padding: 10px; /* Adjust as needed */
     z-index: 1000; /* Adjust as needed */
   }
+  .col-12 .col-lg-4 .col-md-4 .col-sm-4{
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 0;
+    background-color: #000000;
+  }
 }
 
 
@@ -796,6 +803,11 @@ background-color: #16202c !important;
 margin-top: 7rem;
 
 
+}
+.col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 0;
 }
 .green-button {
 background-color: green !important;
@@ -1002,8 +1014,7 @@ letter-spacing: 0.01em;
 color: #fff !important;
 }
 .more{
-width: 5.5rem !important;
-
+width: fit-content;
 font-family: 'Poppins';
 font-style: normal;
 font-weight: 700;
@@ -1011,13 +1022,15 @@ font-size: 16.8154px;
 line-height: 25px;
 text-align: center;
 letter-spacing: 0.01em;
+color: hsl(87, 71%, 35%);
 
-color: #F9F9F9;
-
-background: #1EBA01;
 border-radius: 10px;
 display: flex;
 justify-content: center;
+}
+.bothgamesandodds{
+  display: flex;
+  flex-direction: row;
 }
 }
 
