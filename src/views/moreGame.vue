@@ -568,7 +568,7 @@
     }
   }
       .bdy{
-        background-color: #918f8f !important;
+        background-color: #16202c !important;
         width: 100%;
         height: 100%;
         overflow: scroll; /* Prevent scrolling */

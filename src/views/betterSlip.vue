@@ -5,25 +5,40 @@
    
     <ul>
       <li v-for="(betslipItem, index) in betslipCopy" :key="index">
-        <span>{{ betslipItem.match }}</span>
-        <div class="game-id" style="display: none;">{{ betslipItem.game_id }}</div>
-        <span class="selection">  {{ betslipItem.selection === betslipItem.odds ? betslipItem.key : getBetOutcome(betslipItem.selection, betslipItem.odds, betslipItem.key) }}</span>
-        <div>{{ betslipItem.odds }}</div>
-        <button class="btn-remove"
-        @click="removeFromBetslip(index)">Remove</button>
+          <div class="betremov">
+                <div class="betitems">
+                  <span>{{ betslipItem.match }}</span>
+                  <div class="game-id" style="display: none;">{{ betslipItem.game_id }}</div>
+                  <div class="selectiodd">
+                      <div >  {{ betslipItem.selection === betslipItem.odds ? betslipItem.key : getBetOutcome(betslipItem.selection, betslipItem.odds, betslipItem.key) }}</div>
+                      <div class="selection">{{ betslipItem.odds }}</div>
+                  </div>
+              </div>
+              <div class="remove">
+                <button class="btn-remove"
+                @click="removeFromBetslip(index)">Remove</button>
+
+              </div>
+          </div>
+       <div class="hrs">
+        <hr>
+       </div>
       </li>
+    
     </ul>
     
   </div>
+
+  <hr>
   <div class="total1">
     <div class="total">
-      <span class="left">TOTAL ODDS:</span>
-      <span class="right" v-if="totalOdds !== 1">{{ totalOdds.toFixed(2) }}</span>
-      <h6></h6>
+      <div class="left">Total Odds:</div>
+      <div class="right" v-if="totalOdds !== 1">{{ totalOdds.toFixed(2) }}</div>
+    
     </div>
   <h6>Accept any changes in odds prices</h6>
   <div class="stak">
-    <span class="stake">STAKE:</span>
+    <span class="stake">Stake:</span>
     <input type="number" id="stake-input" name="stake" step="0.01" min="0" required v-model="stake">
   </div>
   <button class="btnn" @click="placeBet">Place Bet</button>
@@ -69,6 +84,9 @@
   <bottomNav />
 </div>
 
+<div class="remaining-background">
+      <!-- Content for the remaining part of the page -->
+    </div>
 
 
 </template>
@@ -335,7 +353,11 @@ const totalOdds = this.betslip.reduce((total, betslipItem) => {
 
 
 <style scoped>
-
+.col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 0;
+}
 .bottom-nav-container {
     display: none; /* Hide the container by default */
   }
@@ -353,6 +375,10 @@ const totalOdds = this.betslip.reduce((total, betslipItem) => {
       padding: 10px; /* Adjust as needed */
       z-index: 1000; /* Adjust as needed */
     }
+    .remaining-background {
+  background-color: red; 
+ 
+  }
   }
 .betslip {
 padding-top: 2rem;
@@ -363,18 +389,23 @@ padding-top: 2rem;
 ul {
   list-style-type: none;
   margin: 0;
-  padding: 0;
-  background-color: #333;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
    align-items: center;
+   background-color: #16202c;
+   margin-left: 2rem;
+  margin-right: 2rem;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
-li {
+.betremov {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 2rem;
   margin-bottom: 0.5rem;
-  background-color: #000000 !important;
+
   height: 4rem;
   border-radius: 10px;
   padding-left: 1rem;
@@ -389,7 +420,7 @@ font-weight: 600;
 font-size: 12px;
 line-height: 22px;
 letter-spacing: 0.01em;
-
+padding: 10px 0 10px 5px;
 }
 
 button {
@@ -421,6 +452,7 @@ left: 1257px;
 top: 473px;
 
 border-radius: 8.21818px;
+margin-top: 2rem;
 }
 
 .total {
@@ -443,7 +475,7 @@ font-size: 15px;
 line-height: 22px;
 letter-spacing: 0.01em;
 
-color: #1EBA01;
+color: #98a9bc;
 }
 
 .right {
@@ -460,8 +492,8 @@ color: #1EBA01;
   font-size: 15px;
   line-height: 22px;
   letter-spacing: 0.01em;
-
-  color: #1EBA01;
+  flex-basis: 40%;
+;
 }
 h6{
   width: 201px;
@@ -497,7 +529,7 @@ color: #000000;
   font-size: 15px;
   line-height: 22px;
   letter-spacing: 0.01em;
-  color: white;
+  color: #98a9bc;
 }
 .amount{
 width: 255px;
@@ -510,8 +542,13 @@ border-radius: 10px;
   height: 2rem;
 }
 .btnn{
-  background-color: #1EBA01;
+  background-color: #fed800;
   margin-bottom: 1rem;
+  color: #000000;
+  font-weight: 700;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  font-size: 14px;
 }
 h6{
   color: #fff;
@@ -531,6 +568,44 @@ h6{
 }
 .row{
   width: 100% !important;
+}
+.betitems{
+  display: flex;
+  flex-direction: column;
+}
+.selectiodd{
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-between;
+  font-weight: 300;
+  color: #98a9bc;
+}
+.betremov {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+
+  height: 4rem;
+  border-radius: 10px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+ 
+}
+.hrs{
+  margin-right: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  padding-top: 1rem;
+  border: #2d4458;
+  border-bottom: 1px;
+}
+.col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 0;
 }
 }
 </style>
