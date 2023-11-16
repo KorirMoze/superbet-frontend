@@ -37,17 +37,25 @@
     <div class="games" v-if="games && games.length > 0">
      
       <div class="whole" v-for="(game, index) in games" :key="index">
-          <div class = "for" >
-                <div class="time" >{{start_date}} {{ start_time_formatted }}</div>
-                <div class="homeaway">
-                  <div class="homei">{{ game.fields.home_team }}</div>
-                <div class="away" >{{ game.fields.away_team }}</div></div>
-                  <div class ='prebet'>
+        <div class="timedate">
+                <div class="time" >{{ gameData[index].start_date }} {{ gameData[index].start_time_formatted }}</div>
+              </div>
+          <div class = "" >
+      
+                <div class="bothgamesandodds">
+                    <div class="homeaway">
+                      <div class="homei">{{ game.fields.home_team }}</div>
+                    <div class="away" >{{ game.fields.away_team }}</div></div>
+                    <div class ='prebet'>
+              
+                        <span><button :id="game.fields.home_team+game.fields.home_odd" class="hom" @click="addToBetslip1(game, 'home_odd')">{{ game.fields.home_odd }}</button></span>
+                        <span><button :id="game.fields.neutral_odd" class="hom1" @click="addToBetslip1(game, 'neutral_odd')">{{ game.fields.neutral_odd }}</button></span>
+                        <span> <button :id="game.fields.away_team+game.fields.away_odd" class="hom2" @click="addToBetslip1(game, 'away_odd')">{{ game.fields.away_odd}}</button></span>
+                    </div>
+                  </div>
+                  <div class ='preebet'>
           
-                    <span><button :id="game.fields.home_team+game.fields.home_odd" class="hom" @click="addToBetslip1(game, 'home_odd')">{{ game.fields.home_odd }}</button></span>
-                    <span><button :id="game.fields.neutral_odd" class="hom1" @click="addToBetslip1(game, 'neutral_odd')">{{ game.fields.neutral_odd }}</button></span>
-                    <span> <button :id="game.fields.away_team+game.fields.away_odd" class="hom2" @click="addToBetslip1(game, 'away_odd')">{{ game.fields.away_odd}}</button></span>
-
+    
 
                         <div >
 
@@ -55,7 +63,7 @@
                             <div>
             
                               <router-link :to="'/more/'" @click="sendParentId(game.fields.parent_match_id)" class="more">
-                                +92
+                                +92 Markets
                               </router-link>
                               <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
                             </div>
@@ -65,34 +73,41 @@
                 <!-- Add more elements to display other properties as needed -->
               </div>
           </div>
+          
       </div>
       <div class="games" v-for="item in Datas" :key="item.sport_id">
         <div>
 
        
             <div class="whole">
-                <div class="time">
-                  {{ item.start_time }}
+                <div class="timedate">
+                  <div>
+                  <div class="time">
+                          {{ item.start_time }}
+                        </div>
+                      </div>
                 </div>
+              <div class="bothgamesandodds">
                 <div class="homeaway">
-                  <div class="homei">
-                    {{ item.home_team }}
-                  </div>
-             
-                <div class="away">{{ item.away_team }} </div>
-                <div class="away" style="display: none;">{{ item.game_id }}</div>
+                      <div class="homei">
+                        {{ item.home_team }}
+                      </div>
+                
+                    <div class="away">{{ item.away_team }} </div>
+                    <div class="away" style="display: none;">{{ item.game_id }}</div>
 
-
-
-            </div>
+                </div>
+                  <div class ='prebet'>
+                
+                      <span> <button :id="'button_home_' + item.game_id" class="hom" @click="addToBetslip(item, 'home_odd', index)" >{{ item.home_odd }}</button>
+                      </span>
+                      <span><button :id="'button_neutral_' + item.game_id"  class="hom1" @click="addToBetslip(item, 'neutral_odd',index)" >{{ item.neutral_odd }}</button></span>
+                      <span> <button :id="'button_away_' + item.game_id"  class="hom2" @click="addToBetslip(item, 'away_odd', index)" >{{ item.away_odd }}</button></span>
+                </div>
+          </div>
             <div class="">
-              <div class ='prebet'>
+              <div class ='preebet'>
  
-                  <span> <button :id="'button_home_' + item.game_id" class="hom" @click="addToBetslip(item, 'home_odd', index)" >{{ item.home_odd }}</button>
-                  </span>
-                  <span><button :id="'button_neutral_' + item.game_id"  class="hom1" @click="addToBetslip(item, 'neutral_odd',index)" >{{ item.neutral_odd }}</button></span>
-                  <span> <button :id="'button_away_' + item.game_id"  class="hom2" @click="addToBetslip(item, 'away_odd', index)" >{{ item.away_odd }}</button></span>
-
 
                       <div >
 
@@ -100,7 +115,7 @@
                           <div>
            
                             <router-link :to="'/game/'" @click="sendParentId(item.parent_match_id)" class="more">
-                              +92
+                              +92 Markets
                             </router-link>
                             <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
                           </div>
@@ -168,6 +183,7 @@ return {
 Datas: [],
 betslip: [],
 games: [],
+gameData: [],
 start_date: [],
 start_time_formatted: [],
 // buttonClicked: false,
@@ -199,7 +215,8 @@ this.getDatas();
 this.getAirtimes();
 this.getcustom();
 
-
+console.log('games:', this.games);
+    console.log('gameData:', this.gameData);
 
 // console.log(this.betslip);
 
@@ -232,41 +249,53 @@ axios
   console.log(error);
 });
 },
+
+
+
 getcustom() {
-axios
-.get('https://www.23bet.pro/custom/')
-.then((response) => {
-const data = JSON.parse(response.data);
-this.games = data;
-//console.log(this.games)
-// Check if data is an array and has at least one element
-if (Array.isArray(data) && data.length > 0) {
-// Access the first element of the array
-const firstItem = data[0];
+    axios
+      .get('https://www.23bet.pro/custom/')
+      .then((response) => {
+        const data = JSON.parse(response.data);
+        this.games = data;
+        console.log(this.games);
 
+        // Check if data is an array and has at least one element
+        if (Array.isArray(data) && data.length > 0) {
+          // Iterate through each element in the array
+          data.forEach((item) => {
+            // Check if the current item has 'fields' property
+            if (item.fields && item.fields.start_time) {
+              // Assign 'start_time' to this.start_time after formatting
+              const start_time = new Date(item.fields.start_time);
+              // Subtract 3 hours from the UTC time
+              start_time.setUTCHours(start_time.getUTCHours() - 3);
 
-// Check if the first item has 'fields' property
-if (firstItem.fields && firstItem.fields.start_time) {
-  // Assign 'start_time' to this.start_time after formatting
-  this.start_time = new Date(firstItem.fields.start_time);
-  this.start_date = this.formatDate(this.start_time);
-  this.start_time_formatted = this.formatTime(this.start_time);
- 
-  // Log the 'start_date' and 'start_time_formatted' values
-  // console.log(this.start_date);
-  // console.log(this.start_time_formatted);
-} else {
-  //console.log('The expected data structure is not present in the response.');
-}
-} else {
-//console.log('No data found in the response.');
-}
-})
-.catch((error) => {
-console.log(error);
-});
-},
+              // Format date and time for the current game
+              const start_date = this.formatDate(start_time);
+              const start_time_formatted = this.formatTime(start_time);
 
+              // Push an object with game data to the gameData array
+              this.gameData.push({
+                start_date,
+                start_time_formatted,
+              });
+
+              // Log the 'start_date' and 'start_time_formatted' values for each item
+              console.log(start_time);
+              console.log(this.gameData);
+            } else {
+              //console.log('The expected data structure is not present in the response.');
+            }
+          });
+        } else {
+          //console.log('No data found in the response.');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 
 formatDate(date) {
 const year = date.getFullYear();
@@ -763,7 +792,7 @@ this.isActive = true;
 
 
 .bdy {
-background-color: #918f8f !important;
+background-color: #16202c !important;
 margin-top: 7rem;
 
 
@@ -1038,12 +1067,16 @@ padding-left: 1rem;
 padding-right: 1rem;
 font-size: 1.5rem;
 border-radius: 10px;
+text-align: left;
 }
-.time{
+.timedate{
+margin-bottom: 2rem;
+
 }
 .prebet{
 display: flex;
 justify-content: space-between;
+flex-basis: 50%;
 }
 .hom{
 
@@ -1087,22 +1120,42 @@ padding-bottom: 23px;
 padding-right: 40px;
 }
 .more{
- width: 4rem !important;
+ width: fit-content !important;
 
 font-family: 'Poppins';
 font-style: normal;
-font-weight: 700;
-font-size: 16.8154px;
-line-height: 25px;
+
+font-size: 13px;
+
 text-align: center;
-letter-spacing: 0.01em;
-
-color: #F9F9F9;
-
-background: #1EBA01;
-border-radius: 10px;
-display: flex;
+padding: 5px 0;
+color: hsl(87, 71%, 35%);
+text-decoration: none;
 justify-content: center;
+}
+.homeaway{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  line-height: 12px;
+  padding: 2px 5px;
+  font-weight: 600;
+}
+.bothgamesandodds{
+  display: flex;
+}
+.homei{
+  margin-bottom: 8px;
+}
+.preebet{
+  text-align: right;
+}
+.time{
+  font-size: 12px;
+  float: right;
+}
+.away{
+  flex-basis: 50%;
 }
 }
 </style>

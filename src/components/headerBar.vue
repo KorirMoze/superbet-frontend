@@ -90,7 +90,8 @@
       </section>
       <footer class="modal-card-foot">
         <button class="button is-success" @click="closeModal">Close</button>
-        <button class="button is-success" @click="deposit">Deposit</button>
+        <button class="button is-success" @click="deposit" :disabled="loading">{{ loading ? 'Depositing...' : 'Deposit' }}</button>
+        
       </footer>
     </div>
   </div>
@@ -106,6 +107,7 @@ export default {
       isModalActive: false,
       stake: 49, // Initialize stake with 0
       isLoggedIn: false,
+      loading: false, // New loading state
     };
   },
   created()
@@ -143,6 +145,7 @@ export default {
         this.$router.push({ name: 'login' });
         return; // Stop further execution
       }
+      this.loading = true;
       // Send a POST request to the backend with the deposit amount and the JWT token in the headers
       axios
         .post('https://www.23bet.pro/deposit/', {
@@ -161,6 +164,10 @@ export default {
         {
           // Handle any errors, e.g., display an error message
           console.error('Deposit failed', error);
+        })
+        .finally(() => {
+          // Reset loading state after the request is complete
+          this.loading = false;
         });
     },
     logout()
