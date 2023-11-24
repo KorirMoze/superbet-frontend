@@ -100,7 +100,7 @@
         Datas: [],
         betslip: [],
         games: [],
-        
+        base_url: 'https://www.23bet.pro/',
       };
     },
 
@@ -114,7 +114,7 @@
     methods: {
       getDatas() {
         axios
-          .get('https://www.23bet.pro/results')
+          .get(this.base_url+'results')
           .then((response) => {
             this.Datas = response.data;
           
@@ -126,7 +126,7 @@
       
       getcustom() {
       axios
-        .get('https://www.23bet.pro/custom-results/')
+        .get(this.base_url+'custom-results/')
         .then((response) => {
           const data = JSON.parse(response.data[0]);
           this.games = data;

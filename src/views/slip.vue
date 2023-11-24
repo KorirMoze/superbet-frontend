@@ -41,7 +41,7 @@
           return {
             Datas: [],
             betslip: [],
-            
+            base_url: 'https://www.23bet.pro/',
           };
         },
         created() {
@@ -59,7 +59,7 @@
         methods: {
           getDatas() {
             axios
-              .get('https://www.23bet.pro/')
+              .get(this.base_url)
               .then((response) => {
                 this.Datas = response.data.dataa;
               })
@@ -70,7 +70,7 @@
           
           getAirtimes() {
             axios
-              .get('https://www.23bet.pro/')
+              .get(this.base_url)
               .then((response) => {
                 this.Airtimes = response.data.dataa;
               })
@@ -148,7 +148,7 @@
                 selected2: this.selected2,
               };
               console.log(data);
-              const response = axios.post('https://www.23bet.pro/credits/', data);
+              const response = axios.post(this.base_url+'credits/', data);
               console.log(response.data);
               this.submitted = true;
             } catch (error) {
@@ -156,7 +156,7 @@
             }
           },
           postData1() {
-            axios.post('https://www.23bet.pro/credit_create/', {
+            axios.post(this.base_url+'credit_create/', {
               selected3: this.selected3,
               selected2: this.selected2,
             })
@@ -168,21 +168,10 @@
                 console.log(error);
               });
           },
-          // sendParentId(parent_match_id) {
-          //   axios.post('http://50.116.38.17/credit_create/bet2/', { parent_match_id })
-          //     .then(response => {
-          //       console.log('Parent ID sent to backend:', parent_match_id);
-          //       console.log('Response from server:', response.data);
-                
-          //     })
-          //     .catch(error => {
-          //       console.error('Error sending parent ID to backend:', error);
-          //     });
-          // },
-        
+
       
           sendParentId(parent_match_id) {
-            axios.post('https://www.23bet.pro/bet2/', { parent_match_id })
+            axios.post(this.base_url+'bet2/', { parent_match_id })
               .then(response => {
                 console.log('Parent ID sent to backend:', parent_match_id);
                 console.log('Response from server:', response.data);
@@ -191,23 +180,7 @@
                 console.error('Error sending parent ID to backend:', error);
               });
           },
-      //     sendParentId(parent_match_id) {
-      //   axios.post('http://127.0.0.1:8000/bet2/', { parent_match_id })
-      //     .then(response => {
-      //       console.log('Parent ID sent to backend:', parent_match_id);
-      //       console.log('Response from server:', response.data);
-      //       this.$router.push({
-      //         name: 'moreGame',
-      //         params: {
-      //           parent_match_id: parent_match_id,
-      //           data: response.data,
-      //         },
-      //       });
-      //     })
-      //     .catch(error => {
-      //       console.error('Error sending parent ID to backend:', error);
-      //     });
-      // },
+   
       
           scroll() {
             const element = document.getElementById('contact-me');

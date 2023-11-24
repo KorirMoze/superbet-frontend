@@ -88,6 +88,7 @@
       phoneNumber: '',
       email: '',
       password: '',
+      base_url: 'https://www.23bet.pro/',
       };
     },
     methods: {
@@ -98,7 +99,7 @@ postData() {
     return;
   }
   
-  axios.post('https://www.23bet.pro/login/', {
+  axios.post(this.base_url+'login/', {
     password: this.password,
     username: this.userName,
   }, { withCredentials: false })

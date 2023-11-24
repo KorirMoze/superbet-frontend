@@ -159,6 +159,7 @@
         homeTeam: [],
         awayTeam: [],
         isModalActive: false,
+        base_url: 'https://www.23bet.pro/',
       };
       
     },
@@ -175,7 +176,7 @@
 },
 
     mounted() {
-      axios.get(`https://www.23bet.pro/bet2/?parent_match_id=${this.parent_match_id}`)
+      axios.get(this.betslip+`bet2/?parent_match_id=${this.parent_match_id}`)
       
         .then(response => {
           //console.log('Response from server:', response.data);
@@ -204,7 +205,7 @@
  methods: {
   getDatas() {
       axios
-        .get('https://www.23bet.pro/')
+        .get(this.base_url)
         .then((response) => {
           const allData = response.data.dataa; // Assuming your data is in response.data.dataa
           const filteredData = allData.filter((item) => item.parent_match_id === this.match_id);
@@ -222,7 +223,7 @@
 
     getcustom() {
       axios
-        .get('https://www.23bet.pro/custom/')
+        .get(this.base_url+'custom/')
         .then((response) => {
           const data = JSON.parse(response.data[0]);
           this.games = data;
@@ -236,10 +237,6 @@
 
 
   addToBetslip(match, odd,betType) {
-    // console.log("Clicked on match: ", match.name);
-   // console.log("Selected type: ", betType);
-    // console.log("Home Team:", this.homeTeam);
-    // Check if there's already a selection for this match
 
 
    switch (betType)
@@ -442,37 +439,7 @@
     ///////// corect score
 
 
-// // Define an array of odd types that should have the toggle behavior
-// const oddTypesWithToggle = ['TOTAL', 'BOTH TEAMS TO SCORE', 'CORRECT SCORE', 'DOUBLE CHANCE'];
-// const targetValues = ['0:0', '0:1', '0:2', '0:3', '0:4', '1:0', '1:1', '1:2', '1:3', '1:4', '2:0', '2:1', '2:2', '2:3', '2:4', '3:0', '3:1', '3:2', '3:3', '3:4', '4:0', '4:1', '4:2', '4:3', '4:4', 'OTHER', 'OVER 0.5', 'UNDER 0.5', 'OVER 1.5', 'UNDER 1.5', 'OVER 2.5', 'UNDER 2.5', 'OVER 3.5', 'UNDER 3.5', 'OVER 4.5', 'UNDER 4.5', 'OVER 5.5', 'UNDER 5.5', 'YES', 'NO', '!/X', '1/2', 'X/2'];
 
-
-// // Check if the current odd type is in the array
-// if (oddTypesWithToggle.includes(betType)) {
-//   const buttonId = `button_${betType}_${odd.display}`;
-  
-
-  
-//   // Ensure buttonId is defined before using it
-//   const button = document.getElementById(buttonId);
-
-//   console.log(button)
-//   if (button) {
-//     const currentBackgroundColor = window.getComputedStyle(button).backgroundColor;
-
-
-
-//     // Toggle the background color between green and the original color for the current button
-//     if (currentBackgroundColor === 'rgb(0, 128, 0)') {
-//       // If the background color is green, set it to the original color
-//       button.style.backgroundColor = '';
-//     } else {
-//       // If the background color is not green, set it to green
-//       button.style.backgroundColor = 'green';
-//       // otherButton.style.backgroundColor = '';
-//     }
-//   }
-// }
 
 
 

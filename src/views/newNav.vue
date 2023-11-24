@@ -95,6 +95,7 @@ export default {
       isModalActive: false,
       stake: 49, // Initialize stake with 0
       isLoggedIn: false,
+      base_url: 'https://www.23bet.pro/',
     };
   },
   created() {
@@ -123,7 +124,7 @@ export default {
 
       // Send a POST request to the backend with the deposit amount and the JWT token in the headers
       axios
-        .post('https://www.23bet.pro/deposit/', {
+        .post(this.base_url+'deposit/', {
           amount: this.stake, // Use the deposit amount from your component's data
         }, {
           headers: {
@@ -145,7 +146,7 @@ export default {
 
       // Send a POST request to the backend to perform the logout action
       axios
-        .get('https://www.23bet.pro/logout/', {
+        .get(this.base_url+'logout/', {
           headers: {
             Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
           },

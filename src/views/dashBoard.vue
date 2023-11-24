@@ -190,6 +190,7 @@ start_time_formatted: [],
 // buttonClicked: false,
 // buttonClicked: false, // Initialize as an empty array
 buttonClicked: [], // Initialize as an empty array
+base_url: 'https://www.23bet.pro/',
 
 
 selectedButtonColors: {
@@ -226,7 +227,7 @@ console.log('games:', this.games);
 methods: {
 getDatas() {
 axios
-    .get('https://www.23bet.pro/')
+    .get(this.base_url)
     .then((response) => {
       this.Datas = response.data.dataa;
     })
@@ -242,7 +243,7 @@ prevSlide() {
 },
 getAirtimes() {
 axios
-.get('https://www.23bet.pro/')
+.get('${base_url}')
 .then((response) => {
   this.Airtimes = response.data.dataa;
 })
@@ -255,7 +256,7 @@ axios
 
 getcustom() {
     axios
-      .get('https://www.23bet.pro/custom/')
+      .get(this.base_url+'custom/')
       .then((response) => {
         const data = JSON.parse(response.data);
         this.games = data;
@@ -700,7 +701,7 @@ const data = {
   selected2: this.selected2,
 };
 console.log(data);
-const response = axios.post('https://www.23bet.pro/credits/', data);
+const response = axios.post(this.base_url+'credits/', data);
 console.log(response.data);
 this.submitted = true;
 } catch (error) {
@@ -708,7 +709,7 @@ console.error(error);
 }
 },
 postData1() {
-axios.post('https://www.23bet.pro/credit_create/', {
+axios.post('{{base_url}}/credit_create/', {
 selected3: this.selected3,
 selected2: this.selected2,
 })
@@ -726,7 +727,7 @@ sendParentId(parent_match_id) {
   localStorage.removeItem('parent_match_id');
 
   localStorage.setItem('parent_match_id', parent_match_id);
-axios.post('https://www.23bet.pro/bet2/', { parent_match_id })
+axios.post(this.base_url+'bet2/', { parent_match_id })
 .then(response => {
   console.log('Parent ID sent to backend:', parent_match_id);
   console.log('Response from server:', response.data);

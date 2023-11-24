@@ -3,19 +3,19 @@
     <headerTop />
 
   </div>
- <div >
+  <div>
     <div class="modal-background" @click="closeModal"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        
-          <h5 class="modal-card-title">Deposit</h5>
-         
-     
+
+        <h5 class="modal-card-title">Deposit</h5>
+
+
         <button class="delete" aria-label="close" @click="closeModal"></button>
       </header>
-      <section class="modal-card-body">
-        <!-- Modal content goes here -->
-        
+      <section class="modal-card-body-sample" style="background-color: black;">
+      
+
         <div class="box">
           <p class="pale">Send Money to Your Account</p>
 
@@ -28,20 +28,20 @@
             <li class="coin" @click="setStake(500)">+490</li>
           </ul>
           <span class="stake">DEPOSIT:</span>
-          <input type="number" id="depo" name="stake" step="0.01" min="10" required v-model="stake" placeholder="Enter Amount">
+          <input type="number" id="depo" name="stake" step="0.01" min="10" required v-model="stake"
+            placeholder="Enter Amount">
         </div>
       </section>
       <footer class="modal-card-foot">
         <!-- <button class="button is-success" @click="closeModal">Close</button> -->
-        <button class="button is-success" @click="deposit" >Deposit</button>
+        <button class="button is-success" @click="deposit">Deposit</button>
       </footer>
     </div>
   </div>
 
   <div class="bottom-nav-container">
-  <bottomNav />
-</div>
-
+    <bottomNav />
+  </div>
 </template>
 
 
@@ -51,73 +51,85 @@ import headerTop from '@/components/headerBar.vue'
 import bottomNav from '@/views/bottomNav.vue'
 
 export default {
-  components:{
+  components: {
     headerTop,
     bottomNav,
 
   },
-  data() {
+  data()
+  {
     return {
       isMenuActive: false,
       isModalActive: false,
       stake: 49, // Initialize stake with 0
       isLoggedIn: false,
+      base_url: 'https://www.23bet.pro/',
     };
   },
-  created() {
+  created()
+  {
     // Check if the user is logged in (e.g., by checking if a JWT token exists)
     const token = localStorage.getItem('jwt'); // Adjust this according to where you store your token
     this.isLoggedIn = !!token;
-    console.log('JWT Token:', token); 
+    console.log('JWT Token:', token);
   },
   methods: {
-    toggleMenu() {
+    toggleMenu()
+    {
       this.isMenuActive = !this.isMenuActive;
     },
-    openModal() {
+    openModal()
+    {
       this.isModalActive = true;
     },
-    closeModal() {
+    closeModal()
+    {
       this.isModalActive = false;
     },
-    setStake(amount) {
+    setStake(amount)
+    {
       // This method will be called when a list item is clicked
       this.stake = amount; // Set the stake to the selected amount
     },
-    deposit() {
+    deposit()
+    {
       // Get the JWT token from your storage (e.g., localStorage or Vuex store)
       const token = localStorage.getItem('jwt'); // Adjust this according to where you store your token
 
       // Send a POST request to the backend with the deposit amount and the JWT token in the headers
       axios
-        .post('https://www.23bet.pro/deposit/', {
+        .post(this.base_url+'deposit/', {
           amount: this.stake, // Use the deposit amount from your component's data
         }, {
           headers: {
             Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
           },
         })
-        .then((response) => {
+        .then((response) =>
+        {
           // Handle the response from the backend, e.g., display a success message
           console.log('Deposit successful', response.data);
         })
-        .catch((error) => {
+        .catch((error) =>
+        {
           // Handle any errors, e.g., display an error message
           console.error('Deposit failed', error);
         });
     },
-    logout() {
+    logout()
+    {
       // Get the JWT token from your storage (e.g., localStorage or Vuex store)
       const token = localStorage.getItem('jwt'); // Adjust this according to where you store your token
 
       // Send a POST request to the backend to perform the logout action
       axios
-        .get('https://www.23bet.pro/logout/', {
+        .get(this.base_url+'logout/', {
           headers: {
             Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
           },
         })
-        .then((response) => {
+        .then((response) =>
+        {
           // Handle the response from the backend, e.g., display a success message
           console.log('Logout successful', response.data);
 
@@ -127,7 +139,8 @@ export default {
           // Optionally, you can redirect the user to the login page
           this.$router.push('/login'); // Adjust the route path as needed
         })
-        .catch((error) => {
+        .catch((error) =>
+        {
           // Handle any errors, e.g., display an error message
           console.error('Logout failed', error);
           this.isLoggedIn = false;
@@ -138,63 +151,88 @@ export default {
 };
 </script>
 <style scoped>
-  .nav-topp {
-   
-   position: fixed;
-   top: 0;
-   left: 0;
-   right: 0;
-   z-index: 1000; /* Adjust as needed */
- }
+.nav-topp {
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  /* Adjust as needed */
+}
+
+.modal-backgound {
+  background-color: #16202c;
+}
+
+.modal-card-body-sample {
+  background-color: #16202c !important;
+}
 
 /* Default styles for larger screens */
 .bottom-nav-container {
- display: none; /* Hide the container by default */
+  display: none;
+  /* Hide the container by default */
 }
+
+.stake {}
 
 /* Media query for mobile devices (adjust the max-width as needed) */
 @media (max-width: 767px) {
- .bottom-nav-container {
-   display: block; /* Show the container on mobile devices */
-   position: fixed;
-   bottom: 0;
-   left: 0;
-   right: 0;
-   background-color: #000; /* Adjust as needed */
-   color: #fff; /* Adjust as needed */
-   padding: 10px; /* Adjust as needed */
-   z-index: 1000; /* Adjust as needed */
- }
+  .bottom-nav-container {
+    display: block;
+    /* Show the container on mobile devices */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    /* Adjust as needed */
+    color: #fff;
+    /* Adjust as needed */
+    padding: 10px;
+    /* Adjust as needed */
+    z-index: 1000;
+    /* Adjust as needed */
+  }
 }
 
 
-.navbar-item{
+.navbar-item {
   font-size: 1.5rem;
 }
-a{
-  text-decoration: none; /* This removes the underline */
- 
+
+a {
+  text-decoration: none;
+  /* This removes the underline */
+
 }
-navbar{
+
+navbar {
   margin-bottom: 0 !important;
 }
-.button{
+
+.button {
   color: black !important;
   background-color: yellow;
 }
-.pale{
+
+.pale {
   text-decoration: muted;
 }
-.titlee{
+
+.titlee {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
-.modal-card-foot{
+
+.modal-card-foot {
   display: block;
 }
-#depo{
+
+#depo {
   border: 1px;
   background-color: rgba(217, 217, 217, 0.6);
   color: #000000;
@@ -207,12 +245,14 @@ navbar{
 
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-.stak{
+
+.stak {
   justify-content: space-between;
   border-color: green !important;
 
 }
-.coins{
+
+.coins {
   display: flex !important;
   flex-direction: row;
   align-items: center;
@@ -221,37 +261,41 @@ navbar{
   margin: auto;
   margin-bottom: 3rem;
 }
-.coin{
-  background-color: rgba(217, 217, 217, 0.6);
+
+.coin {
+  background-color: #16202c;
+  color: #fff;
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: 10px;
   font-size: 1.5rem;
-  cursor: pointer; /* Add this line to change cursor to pointer */
+  cursor: pointer;
+  /* Add this line to change cursor to pointer */
 }
-.modal-card{
+
+.modal-card {
   margin-top: 10rem;
 }
 
-@media screen and (max-width: 1023px){
+@media screen and (max-width: 1023px) {
   .navbar-menu {
-      background-color: #cb0a0a;
-      box-shadow: 0 8px 16px rgba(10,10,10,.1);
-      padding: 0.5rem 0;
-      border-radius: 10px;
+    background-color: #cb0a0a;
+    box-shadow: 0 8px 16px rgba(10, 10, 10, .1);
+    padding: 0.5rem 0;
+    border-radius: 10px;
   }
 
-  .modal-card{
+  .modal-card {
     margin: 0%;
   }
-  .navbar-end{
 
-  }
-  .burger{
+  .navbar-end {}
+
+  .burger {
     margin-right: 1rem;
   }
-  .bet{
+
+  .bet {
     margin-right: 75%;
   }
-   }
-</style>
+}</style>

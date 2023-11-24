@@ -53,6 +53,7 @@ export default {
         loading: false,
         showBetSlip: false,
         withdrawalAmount: 0,
+        base_url: 'https://www.23bet.pro/',
       },
       withdrawalMessage: null,
     };
@@ -67,7 +68,7 @@ export default {
     if (token)
     {
       axios
-        .get("https://www.23bet.pro/account_details/", {
+        .get(this.base_url+"account_details/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -119,7 +120,7 @@ export default {
       {
         // Send a POST request to your backend API to initiate the withdrawal
         axios
-          .post("https://www.23bet.pro/withdraw/", { amount }, {
+          .post(this.base_url+"withdraw/", { amount }, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

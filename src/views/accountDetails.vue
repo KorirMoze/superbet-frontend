@@ -99,6 +99,7 @@
       loading: false,
       showBetSlip: false,
       withdrawalAmount: 0,
+      base_url: 'https://www.23bet.pro/',
     },
   };
 },
@@ -107,7 +108,7 @@
      // console.log(token)
       if (token) {
         axios
-          .get("https://www.23bet.pro/account_details/", {
+          .get(this.base_url+"account_details/", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -141,7 +142,7 @@
 
       // Replace 'your_api_endpoint' with the actual URL of your Django API endpoint
       axios
-        .get('https://www.23bet.pro/bets/', {
+        .get(this.base_url+'bets/', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

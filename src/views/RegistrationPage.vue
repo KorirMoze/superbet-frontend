@@ -56,7 +56,7 @@
                   <div class="input-group-prepend">
       
                   </div>
-                  <input type="text" class="form-control" placeholder="Date Of Birth...2020-12-23" v-model="dob" required>
+                  <!-- <input type="text" class="form-control" placeholder="Date Of Birth...2020-12-23" v-model="dob" required> -->
                 </div>
                 <!-- If you want to add a checkbox to this form, uncomment this code -->
                 <!-- <div class="checkbox">
@@ -101,7 +101,8 @@
       email: '',
       password: '',
       gender: '',
-      dob: ''
+      dob: '',
+      base_url: 'https://www.23bet.pro/',
       };
     },
     methods: {
@@ -116,21 +117,21 @@
   this.dob = this.dob.trim();
 
   // Check if all required fields are filled in
-  if (!this.fname || !this.sname || !this.email || !this.phoneNumber || !this.password || !this.dob) {
+  if (!this.fname || !this.sname || !this.email || !this.phoneNumber || !this.password ) {
     console.log('All fields are required');
     return;
   }
 
   // Continue with the API call
   axios
-    .post('https://www.23bet.pro/user/', {
+    .post(this.base_url+'user/', {
       firstname: this.fname,
       secondname: this.sname,
       email: this.email,
       password: this.password,
       phoneNumber: this.phoneNumber,
       gender: this.gender, // You might want to make sure that gender is set correctly
-      dob: this.dob,
+     // dob: this.dob,
     }, { withCredentials: false })
     .then((response) => {
       console.log('Registration successful:', response.data);

@@ -150,6 +150,7 @@
         homeTeam: null,
         awayTeam: null,
         parentMatchId:null,
+        base_url: 'https://www.23bet.pro/',
 
         
       };
@@ -171,7 +172,7 @@
             
         getcustom() {
    
-          axios.get(`https://www.23bet.pro/custom/`)
+          axios.get(this.base_url+`custom/`)
           .then(response => {
             // Retrieve the parent_match_id from local storage
             const parentMatchId = localStorage.getItem('parent_match_id');
@@ -505,7 +506,7 @@
             selected2: this.selected2,
           };
           console.log(data);
-          const response = axios.post('https://www.23bet.pro/credits/', data);
+          const response = axios.post(this.base_url+'credits/', data);
           console.log(response.data);
           this.submitted = true;
         } catch (error) {
@@ -513,7 +514,7 @@
         }
       },
       postData1() {
-        axios.post('https://www.23bet.pro/credit_create/', {
+        axios.post(this.base_url+'credit_create/', {
           selected3: this.selected3,
           selected2: this.selected2,
         })
@@ -527,7 +528,7 @@
       },
   
       sendParentId(parent_match_id) {
-        axios.post('http://172.233.175.33/bet2/', { parent_match_id })
+        axios.post(this.base_url+'bet2/', { parent_match_id })
           .then(response => {
             console.log('Parent ID sent to backend:', parent_match_id);
             console.log('Response from server:', response.data);
