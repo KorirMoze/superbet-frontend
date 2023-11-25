@@ -4,7 +4,8 @@
   </div>
 
 
-<div class="bdy">
+
+  <div class="bdy">
 <div class="tit">Today Games</div>
 
 
@@ -37,26 +38,17 @@
     <div class="games" v-if="games && games.length > 0">
      
       <div class="whole" v-for="(game, index) in games" :key="index">
-        <div class="timedate">
-                <div class="time" >{{ gameData[index].start_date }} {{ gameData[index].start_time_formatted }}</div>
-              </div>
-       
-      
-                <div class="bothgamesandodds">
-                    <div class="homeaway">
-                      <div class="homei">{{ game.fields.home_team }}</div>
-                    <div class="away" >{{ game.fields.away_team }}</div></div>
-                    <div class ='prebet'>
-              
-                        <span><button :id="game.fields.home_team+game.fields.home_odd" class="hom" @click="addToBetslip1(game, 'home_odd')">{{ game.fields.home_odd }}</button></span>
-                        <span><button :id="game.fields.neutral_odd" class="hom1" @click="addToBetslip1(game, 'neutral_odd')">{{ game.fields.neutral_odd }}</button></span>
-                        <span> <button :id="game.fields.away_team+game.fields.away_odd" class="hom2" @click="addToBetslip1(game, 'away_odd')">{{ game.fields.away_odd}}</button></span>
-                    </div>
-                  </div>
-
-                  <div class ='preebet'>
+          <div  >
+                <div class="time" >{{start_date}} {{ start_time_formatted }}</div>
+                <div class="homeaway">
+                  <div class="homei">{{ game.fields.home_team }}</div>
+                <div class="away" >{{ game.fields.away_team }}</div></div>
+                  <div class ='prebet'>
           
-    
+                    <span><button :id="game.fields.home_team+game.fields.home_odd" class="hom" @click="addToBetslip1(game, 'home_odd')">{{ game.fields.home_odd }}</button></span>
+                    <span><button :id="game.fields.neutral_odd" class="hom1" @click="addToBetslip1(game, 'neutral_odd')">{{ game.fields.neutral_odd }}</button></span>
+                    <span> <button :id="game.fields.away_team+game.fields.away_odd" class="hom2" @click="addToBetslip1(game, 'away_odd')">{{ game.fields.away_odd}}</button></span>
+
 
                         <div >
 
@@ -64,7 +56,7 @@
                             <div>
             
                               <router-link :to="'/more/'" @click="sendParentId(game.fields.parent_match_id)" class="more">
-                                +92 Markets
+                                +92
                               </router-link>
                               <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
                             </div>
@@ -72,43 +64,36 @@
                 </div>
           
                 <!-- Add more elements to display other properties as needed -->
-             
+              </div>
           </div>
-          
       </div>
       <div class="games" v-for="item in Datas" :key="item.sport_id">
         <div>
 
        
             <div class="whole">
-                <div class="timedate">
-                  <div>
-                  <div class="time">
-                          {{ item.start_time }}
-                        </div>
-                      </div>
+                <div class="time">
+                  {{ item.start_time }}
                 </div>
-              <div class="bothgamesandodds">
                 <div class="homeaway">
-                      <div class="homei">
-                        {{ item.home_team }}
-                      </div>
-                
-                    <div class="away">{{ item.away_team }} </div>
-                    <div class="away" style="display: none;">{{ item.game_id }}</div>
+                  <div class="homei">
+                    {{ item.home_team }}
+                  </div>
+             
+                <div class="away">{{ item.away_team }} </div>
+                <div class="away" style="display: none;">{{ item.game_id }}</div>
 
-                </div>
-                  <div class ='prebet'>
-                
-                      <span> <button :id="'button_home_' + item.game_id" class="hom" @click="addToBetslip(item, 'home_odd', index)" >{{ item.home_odd }}</button>
-                      </span>
-                      <span><button :id="'button_neutral_' + item.game_id"  class="hom1" @click="addToBetslip(item, 'neutral_odd',index)" >{{ item.neutral_odd }}</button></span>
-                      <span> <button :id="'button_away_' + item.game_id"  class="hom2" @click="addToBetslip(item, 'away_odd', index)" >{{ item.away_odd }}</button></span>
-                </div>
-          </div>
+
+
+            </div>
             <div class="">
-              <div class ='preebet'>
+              <div class ='prebet'>
  
+                  <span> <button :id="'button_home_' + item.game_id" class="hom" @click="addToBetslip(item, 'home_odd', index)" >{{ item.home_odd }}</button>
+                  </span>
+                  <span><button :id="'button_neutral_' + item.game_id"  class="hom1" @click="addToBetslip(item, 'neutral_odd',index)" >{{ item.neutral_odd }}</button></span>
+                  <span> <button :id="'button_away_' + item.game_id"  class="hom2" @click="addToBetslip(item, 'away_odd', index)" >{{ item.away_odd }}</button></span>
+
 
                       <div >
 
@@ -116,7 +101,7 @@
                           <div>
            
                             <router-link :to="'/game/'" @click="sendParentId(item.parent_match_id)" class="more">
-                              +92 Markets
+                              +92
                             </router-link>
                             <!-- <div class="" ><span>{{ item.parent_match_id }}</span> </div> -->
                           </div>
@@ -135,7 +120,6 @@
     </div>
   </div>     
 </div>
-<tawk-to />
 
 
 <div class="col-12 col-lg-4 col-md-4 col-sm-4">
@@ -161,6 +145,8 @@
 
 
 </template>
+
+
 <script>
 import axios from 'axios';
 import betterSlip from "@/views/betterSlip.vue";
@@ -796,12 +782,11 @@ this.isActive = true;
 
 
 .bdy {
-background-color: #16202c !important;
+background-color: #918f8f !important;
 margin-top: 7rem;
 
 
 }
-
 .green-button {
 background-color: green !important;
 /* You can adjust other styles as needed */
@@ -1007,7 +992,8 @@ letter-spacing: 0.01em;
 color: #fff !important;
 }
 .more{
-width: fit-content;
+width: 5.5rem !important;
+
 font-family: 'Poppins';
 font-style: normal;
 font-weight: 700;
@@ -1015,15 +1001,13 @@ font-size: 16.8154px;
 line-height: 25px;
 text-align: center;
 letter-spacing: 0.01em;
-color: hsl(87, 71%, 35%);
 
+color: #F9F9F9;
+
+background: #1EBA01;
 border-radius: 10px;
 display: flex;
 justify-content: center;
-}
-.bothgamesandodds{
-  display: flex;
-  flex-direction: row;
 }
 }
 
@@ -1073,16 +1057,12 @@ padding-left: 1rem;
 padding-right: 1rem;
 font-size: 1.5rem;
 border-radius: 10px;
-text-align: left;
 }
-.timedate{
-margin-bottom: 2rem;
-
+.time{
 }
 .prebet{
 display: flex;
 justify-content: space-between;
-flex-basis: 50%;
 }
 .hom{
 
@@ -1126,45 +1106,27 @@ padding-bottom: 23px;
 padding-right: 40px;
 }
 .more{
- width: fit-content !important;
+ width: 4rem !important;
 
 font-family: 'Poppins';
 font-style: normal;
-
-font-size: 13px;
-
+font-weight: 700;
+font-size: 16.8154px;
+line-height: 25px;
 text-align: center;
-padding: 5px 0;
-color: hsl(87, 71%, 35%);
-text-decoration: none;
+letter-spacing: 0.01em;
+
+color: #F9F9F9;
+
+background: #1EBA01;
+border-radius: 10px;
+display: flex;
 justify-content: center;
-}
-.homeaway{
-  display: flex;
-  flex-direction: column;
-  flex-basis: 50%;
-  line-height: 12px;
-  padding: 2px 5px;
-  font-weight: 600;
-}
-.bothgamesandodds{
-  display: flex;
-}
-.homei{
-  margin-bottom: 8px;
-}
-.preebet{
-  text-align: right;
-}
-.time{
-  font-size: 12px;
-  float: right;
-}
-.away{
-  flex-basis: 50%;
 }
 }
 </style>
+
+
 
 
 
