@@ -99,8 +99,9 @@
       loading: false,
       showBetSlip: false,
       withdrawalAmount: 0,
-      base_url: 'https://www.23bet.pro/',
     },
+    base_url: 'https://www.23bet.pro/',
+
   };
 },
     mounted() {

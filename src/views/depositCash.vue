@@ -4,6 +4,7 @@
 
   </div>
   <div>
+  
     <div class="modal-background" @click="closeModal"></div>
     <div class="modal-card">
       <header class="modal-card-head">

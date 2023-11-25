@@ -135,6 +135,7 @@
     </div>
   </div>     
 </div>
+<tawk-to />
 
 
 <div class="col-12 col-lg-4 col-md-4 col-sm-4">
@@ -235,6 +236,7 @@ axios
       console.log(error);
     });
 },
+
 nextSlide() {
    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
   },
