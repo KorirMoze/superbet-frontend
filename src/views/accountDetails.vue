@@ -25,7 +25,7 @@
             <!-- <pre>{{ JSON.stringify(gambler, null, 2) }}</pre> -->
             <p class="detai">Email: {{ gambler.data && gambler.data.email }}</p>
         
-            <p class="detai">Date of Birth: {{ gambler.data && gambler.data.date_of_birth }}</p>
+            <!-- <p class="detai">Date of Birth: {{ gambler.data && gambler.data.date_of_birth }}</p> -->
             <p class="detai">Gender: {{ gambler.data && gambler.data.gender }}</p>
             <p class="detai">Phone Number: {{ gambler.data && gambler.data.phone_number }}</p>
             <p class="detai">Account Balance: {{ gambler.data && gambler.data.acc_balance }}</p>
@@ -231,7 +231,7 @@
 }
  @media screen and (min-width: 992px){
   .account{
-    background-color: #918f8f ;
+    background-color: #16202c  ;
     height: scroll;
     padding-bottom: 1rem;
     margin-top: 4rem;
@@ -275,6 +275,8 @@
     border-radius: 10px;
     margin-top: 2rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding-left: 4rem;
+    padding-right: 4rem;
    }
    .hello{
     color: #918f8f ;
@@ -329,11 +331,17 @@
  }
  @media screen and (max-width: 992px){
   .account{
-    background-color: #918f8f ;
+    background-color: #16202c  ;
     height: scroll;
     padding-bottom: 1rem;
     margin-bottom: 5rem;
     margin-top: 5rem;
+   }
+   .column.is-5{
+    padding-left: 4rem;
+   }
+   .column.is-7{
+    padding: 4rem;
    }
    h1{
    color: #fff;

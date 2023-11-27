@@ -64,11 +64,11 @@ export default {
   mounted()
   {
     const token = localStorage.getItem("jwt");
-    // console.log(token)
+     console.log(token)
     if (token)
     {
       axios
-        .get(this.base_url+"account_details/", {
+        .get(this.base_url+'account_details/', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
