@@ -58,13 +58,8 @@
                   </div>
                   <!-- <input type="text" class="form-control" placeholder="Date Of Birth...2020-12-23" v-model="dob" required> -->
                 </div>
-                <!-- If you want to add a checkbox to this form, uncomment this code -->
-                <!-- <div class="checkbox">
-                    <input id="checkboxSignup" type="checkbox">
-                      <label for="checkboxSignup">
-                      Unchecked
-                      </label>
-                    </div> -->
+                <p v-if="withdrawalMessage" class="">{{ withdrawalMessage }}</p>
+
               </div>
               <div class="card-footer text-center">
                 <button  @click="postData" class="btn btn-neutral btn-round btn-lg">Register</button>
@@ -103,6 +98,7 @@
       gender: '',
       dob: '',
       base_url: 'https://www.23bet.pro/',
+      withdrawalMessage: null,
       };
     },
     methods: {
@@ -119,6 +115,7 @@
   // Check if all required fields are filled in
   if (!this.fname || !this.sname || !this.email || !this.phoneNumber || !this.password ) {
     console.log('All fields are required');
+    this.withdrawalMessage = "Check your Registration details again"
     return;
   }
 
@@ -143,6 +140,7 @@
     .catch((error) => {
       console.error('Registration failed:', error);
       this.errorMessage = error.message || 'Oops! Something went wrong.';
+      this.withdrawalMessage = "Registration Failed check your credetials again"
     });
 }
 ,

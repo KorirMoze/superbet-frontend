@@ -40,7 +40,7 @@ export default {
   {
     return {
       isModalActive: false,
-      withdrawalAmount: 98, // Initialize with a default value or leave it empty
+      withdrawalAmount: 1000, // Initialize with a default value or leave it empty
       gambler: {
         email: '',
         first_name: '',
@@ -53,8 +53,9 @@ export default {
         loading: false,
         showBetSlip: false,
         withdrawalAmount: 0,
-        base_url: 'https://www.23bet.pro/',
       },
+      base_url: 'https://www.23bet.pro/',
+
       withdrawalMessage: null,
     };
   },
@@ -79,6 +80,7 @@ export default {
           this.gambler = response.data;
           this.gambler.acc_balance = response.data.acc_balance;
           this.fetchBets();
+      
 
         })
         .catch((error) =>
@@ -109,22 +111,29 @@ export default {
     {
       const token = localStorage.getItem("jwt"); // Get the JWT token
       const amount = this.withdrawalAmount; // Get the withdrawal amount from the data property
-
       // Check if a token exists and if the withdrawal amount is valid
-      if (!token || amount <= 0)
+      if (!token)
       {
         console.error("Invalid withdrawal request.");
+        this.withdrawalMessage = `You Must Be Logged in First.`;
+
+        return;
+      }
+      if (this.gambler.data.acc_balance <this.withdrawalAmount) {
+        this.withdrawalMessage = `Withdrawal amount must be at least 1000.`;
         return;
       }
       if (this.gambler.data.acc_balance > 98)
       {
         // Send a POST request to your backend API to initiate the withdrawal
         axios
-          .post(this.base_url+"withdraw/", { amount }, {
+          .post(this.base_url+'withdraw/', { amount }, {
             headers: {
               Authorization: `Bearer ${token}`,
+              
             },
           })
+    
 
           .then((response) =>
           {
@@ -150,7 +159,7 @@ export default {
       }
       else
       {
-        this.withdrawalMessage = "Withdrawal amount must be at least 98.";
+        this.withdrawalMessage = "Withdrawal amount must be at least 1000.";
         return;
       }
     }

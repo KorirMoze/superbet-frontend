@@ -84,10 +84,14 @@
             <li class="coin" @click="setStake(490)">+490</li>
           </ul>
           <span class="stake">DEPOSIT:</span>
+
           <input type="number" id="depo" name="stake" step="0.01" min="10" required v-model="stake"
             placeholder="Enter Amount">
         </div>
+        <p v-if="withdrawalMessage" class="has-text-danger">{{ withdrawalMessage }}</p>
+
       </section>
+
       <footer class="modal-card-foot">
         <button class="button is-success" @click="closeModal">Close</button>
         <button class="button is-success" @click="deposit" :disabled="loading">{{ loading ? 'Depositing...' : 'Deposit' }}</button>
@@ -109,6 +113,8 @@ export default {
       isLoggedIn: false,
       loading: false, // New loading state
       base_url: 'https://www.23bet.pro/',
+      withdrawalMessage: null,
+
     };
   },
   created()
@@ -145,6 +151,8 @@ export default {
        {
         // Token is not available, redirect to the login page
         this.$router.push({ name: 'login' });
+        console.log("no token")
+        this.withdrawalMessage = "You need to Login First"
         return; // Stop further execution
       }
       this.loading = true;

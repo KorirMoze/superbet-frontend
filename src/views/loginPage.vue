@@ -33,21 +33,12 @@
 
   
                 <div class="input-group no-border">
-                  <!-- <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="now-ui-icons ui-1_email-85"></i>
-                    </span>
-                  </div> -->
+ 
                   <input type="text" class="form-control" placeholder="Password..." v-model="password" required>
                 </div>
        
-                <!-- If you want to add a checkbox to this form, uncomment this code -->
-                <!-- <div class="checkbox">
-                    <input id="checkboxSignup" type="checkbox">
-                      <label for="checkboxSignup">
-                      Unchecked
-                      </label>
-                    </div> -->
+                <p v-if="withdrawalMessage" class="">{{ withdrawalMessage }}</p>
+
               </div>
               <div class="card-footer ">
                 <button href="#pablo" @click="postData" class="btn btn-neutral btn-round btn-lg">Login</button>
@@ -89,6 +80,7 @@
       email: '',
       password: '',
       base_url: 'https://www.23bet.pro/',
+      withdrawalMessage: null,
       };
     },
     methods: {
@@ -112,6 +104,8 @@ postData() {
       this.$router.push({ path: '/' });
     } else {
       console.log('Login failed');
+      this.withdrawalMessage = "Oops Check Your Credentials And Try Again"
+
     }
   })
   .catch(error => {

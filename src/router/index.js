@@ -64,12 +64,7 @@ const routes = [
         path: '/game',
         component: () => import( '../views/moreGame.vue'),
       },
-      // {
-      //   name: 'nav',
-      //   path: '/nav',
-      //   component: () => import( '../views/headerBar.vue'),
-      
-      // },
+ 
       {
         name: 'deposit',
         path: '/deposit',
