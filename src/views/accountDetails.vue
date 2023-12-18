@@ -65,6 +65,10 @@
     <i class="fa-solid fa-user"></i>
 
 
+    <div class="terms">
+  <bottom />
+</div>
+
     
 <div class="bottom-nav-container">
   <bottomNav />
@@ -78,12 +82,14 @@
   import headerTop from '@/components/headerBar.vue'
   import WithdrawalModal from "@/views/withdrawModal.vue"; 
   import bottomNav from '@/views/bottomNav.vue'
+  import bottom from '@/views/termsPage.vue'
 
   export default {
     components: {
       headerTop,
       WithdrawalModal,
       bottomNav,
+      bottom,
     },
     data() {
   return {
@@ -109,7 +115,7 @@
      // console.log(token)
       if (token) {
         axios
-          .get(this.base_url+"account_details/", {
+          .get(this.base_url+'account_details/', {
             headers: {
               Authorization: `Bearer ${token}`,
             },

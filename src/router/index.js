@@ -95,6 +95,12 @@ const routes = [
         component: () => import( '../views/newNav.vue'),
      
       },
+      {
+        name: 'terms',
+        path: '/terms',
+        component: () => import( '../views/termsPage.vue'),
+     
+      },
   
 ]
 

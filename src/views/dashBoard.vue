@@ -5,7 +5,6 @@
 
 
 <div class="bdy">
-<div class="tit">Today Games</div>
 
 
 
@@ -151,9 +150,14 @@
 </div>
 </div>
 
+<div class="terms">
+  <bottom />
+</div>
+
 <div class="bottom-nav-container">
   <bottomNav />
 </div>
+
 
 
 
@@ -166,7 +170,7 @@ import betterSlip from "@/views/betterSlip.vue";
 import router from '@/router' // eslint-disable-line no-unused-vars
 import headerTop from '@/components/headerBar.vue'
 import bottomNav from '@/views/bottomNav.vue'
-
+import bottom from '@/views/termsPage.vue'
 
 
 // import masterWang from "@/pages/betterSlip.vue";
@@ -175,6 +179,7 @@ components: {
 betterSlip,
 headerTop,
 bottomNav,
+bottom,
 // masterWang
 },
 name: 'dropDown',
@@ -672,21 +677,10 @@ this.betslip = updatedBetslip;
 
 
 placeBet() {
-//console.log("Entering placeBet() function...");
-//console.log("Placing bet:", this.betslip);
-// Place the bet using the betslip data
-// ...
 
-
-// Once the bet is placed, clear the betslip
 this.betslip = [];
 
 
-// Add a console log to check if this line is reached
-//console.log("Removing from local storage...");
-
-
-// Remove the 'betslip' item from local storage
 localStorage.removeItem('betslip');
 },
 
@@ -846,7 +840,7 @@ height: auto; /* Maintain aspect ratio */
 background-color: #000000;
 border-radius: 8.21818px;
 color: #fff;
-position: fixed;
+width: 100%;
 }
 body{
 background-color: #232323;

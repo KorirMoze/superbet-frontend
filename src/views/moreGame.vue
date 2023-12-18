@@ -131,6 +131,9 @@
       </div>
   </div>
 </div>
+<div class="terms">
+  <bottom />
+</div>
 <div class="bottom-nav-container">
   <bottomNav />
 </div>
@@ -142,6 +145,7 @@
   import { mapGetters } from 'vuex';
   import headerTop from '@/components/headerBar.vue'
   import bottomNav from '@/views/bottomNav.vue'
+  import bottom from '@/views/termsPage.vue'
   export default {
     components: {
     betterSlip,
@@ -160,6 +164,7 @@
         awayTeam: [],
         isModalActive: false,
         base_url: 'https://www.23bet.pro/',
+        bottom,
       };
       
     },
@@ -176,7 +181,7 @@
 },
 
     mounted() {
-      axios.get(this.betslip+`bet2/?parent_match_id=${this.parent_match_id}`)
+      axios.get(this.base_url+`bet2/?parent_match_id=${this.parent_match_id}`)
       
         .then(response => {
           //console.log('Response from server:', response.data);

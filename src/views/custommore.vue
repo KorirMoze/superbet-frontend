@@ -122,7 +122,9 @@
             </div>
         </div>
       </div>
-  
+      <div class="terms">
+  <bottom />
+</div>
   
   </template>
   <script>
@@ -130,7 +132,7 @@
   import betterSlip from "@/views/betterSlip.vue";
   import router from '@/router' // eslint-disable-line no-unused-vars
   import headerTop from '@/components/headerBar.vue'
-
+  import bottom from '@/views/termsPage.vue'
   
   // import masterWang from "@/pages/betterSlip.vue";
   export default {
@@ -151,7 +153,7 @@
         awayTeam: null,
         parentMatchId:null,
         base_url: 'https://www.23bet.pro/',
-
+        bottom,
         
       };
     },

@@ -80,6 +80,10 @@
     </div>
   </div>
 
+  <div class="terms">
+  <bottom />
+</div>
+
   <div class="bottom-nav-container">
   <bottomNav />
 </div>
@@ -94,7 +98,7 @@
 <script>
 import axios from 'axios';
 import bottomNav from '@/views/bottomNav.vue'
-
+import bottom from '@/views/termsPage.vue'
 
 export default {
   props: {
@@ -126,8 +130,11 @@ export default {
       showBetSlip: false,
       withdrawalAmount: 0,
       isModalActive: false,
-      base_url: 'https://www.23bet.pro/',
+      
     },
+    base_url: 'https://www.23bet.pro/',
+    bottom,
+
       
     };
   },
@@ -197,49 +204,20 @@ export default {
     this.$emit('update:betslip', updatedBetslip);
     this.betslipKey += 1;
 
-    // const buttonId1 = `button_home_${gameId}`;
-    // const buttonId2 = `button_neutral_${gameId}`;
-    // const buttonId3 = `button_away_${gameId}`;
 
-   
-    //console.log(buttonId1,'buttonID')
-   // console.log(this.betslip[index])
-  
 
    if (removedBetslip.selection != null && removedBetslip.game_id) {
   
-        // const buttonId = removedBetslip.selection;
-        // const button = document.getElementById(buttonId);
-        // console.log(button,"svhadbansbghanjhsgwbnasbhna")
-        // const button1 = document.getElementById(buttonId1);
-        // const button2 = document.getElementById(buttonId2);
-        // const button3 = document.getElementById(buttonId3)
+
         if (removedBetslip.game_id){
          // var leength = removedBetslip.game_id.length
 
         }
 
         // if (button ) {
-        //   button.style.backgroundColor = ''; // Reset the background color
-
-        // }
-        // else if (removedBetslip.selection ==='home_odd' && leength >3)
-        // {
-        //   button1.style.backgroundColor = '';
-        //   console.log(button1)
-
-        // }
-        // else if (removedBetslip.selection === 'neutral_odd' && leength >3){
-        //   button2.style.backgroundColor = '';
-   
-        // }
-        // else if (removedBetslip.selection === 'away_odd' && leength >3){
-        //   button3.style.backgroundColor = '';
-        
-        // }
+    
       } else if (removedBetslip.key != null ) {
-        // Reset the background color for key buttons
-        // Use the item.game_id or other identifier to find the button
+
         const buttonId = removedBetslip.key;
         const button = document.getElementById(buttonId);
         if (button) {
@@ -263,7 +241,7 @@ async placeBet() {
 // Calculate the total odds by summing up all the odds in the betslip
 const totalOdds = this.betslip.reduce((total, betslipItem) => {
   const odds = parseFloat(betslipItem.odds);
-  return total + odds;
+  return total * odds;
 }, 0);
 //console.log('Total Odds:', totalOdds);
   // Get the JWT from a cookie or local storage
