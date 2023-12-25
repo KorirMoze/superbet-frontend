@@ -4,38 +4,38 @@
 
   </div>
     <div class="account">
-    <div class="hello" >g</div>
+    <div class="hello" ></div>
       <div class="columns">
 
         <div class="column is-5">  
          
           <img class="userimg" src="../assets/user.png" alt="Italian Trulli">
-          <i class="fa-solid fa-user"></i>
-          <p class="detai">Full Name: {{ gambler.data && gambler.data.first_name }} {{ gambler.data && gambler.data.last_name }}</p>
-          <p class="detai">Email: {{ gambler.data && gambler.data.email }}</p>
-          <!-- <button class="button is-primary" @click="openWithdrawalModal">Withdraw Funds</button> -->
 
-          <!-- Include the WithdrawalModal component and pass its visibility as a prop -->
-      
-          <p class="detail"><WithdrawalModal v-model="isWithdrawalModalOpen" /></p>
-         
+          <div class="number"><p class="detai"> {{ gambler.data && gambler.data.phone_number }}</p></div>
+
+               
         </div>
         <div class="column is-7">
           <div class="data" v-if="Object.keys(gambler).length !== 0">
-            <!-- <pre>{{ JSON.stringify(gambler, null, 2) }}</pre> -->
-            <p class="detai">Email: {{ gambler.data && gambler.data.email }}</p>
-        
-            <!-- <p class="detai">Date of Birth: {{ gambler.data && gambler.data.date_of_birth }}</p> -->
-            <p class="detai">Gender: {{ gambler.data && gambler.data.gender }}</p>
-            <p class="detai">Phone Number: {{ gambler.data && gambler.data.phone_number }}</p>
-            <p class="detai">Account Balance: {{ gambler.data && gambler.data.acc_balance }}</p>
+            <p class="detai"> {{ gambler.data && gambler.data.first_name }} {{ gambler.data && gambler.data.last_name }}</p>
+          <p class="detai"> {{ gambler.data && gambler.data.email }}</p>
+          <p class="detai">Balance: {{ gambler.data && gambler.data.acc_balance }}</p>
+
+
+
+
           </div>
           <template v-else>
             <p>Loading...</p>
           </template>
         </div>
+
     
       </div>
+      <div class="other-details">
+        <div class="mail"><p class="detai"> {{ gambler.data && gambler.data.email }}</p></div>
+        <div class="withdaw"><p class="detai"><WithdrawalModal v-model="isWithdrawalModalOpen" /></p></div>
+        </div>
         <div  class="betss">
           <ul class="bets">
             <li v-for="bet in bets" :key="bet.id">
@@ -62,7 +62,6 @@
           </ul>
           </div>
     </div>
-    <i class="fa-solid fa-user"></i>
 
 
     <div class="terms">
@@ -156,7 +155,7 @@
         })
         .then((response) => {
           this.bets = response.data.bets; // Assuming your API response has a 'bets' field
-         // console.log(this.bets)
+          console.log(this.bets)
          this.bets = this.bets.reverse()
          this.bets.forEach((bet) => {
   // Reverse the order of bet_items within each bet
@@ -240,7 +239,7 @@
     background-color: #16202c  ;
     height: scroll;
     padding-bottom: 1rem;
-    margin-top: 4rem;
+    padding-top: 10rem;
    }
    h1{
    color: #fff;
@@ -256,20 +255,20 @@
     margin: auto;
    }
    .detai{
-    background-color: #000000!important;
-    padding-bottom: 3rem;
-    padding-top: 3rem;
+    background-color: #23313d!important;
+    padding-top: 1rem;
     border-radius: 10px;
     font-size: 1.5rem;
     text-align: left;
     font-size: 1.8rem;
+    padding-left: 1rem;
    }
    .userimg{
   
     display: flex;
-    background-color: #000000;
-    width: 150px; /* Specify the desired width */
-    height: 150px; 
+    background-color: #23313d;
+    width: 100px; /* Specify the desired width */
+    height: 100px; 
    
     margin-top: 1rem;
     border-radius: 50%;
@@ -277,12 +276,20 @@
    .columns{
     width: 60%;
     margin: auto;
-    background-color: #000000;
+    background-color: #23313d;
     border-radius: 10px;
     margin-top: 2rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding-left: 4rem;
     padding-right: 4rem;
+   }
+   .detail{
+    width: 80%;
+padding-left: 1rem;
+   }
+   .button.is-primary{
+    width: 80%;
+    margin: left;
    }
    .hello{
     color: #918f8f ;
@@ -302,10 +309,11 @@
    .betss{
     width: 60%;
     margin: auto;
-    background-color: #000000;
+    background-color: #23313d;
     border-radius: 10px;
     margin-top: 2rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding-bottom: 2rem;
    }
    .keys{
     display: flex;
@@ -317,7 +325,8 @@
   .bte1{
     display: flex;
     flex-direction: row;
-  
+    padding-top: 2rem;
+    padding-bottom: 1rem;
   }
   .bte2{
     text-align: left;
@@ -334,14 +343,34 @@
     padding-bottom: 1rem;
     padding-top: 1rem;
   }
+  .other-details{
+    width: 60%;
+    margin: auto;
+    background-color: #23313d;
+    border-radius: 10px;
+    margin-top: 2rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0.6;
+  }
+  
+  .withdaw{
+    margin-right: 2rem;
+   }
+   .mail{
+    margin-right: 2rem;
+   }
  }
  @media screen and (max-width: 992px){
   .account{
     background-color: #16202c  ;
     height: scroll;
     padding-bottom: 1rem;
-    margin-bottom: 5rem;
-    margin-top: 5rem;
+    margin-top: 7rem;
+    padding-top: 4rem;
    }
    .column.is-5{
     padding-left: 4rem;
@@ -362,19 +391,25 @@
     margin: auto;
    }
    .detai{
-    background-color: #000000!important;
-    text-align: center;
+    background-color: #23313d!important;
+    text-align: left;
     padding-top: 1rem;
     border-radius: 10px;
     font-size: 1.4rem;
+    
+   }
+   .number{
+    background-color: #23313d!important;
+    text-align: center;
+    margin-left: -4rem;
+    margin-top: 2rem;
    }
    .userimg{
   
     display: flex;
-    background-color: #000000;
-    width: 150px; /* Specify the desired width */
-    height: 150px; 
-   
+    background-color: #23313d!important;
+    width: 80px; /* Specify the desired width */
+    height: 80px; 
     margin-top: 1rem;
     border-radius: 50%;
     margin-left: 25%;
@@ -382,7 +417,7 @@
    .columns{
     width: 94%;
     margin: auto;
-    background-color: #000000;
+    background-color: #23313d!important;
     border-radius: 10px;
    
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -406,7 +441,7 @@
    .betss{
     width: 94%;
     margin: auto;
-    background-color: #000000;
+    background-color: #23313d!important;
     border-radius: 10px;
     margin-top: 2rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -424,6 +459,7 @@
     display: flex;
     flex-direction: row;
     margin-top: 1rem;
+    font-size: 1.3rem;
   }
   .bte2{
     text-align: left;
@@ -440,6 +476,19 @@
     justify-content: space-between !important;
     padding-bottom: 1rem;
     padding-top: 1rem;
+  }
+  .is-7{
+    padding-top: 1rem !important;
+  }
+  .other-details{
+    width: 94%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    background-color: #23313d!important;
+    margin-top: 1rem;
+    border-radius: 10px;
+    padding: 1rem;
   }
  }
 

@@ -102,9 +102,11 @@ li a{
 .terms{
     text-align: left;
 }
-.About p{
+
+@media screen and (min-width: 992px) {
+    .About p{
     width: 50%;
     margin: auto;
 }
-
+}
 </style>

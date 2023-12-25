@@ -897,6 +897,25 @@ export default {
 
 /* Media query for mobile devices (adjust the max-width as needed) */
 @media (max-width: 767px) {
+  .top-image  {
+    width: 100%;
+    background-color: #1F4255;
+    background-image: url('../assets/Background.jpg');
+    background-size: cover;
+    background-position: center center; 
+    background-repeat: no-repeat;
+    justify-content: center;
+    display: flex;
+  }
+  .adr{
+    text-align: center;
+    align-items: center;
+    color: gold;
+    margin-top: 2rem;
+  }
+  .adr h1{
+    font-weight: 900;
+  }
   .bottom-nav-container {
     display: block;
     /* Show the container on mobile devices */
