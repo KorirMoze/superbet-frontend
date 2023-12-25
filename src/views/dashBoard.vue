@@ -1014,7 +1014,7 @@ video {
     min-height: 120px;
   }
   .carousel-slide img{
-width: 100%;
+    width: 100%;
   }
   .corousel1 img{
     width: 100%;
@@ -1166,7 +1166,7 @@ width: 100%;
   .homeaway {
     display: flex;
     flex-direction: column;
-
+    padding-right: 5rem;
   }
 
   .homei {
@@ -1241,6 +1241,7 @@ width: 100%;
   .bothgamesandodds {
     display: flex;
     flex-direction: row;
+    width: -webkit-fill-available;
   }
 }
 

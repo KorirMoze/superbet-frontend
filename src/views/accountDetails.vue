@@ -11,7 +11,7 @@
          
           <img class="userimg" src="../assets/user.png" alt="Italian Trulli">
 
-          <div class="number"><p class="detai"> {{ gambler.data && gambler.data.phone_number }}</p></div>
+          <div class="nmber"><p class="detai"> {{ gambler.data && gambler.data.phone_number }}</p></div>
 
                
         </div>
@@ -285,7 +285,7 @@
    }
    .detail{
     width: 80%;
-padding-left: 1rem;
+    padding-left: 1rem;
    }
    .button.is-primary{
     width: 80%;
@@ -356,7 +356,12 @@ padding-left: 1rem;
     justify-content: space-between;
     opacity: 0.6;
   }
-  
+  .nmber{
+    background-color: #23313d!important;
+    text-align: center;
+    display: block;
+    height: 0;
+   }
   .withdaw{
     margin-right: 2rem;
    }
@@ -398,7 +403,7 @@ padding-left: 1rem;
     font-size: 1.4rem;
     
    }
-   .number{
+   .nmber{
     background-color: #23313d!important;
     text-align: center;
     margin-left: -4rem;
