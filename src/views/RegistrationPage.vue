@@ -97,7 +97,7 @@
       password: '',
       gender: '',
       dob: '',
-      base_url: 'https://www.23bet.pro/',
+      base_url: '',
       withdrawalMessage: null,
       };
     },
