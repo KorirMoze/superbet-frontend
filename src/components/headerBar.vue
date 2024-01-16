@@ -112,7 +112,6 @@ export default {
       stake: 49, // Initialize stake with 0
       isLoggedIn: false,
       loading: false, // New loading state
-      base_url: 'https://www.23bet.pro/',
       withdrawalMessage: null,
 
     };
